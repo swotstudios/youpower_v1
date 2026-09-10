@@ -86,3 +86,44 @@ fiscale e regolamentare:
 Esclusi di proposito: gli importi CHF presenti sulla pagina incentivi, perche'
 riferiti alle termopompe e non al fotovoltaico, e comunque non validati per
 questa landing.
+
+---
+
+## Recensioni clienti — fonte e aggiornamento
+
+Le tre recensioni della sezione "Chi ha scelto YouPower" **non sono placeholder**:
+sono recensioni Google reali, mostrate su youpower.ch tramite il widget Trustindex
+(homepage e `/prodotti/impianti-fotovoltaici/`, rilevate il 10/09/2026).
+
+| Cliente (come pubblicato) | Stelle Google | Estratto usato |
+|---|---|---|
+| Jolanda Carvelli | 5/5 | prima e terza frase, con omissione `[…]` |
+| Giovanni (GiDA) | 5/5 | tre frasi consecutive dal centro della recensione |
+| lorenzo giacchetti | 5/5 | prime due frasi |
+
+- Gli estratti sono **letterali**: nessuna parola modificata, solo tagli segnalati.
+  Sono stati omessi i nomi dei collaboratori YouPower citati nel testo.
+- Unica normalizzazione: "lorenzo giacchetti" e' mostrato con le iniziali
+  maiuscole ("Lorenzo Giacchetti").
+- Il widget non espone voto medio ne' numero totale di recensioni, quindi la
+  landing non li mostra.
+- **Da confermare con YouPower** prima della pubblicazione: l'uso dei nomi
+  completi dei clienti fuori dal widget Google. In alternativa usare nome e
+  iniziale del cognome.
+
+Per sostituire una recensione: copiare un estratto letterale da Google, con
+nome e stelle come pubblicati. Non riformulare il testo.
+
+---
+
+## Assistenza post-vendita e FAQ — fonti
+
+- **Assistenza**: controlli periodici, manutenzione, pulizia, supporto tecnico e
+  polizze assicurative da `/prodotti/impianti-fotovoltaici/`; "controllo attivo
+  della produzione di energia" da `/faq/`.
+- **FAQ**: risposte ricavate da `/faq/` (tetti adatti, orientamento, notifica al
+  comune, durata 25–30 anni, accumulo, ricarica auto) e da
+  `/prodotti/impianti-fotovoltaici/` (progettazione, tipi di tetto).
+  **Esclusi di proposito** le percentuali sui contributi presenti in `/faq/`
+  (20% federale, circa 40% complessivo, RUE fino al 60%): non validati per questa
+  landing.

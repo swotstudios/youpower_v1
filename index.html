@@ -771,7 +771,111 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   13. ANIMAZIONI FADE-IN
+   13. RECENSIONI — social proof principale
+   ========================================================================= */
+/* Card bianche da brand kit 4.2 sul wash mint. Niente virgolette decorative,
+   stelle a 16px: la valutazione si legge, non domina. */
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+.review {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+.review__stars {
+  display: flex;
+  gap: var(--space-xxs);
+  color: var(--color-primary);
+}
+.review__stars svg {
+  width: var(--space-sm);
+  height: var(--space-sm);
+}
+.review__quote {
+  margin: var(--space-sm) 0 0;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+/* Firma sempre in fondo: i nomi restano allineati anche con estratti diversi */
+.review__author {
+  margin-top: auto;
+  padding-top: var(--space-md);
+}
+.review__name {
+  display: block;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.review__source {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-heading);
+}
+
+
+/* =========================================================================
+   14. ASSISTENZA POST-VENDITA — rassicurazione, non offerta
+   ========================================================================= */
+.section--compact {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+.assist {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+.assist__item {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-md);
+}
+.assist__icon {
+  width: var(--space-lg);
+  height: var(--space-lg);
+  color: var(--color-primary);
+}
+.assist__title {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-heading);
+}
+.assist__text {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+
+/* =========================================================================
+   15. FAQ — stesso accordion nativo della sezione Incentivi
+   ========================================================================= */
+.faq__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: var(--space-xl);
+}
+.faq__inner .section__head { margin-bottom: 0; }
+
+
+/* =========================================================================
+   16. ANIMAZIONI FADE-IN
    =========================================================================
 /* Fade-in in CSS puro: nessuna dipendenza da JS, il contenuto resta
    sempre leggibile anche se le animazioni non vengono eseguite. */
@@ -808,7 +912,7 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   14. RESPONSIVE
+   17. RESPONSIVE
    ========================================================================= */
 @media (max-width: 1024px) {
   .hero__inner {
@@ -872,6 +976,19 @@ a { text-decoration: none; color: inherit; }
     gap: var(--space-lg);
   }
   .incentives__inner > * { max-width: var(--content-narrow); }
+
+  .reviews {
+    grid-template-columns: 1fr;
+    max-width: var(--content-narrow);
+  }
+
+  .assist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .faq__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .faq__inner > * { max-width: var(--content-narrow); }
 }
 
 @media (max-width: 768px) {
@@ -960,6 +1077,29 @@ a { text-decoration: none; color: inherit; }
     width: 100%;
     padding: var(--space-sm) var(--space-md);
   }
+
+  .reviews { max-width: none; }
+  .review { padding: var(--space-md); }
+
+  /* Assistenza su mobile: icona a sinistra, testo a destra, righe compatte */
+  .assist {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .assist__item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: var(--space-sm);
+    padding-top: var(--space-sm);
+  }
+  .assist__icon {
+    grid-row: span 2;
+    width: var(--space-md);
+    height: var(--space-md);
+  }
+  .assist__title { margin-top: 0; }
+
+  .faq__inner > * { max-width: none; }
 }
 
 /* Sotto i 640px la CTA per esteso non entra nell'header accanto al logo
@@ -1378,6 +1518,164 @@ a { text-decoration: none; color: inherit; }
         <div class="incentives__cta">
           <a class="btn btn--primary" href="#contatti">Richiedi una valutazione gratuita</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--accent section--lead" id="recensioni" aria-labelledby="recensioni-title">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="recensioni-title">Chi ha scelto YouPower</h2>
+        <p class="section__intro">
+          L’esperienza dei clienti racconta il modo in cui YouPower segue ogni progetto,
+          dall’installazione all’assistenza.
+        </p>
+      </div>
+
+      <!-- Recensioni Google reali, estratti letterali dal widget del sito youpower.ch.
+           Fonte e criteri di aggiornamento: assets/README.md -->
+      <ul class="reviews">
+        <li class="review" data-reveal>
+          <div class="review__stars" role="img" aria-label="Valutazione Google: 5 stelle su 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg>
+          </div>
+          <blockquote class="review__quote">
+            <p>Felici di aver affidato l'installazione del fotovoltaico a YouPower. […] Il team è stato davvero disponibile e hanno gestito ogni nostra richiesta con grande professionalità.</p>
+          </blockquote>
+          <p class="review__author">
+            <span class="review__name">Jolanda Carvelli</span>
+            <span class="review__source">Recensione pubblicata su Google</span>
+          </p>
+        </li>
+
+        <li class="review" data-reveal style="--reveal-delay:80ms">
+          <div class="review__stars" role="img" aria-label="Valutazione Google: 5 stelle su 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg>
+          </div>
+          <blockquote class="review__quote">
+            <p>Sono stati veloci, precisi e puntuali ma soprattutto professionali. Loro offrono un servizio chiavi in mano. Ed è davvero stato così.</p>
+          </blockquote>
+          <p class="review__author">
+            <span class="review__name">Giovanni (GiDA)</span>
+            <span class="review__source">Recensione pubblicata su Google</span>
+          </p>
+        </li>
+
+        <li class="review" data-reveal style="--reveal-delay:160ms">
+          <div class="review__stars" role="img" aria-label="Valutazione Google: 5 stelle su 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg>
+          </div>
+          <blockquote class="review__quote">
+            <p>Ottima azienda sicura veloce seria ed efficace. Presente anche nel postvendita.</p>
+          </blockquote>
+          <p class="review__author">
+            <span class="review__name">Lorenzo Giacchetti</span>
+            <span class="review__source">Recensione pubblicata su Google</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--compact" id="assistenza" aria-labelledby="assistenza-title">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="assistenza-title">YouPower resta al tuo fianco anche dopo l’installazione</h2>
+        <p class="section__intro">
+          Il valore di un impianto fotovoltaico continua nel tempo. Per questo YouPower offre
+          servizi dedicati al controllo, alla manutenzione e al supporto tecnico.
+        </p>
+      </div>
+
+      <ul class="assist">
+        <li class="assist__item" data-reveal>
+          <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 9.5h17"></path><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="m9 15 2 2 4-4"></path></svg>
+          <h3 class="assist__title">Controlli periodici</h3>
+          <p class="assist__text">Verifiche regolari e controllo della produzione di energia, per mantenere l’impianto efficiente nel tempo.</p>
+        </li>
+
+        <li class="assist__item" data-reveal style="--reveal-delay:80ms">
+          <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1l-5.8 5.8a1.8 1.8 0 0 0 2.5 2.5l5.8-5.8a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.3-.4-.4-2.3Z"></path></svg>
+          <h3 class="assist__title">Manutenzione e pulizia</h3>
+          <p class="assist__text">Interventi di manutenzione e pulizia che preservano la resa e la sicurezza dell’impianto.</p>
+        </li>
+
+        <li class="assist__item" data-reveal style="--reveal-delay:160ms">
+          <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 13.5V12a7.5 7.5 0 0 1 15 0v1.5"></path><rect x="3.5" y="13" width="4" height="6" rx="1.5"></rect><rect x="16.5" y="13" width="4" height="6" rx="1.5"></rect><path d="M18.5 19v.5a2 2 0 0 1-2 2H13"></path></svg>
+          <h3 class="assist__title">Supporto tecnico</h3>
+          <p class="assist__text">Assistenza tecnica per ogni necessità legata all’impianto, anche dopo l’installazione.</p>
+        </li>
+
+        <li class="assist__item" data-reveal style="--reveal-delay:240ms">
+          <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5 5 6v5.5c0 4.3 3 7.6 7 9 4-1.4 7-4.7 7-9V6Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+          <h3 class="assist__title">Polizze assicurative</h3>
+          <p class="assist__text">Coperture assicurative per proteggere l’impianto da eventi imprevisti.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="container faq__inner">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="faq-title">Domande frequenti</h2>
+      </div>
+
+      <div class="accordion" data-reveal style="--reveal-delay:80ms">
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Il mio tetto è adatto a un impianto fotovoltaico?</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>Gli impianti si adattano a tetti piani, inclinati e anche a superfici verticali. L’ideale è una superficie senza ombreggiamenti, orientata preferibilmente a sud: l’idoneità si verifica in fase di analisi.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Come viene progettato l’impianto?</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>Con software dedicati che considerano struttura, pendenza del tetto, ombreggiamento e cablaggio, con disegno 3D, per ottenere la massima resa dallo spazio disponibile.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Quali incentivi sono disponibili?</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>Contributi federali, cantonali e comunali, cumulabili tra loro. Gli importi dipendono tra l’altro da potenza e tipologia dell’impianto: YouPower verifica quelli applicabili al tuo caso.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">YouPower gestisce anche le pratiche?</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>Sì. In genere basta una notifica al comune, ma dipende dal tipo di installazione. YouPower ti assiste nelle procedure e nella richiesta degli incentivi.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">È possibile integrare il fotovoltaico con accumulo o ricarica auto?</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>Sì. L’accumulo permette di usare la sera l’energia prodotta di giorno; una stazione di ricarica dedicata ricarica l’auto con l’energia del tuo impianto.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Cosa succede dopo l’installazione?</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>L’impianto ha una durata media di circa 25–30 anni. YouPower offre controlli periodici, manutenzione, pulizia, supporto tecnico e polizze assicurative.</p>
+            </div>
+          </details>
       </div>
     </div>
   </section>
