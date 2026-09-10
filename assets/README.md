@@ -92,15 +92,16 @@ termopompe, e le percentuali della pagina FAQ, non validati per questa landing.
 
 ## Recensioni clienti — fonte e aggiornamento
 
-Le tre recensioni della sezione "Chi ha scelto YouPower" **non sono placeholder**:
+Le tre recensioni della sezione "Chi ha scelto YouPower" **non sono placeholder**
+(ognuna e' abbinata a una promessa diversa, mostrata come titolo della card):
 sono recensioni Google reali, mostrate su youpower.ch tramite il widget Trustindex
 (homepage e `/prodotti/impianti-fotovoltaici/`, rilevate il 10/09/2026).
 
-| Cliente (come pubblicato) | Stelle Google | Estratto usato |
-|---|---|---|
-| Jolanda Carvelli | 5/5 | prima e terza frase, con omissione `[…]` |
-| Giovanni (GiDA) | 5/5 | tre frasi consecutive dal centro della recensione |
-| lorenzo giacchetti | 5/5 | prime due frasi |
+| Promessa confermata | Cliente (come pubblicato) | Stelle Google | Estratto usato |
+|---|---|---|---|
+| Gestione chiavi in mano | Giovanni (GiDA) | 5/5 | due frasi consecutive + "hanno pensato loro a tutto", con omissione `[…]` |
+| Precisione e puntualità | Stefano Scossa | 5/5 | seconda e terza frase |
+| Assistenza post-vendita | lorenzo giacchetti | 5/5 | prime due frasi |
 
 - Gli estratti sono **letterali**: nessuna parola modificata, solo tagli segnalati.
   Sono stati omessi i nomi dei collaboratori YouPower citati nel testo.

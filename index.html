@@ -789,6 +789,14 @@ a { text-decoration: none; color: inherit; }
   background: var(--color-surface);
   box-shadow: var(--shadow-soft);
 }
+/* Titolo della card: la promessa che la recensione conferma (stile H4 card) */
+.review__title {
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-heading);
+}
 .review__stars {
   display: flex;
   gap: var(--space-xxs);
@@ -833,6 +841,7 @@ a { text-decoration: none; color: inherit; }
   padding-top: var(--space-xl);
   padding-bottom: var(--space-xl);
 }
+.section__head--compact { margin-bottom: var(--space-lg); }
 .assist {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1834,24 +1843,12 @@ html { scroll-padding-top: var(--header-height); }
            Fonte e criteri di aggiornamento: assets/README.md -->
       <ul class="reviews">
         <li class="review" data-reveal>
+          <h3 class="review__title">Gestione chiavi in mano</h3>
           <div class="review__stars" role="img" aria-label="Valutazione Google: 5 stelle su 5">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg>
           </div>
           <blockquote class="review__quote">
-            <p>Felici di aver affidato l'installazione del fotovoltaico a YouPower. […] Il team è stato davvero disponibile e hanno gestito ogni nostra richiesta con grande professionalità.</p>
-          </blockquote>
-          <p class="review__author">
-            <span class="review__name">Jolanda Carvelli</span>
-            <span class="review__source">Recensione pubblicata su Google</span>
-          </p>
-        </li>
-
-        <li class="review" data-reveal style="--reveal-delay:80ms">
-          <div class="review__stars" role="img" aria-label="Valutazione Google: 5 stelle su 5">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg>
-          </div>
-          <blockquote class="review__quote">
-            <p>Sono stati veloci, precisi e puntuali ma soprattutto professionali. Loro offrono un servizio chiavi in mano. Ed è davvero stato così.</p>
+            <p>Loro offrono un servizio chiavi in mano. Ed è davvero stato così. […] hanno pensato loro a tutto.</p>
           </blockquote>
           <p class="review__author">
             <span class="review__name">Giovanni (GiDA)</span>
@@ -1859,7 +1856,22 @@ html { scroll-padding-top: var(--header-height); }
           </p>
         </li>
 
+        <li class="review" data-reveal style="--reveal-delay:80ms">
+          <h3 class="review__title">Precisione e puntualità</h3>
+          <div class="review__stars" role="img" aria-label="Valutazione Google: 5 stelle su 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg>
+          </div>
+          <blockquote class="review__quote">
+            <p>Tutto è andato perfettamente, senza ritardi e con una gestione chiara e professionale in ogni fase del progetto. L’impianto è entrato in funzione correttamente e nei tempi previsti.</p>
+          </blockquote>
+          <p class="review__author">
+            <span class="review__name">Stefano Scossa</span>
+            <span class="review__source">Recensione pubblicata su Google</span>
+          </p>
+        </li>
+
         <li class="review" data-reveal style="--reveal-delay:160ms">
+          <h3 class="review__title">Assistenza post-vendita</h3>
           <div class="review__stars" role="img" aria-label="Valutazione Google: 5 stelle su 5">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="m12 2.5 2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z"></path></svg>
           </div>
@@ -1877,7 +1889,7 @@ html { scroll-padding-top: var(--header-height); }
 
   <section class="section section--compact" id="assistenza" aria-labelledby="assistenza-title">
     <div class="container">
-      <div class="section__head" data-reveal>
+      <div class="section__head section__head--compact" data-reveal>
         <h2 class="section__title" id="assistenza-title">YouPower resta al tuo fianco anche dopo l’installazione</h2>
         <p class="section__intro">
           Il valore di un impianto fotovoltaico continua nel tempo. Per questo YouPower offre
@@ -1889,25 +1901,25 @@ html { scroll-padding-top: var(--header-height); }
         <li class="assist__item" data-reveal>
           <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15.5" rx="2"></rect><path d="M3.5 9.5h17"></path><path d="M8 3v4"></path><path d="M16 3v4"></path><path d="m9 15 2 2 4-4"></path></svg>
           <h3 class="assist__title">Controlli periodici</h3>
-          <p class="assist__text">Verifiche regolari e controllo della produzione di energia, per mantenere l’impianto efficiente nel tempo.</p>
+          <p class="assist__text">Verifiche regolari e controllo della produzione di energia.</p>
         </li>
 
         <li class="assist__item" data-reveal style="--reveal-delay:80ms">
           <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1l-5.8 5.8a1.8 1.8 0 0 0 2.5 2.5l5.8-5.8a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.3-.4-.4-2.3Z"></path></svg>
           <h3 class="assist__title">Manutenzione e pulizia</h3>
-          <p class="assist__text">Interventi di manutenzione e pulizia che preservano la resa e la sicurezza dell’impianto.</p>
+          <p class="assist__text">Per preservare resa e sicurezza dell’impianto.</p>
         </li>
 
         <li class="assist__item" data-reveal style="--reveal-delay:160ms">
           <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 13.5V12a7.5 7.5 0 0 1 15 0v1.5"></path><rect x="3.5" y="13" width="4" height="6" rx="1.5"></rect><rect x="16.5" y="13" width="4" height="6" rx="1.5"></rect><path d="M18.5 19v.5a2 2 0 0 1-2 2H13"></path></svg>
           <h3 class="assist__title">Supporto tecnico</h3>
-          <p class="assist__text">Assistenza tecnica per ogni necessità legata all’impianto, anche dopo l’installazione.</p>
+          <p class="assist__text">Assistenza tecnica anche dopo l’installazione.</p>
         </li>
 
         <li class="assist__item" data-reveal style="--reveal-delay:240ms">
           <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5 5 6v5.5c0 4.3 3 7.6 7 9 4-1.4 7-4.7 7-9V6Z"></path><path d="m9 12 2 2 4-4"></path></svg>
           <h3 class="assist__title">Polizze assicurative</h3>
-          <p class="assist__text">Coperture assicurative per proteggere l’impianto da eventi imprevisti.</p>
+          <p class="assist__text">Protezione dell’impianto da eventi imprevisti.</p>
         </li>
       </ul>
     </div>
@@ -1922,7 +1934,25 @@ html { scroll-padding-top: var(--header-height); }
       <div class="accordion" data-reveal style="--reveal-delay:80ms">
           <details class="accordion__item">
             <summary class="accordion__summary">
-              <h3 class="accordion__title">Il mio tetto è adatto a un impianto fotovoltaico?</h3>
+              <h3 class="accordion__title">Quanto costa un impianto fotovoltaico?</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>Il costo dipende principalmente da tre fattori: potenza installata, presenza di un sistema di accumulo e qualità della progettazione. Per questo la proposta parte dalla valutazione del tuo immobile e dei tuoi consumi.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Quanto posso realmente risparmiare?</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>Dipende da consumi, quota di autoconsumo e costi iniziali. L’energia che usi direttamente riduce quella acquistata dalla rete e l’eccedenza può essere ceduta al fornitore di elettricità. La valutazione gratuita serve a stimarlo sul tuo caso.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Il mio tetto è adatto?</h3>
               <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
             </summary>
             <div class="accordion__body">
@@ -1931,20 +1961,11 @@ html { scroll-padding-top: var(--header-height); }
           </details>
           <details class="accordion__item">
             <summary class="accordion__summary">
-              <h3 class="accordion__title">Come viene progettato l’impianto?</h3>
+              <h3 class="accordion__title">Quali incentivi posso ottenere?</h3>
               <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
             </summary>
             <div class="accordion__body">
-              <p>Con software dedicati che considerano struttura, pendenza del tetto, ombreggiamento e cablaggio, con disegno 3D, per ottenere la massima resa dallo spazio disponibile.</p>
-            </div>
-          </details>
-          <details class="accordion__item">
-            <summary class="accordion__summary">
-              <h3 class="accordion__title">Quali incentivi sono disponibili?</h3>
-              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
-            </summary>
-            <div class="accordion__body">
-              <p>Contributi federali, cantonali e comunali, cumulabili tra loro. Gli importi dipendono tra l’altro da potenza e tipologia dell’impianto: YouPower verifica quelli applicabili al tuo caso.</p>
+              <p>Contributi federali (Pronovo), cantonali (FER) e comunali, cumulabili tra loro, oltre ad agevolazioni fiscali. Gli importi dipendono tra l’altro da potenza e tipologia dell’impianto: YouPower verifica quelli applicabili al tuo caso.</p>
             </div>
           </details>
           <details class="accordion__item">
@@ -1958,7 +1979,7 @@ html { scroll-padding-top: var(--header-height); }
           </details>
           <details class="accordion__item">
             <summary class="accordion__summary">
-              <h3 class="accordion__title">È possibile integrare il fotovoltaico con accumulo o ricarica auto?</h3>
+              <h3 class="accordion__title">È possibile integrare accumulo o ricarica auto?</h3>
               <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
             </summary>
             <div class="accordion__body">
@@ -1981,10 +2002,10 @@ html { scroll-padding-top: var(--header-height); }
   <section class="section section--accent section--lead contact" id="contatti" aria-labelledby="contatti-title">
     <div class="container contact__inner">
       <div class="section__head" data-reveal>
-        <h2 class="section__title" id="contatti-title">Scopri la soluzione fotovoltaica più adatta al tuo immobile</h2>
+        <h2 class="section__title" id="contatti-title">Inizia dalla valutazione del tuo immobile</h2>
         <p class="section__intro">
-          Richiedi una valutazione gratuita e senza impegno. YouPower analizzerà le informazioni
-          fornite per ricontattarti con una proposta coerente con le tue esigenze.
+          Lasciaci alcune informazioni. Ti ricontatteremo per valutare insieme consumi,
+          caratteristiche dell’immobile e incentivi disponibili.
         </p>
       </div>
 
@@ -2040,7 +2061,7 @@ html { scroll-padding-top: var(--header-height); }
 
           <div class="field" data-field="consumo">
             <label class="field__label" for="consumo">Consumo energetico annuale</label>
-            <p class="field__hint" id="hint-consumo">In kWh o in CHF, come preferisci.</p>
+            <p class="field__hint" id="hint-consumo">Lo trovi in bolletta: indica i kWh consumati in un anno oppure la spesa annua in CHF. Se non lo sai, seleziona “Non lo so”.</p>
             <input class="field__input" id="consumo" name="consumo" type="text" aria-describedby="hint-consumo error-consumo">
             <label class="check check--inline">
               <input type="checkbox" name="consumo-non-lo-so" value="1">
@@ -2058,7 +2079,7 @@ html { scroll-padding-top: var(--header-height); }
           </div>
 
           <div class="form__actions">
-            <button class="btn btn--primary form__submit" type="submit">Richiedi il preventivo gratuito</button>
+            <button class="btn btn--primary form__submit" type="submit">Richiedi la valutazione gratuita</button>
             <p class="form__microcopy">Senza impegno · Consulenza personalizzata</p>
           </div>
         </form>
