@@ -324,6 +324,25 @@ a { text-decoration: none; color: inherit; }
   gap: var(--space-xl);
 }
 
+/* Riferimento territoriale: visibile ma secondario rispetto all'H1.
+   Frase normale con icona lineare, niente maiuscolo tracciato (brand kit 6.2). */
+.hero__location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.hero__location svg {
+  flex: none;
+  width: var(--space-md);
+  height: var(--space-md);
+  color: var(--color-primary);
+}
+
 .hero__title {
   font-size: var(--font-size-h1);
   font-weight: var(--font-weight-bold);
@@ -339,6 +358,7 @@ a { text-decoration: none; color: inherit; }
 .hero__lead {
   margin-top: var(--space-md);
   max-width: 46ch;
+  text-wrap: pretty;
   font-size: var(--font-size-body-large);
   font-weight: var(--font-weight-light);
   line-height: var(--line-height-body);
@@ -374,6 +394,7 @@ a { text-decoration: none; color: inherit; }
 /* Riga "Small / Label" della scala tipografica (14 / 400 / #365252) */
 .hero__microcopy {
   margin-top: var(--space-sm);
+  text-wrap: balance;
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-body);
@@ -1451,11 +1472,20 @@ html { scroll-padding-top: var(--header-height); }
 
     <div class="container hero__inner">
       <div class="hero__content">
-        <h1 class="hero__title reveal" id="hero-title">L'energia del sole per un futuro più tuo</h1>
+        <p class="hero__location reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
+          </svg>
+          <span>Progettazione e installazione in Ticino</span>
+        </p>
+
+        <h1 class="hero__title reveal" id="hero-title" style="--reveal-delay:40ms">Scopri quanto puoi risparmiare con un impianto fotovoltaico</h1>
 
         <p class="hero__lead reveal" style="--reveal-delay:80ms">
-          Produci la tua energia, riduci i costi e valorizza il tuo immobile con un impianto
-          fotovoltaico progettato su misura.
+          YouPower analizza consumi, caratteristiche dell’immobile e incentivi disponibili
+          per progettare la soluzione più adatta al tuo caso.
         </p>
 
         <ul class="hero__benefits reveal" style="--reveal-delay:160ms">
@@ -1506,8 +1536,8 @@ html { scroll-padding-top: var(--header-height); }
         </ul>
 
         <div class="hero__cta-block reveal" style="--reveal-delay:240ms">
-          <a class="btn btn--primary btn--hero" href="#contatti">Richiedi un preventivo gratuito</a>
-          <p class="hero__microcopy">Senza impegno · Consulenza personalizzata</p>
+          <a class="btn btn--primary btn--hero" href="#contatti">Richiedi una valutazione gratuita</a>
+          <p class="hero__microcopy">Senza impegno · Ti aiutiamo anche con incentivi e pratiche</p>
         </div>
       </div>
 
