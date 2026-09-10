@@ -1,0 +1,226 @@
+/* =========================================================================
+   YouPower — Brand Design Tokens
+   =========================================================================
+   Fonte: analisi diretta di https://www.youpower.ch/
+   Estrazione tipografica: WhatFont sul DOM live (valori marcati OSSERVATI).
+   Valori marcati INFERITI vanno confermati con ispezione DevTools sul sito.
+
+   Uso: importare questo file PRIMA di qualsiasi altro CSS di componente
+   in tutte le nuove landing e prodotti YouPower.
+
+     @import "./styles/brand-tokens.css";
+
+   Nessuna regola di stile viene applicata da questo file: solo variabili.
+   ========================================================================= */
+
+:root {
+  /* -----------------------------------------------------------------------
+     1. COLORI — Brand core (OSSERVATI da WhatFont)
+     ----------------------------------------------------------------------- */
+
+  /* Primary: verde salvia YouPower — H1 hero, logo accent, icone */
+  --color-primary: #73AA7F;         /* rgb(115, 170, 127) */
+  --color-primary-rgb: 115, 170, 127;
+
+  /* Secondary: teal medio — H2/H3/H4, label */
+  --color-secondary: #507C7C;       /* rgb(80, 124, 124) */
+  --color-secondary-rgb: 80, 124, 124;
+
+  /* Text: teal scuro — body */
+  --color-text: #365252;            /* rgb(54, 82, 82) */
+  --color-text-rgb: 54, 82, 82;
+
+  /* Alias semantici */
+  --color-text-muted: var(--color-secondary);
+  --color-heading: var(--color-secondary);
+  --color-heading-hero: var(--color-primary);
+
+  /* -----------------------------------------------------------------------
+     Stati derivati (INFERITI — da verificare hover/pressed su sito live)
+     ----------------------------------------------------------------------- */
+
+  --color-primary-dark: #5C8F68;    /* hover / pressed del primary */
+  --color-primary-light: #8FBF9A;   /* stati hover-out / disabled soft */
+  --color-secondary-dark: #3F6363;
+  --color-secondary-light: #7A9E9E;
+
+  /* -----------------------------------------------------------------------
+     Superfici e background
+     ----------------------------------------------------------------------- */
+
+  --color-background: #FFFFFF;              /* OSSERVATO — superficie principale */
+  --color-surface: #FFFFFF;                 /* OSSERVATO — card, blocchi */
+  --color-surface-alt: #E8F1EC;             /* INFERITO — mint wash hero (da campionare) */
+  --color-surface-inverse: var(--color-text); /* fondo scuro per sezioni "dark" */
+
+  /* -----------------------------------------------------------------------
+     Bordi (INFERITI)
+     ----------------------------------------------------------------------- */
+
+  --color-border: #E0E7E3;
+  --color-border-strong: var(--color-secondary);
+  --color-border-focus: var(--color-primary);
+
+  /* -----------------------------------------------------------------------
+     Testo su fondo colorato
+     ----------------------------------------------------------------------- */
+
+  --color-on-primary: #FFFFFF;
+  --color-on-secondary: #FFFFFF;
+  --color-on-dark: #FFFFFF;
+
+  /* -----------------------------------------------------------------------
+     Stati funzionali (INFERITI — nessuno visibile nel sito osservato,
+     definiti per coerenza; da approvare prima di usarli in produzione)
+     ----------------------------------------------------------------------- */
+
+  --color-success: var(--color-primary);
+  --color-error: #B85450;
+  --color-warning: #D4A574;
+  --color-info: var(--color-secondary);
+
+
+  /* =======================================================================
+     2. TIPOGRAFIA (OSSERVATA)
+     ======================================================================= */
+
+  --font-family-base: "Nunito Sans", system-ui, -apple-system,
+                      BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-heading: var(--font-family-base);
+
+  /* Pesi — solo questi quattro sono usati sul sito */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font sizes desktop (OSSERVATE) */
+  --font-size-h1: 60px;
+  --font-size-h2: 32px;
+  --font-size-h3: 28px;
+  --font-size-h4: 20px;
+  --font-size-body-large: 16px;
+  --font-size-body: 16px;
+  --font-size-small: 14px;   /* INFERITO */
+  --font-size-button: 16px;  /* INFERITO */
+
+  /* Line-heights (OSSERVATE) */
+  --line-height-h1: 1.0;      /* 60/60 — cifra distintiva */
+  --line-height-h2: 1.31;     /* 42/32 */
+  --line-height-h3: 1.29;     /* 36/28 */
+  --line-height-h4: 1.30;     /* 26/20 */
+  --line-height-body: 1.50;   /* 24/16 */
+  --line-height-tight: 1.0;
+  --line-height-heading: 1.30;
+  --line-height-default: 1.50;
+
+  /* Letter-spacing — nessuno rilevato sul sito */
+  --letter-spacing-normal: 0;
+
+
+  /* =======================================================================
+     3. RADIUS (INFERITI dallo stile visivo osservato)
+     ======================================================================= */
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;   /* bottoni CTA e input di form */
+
+  --radius-button: var(--radius-pill);
+  --radius-input: var(--radius-pill);
+  --radius-card: var(--radius-lg);
+  --radius-card-large: var(--radius-xl);
+
+
+  /* =======================================================================
+     4. SPACING (INFERITO — scala 4-based)
+     ======================================================================= */
+
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;    /* padding verticale tra macro-sezioni */
+  --space-3xl: 128px;   /* separazione hero / prima sezione */
+
+
+  /* =======================================================================
+     5. LAYOUT (INFERITO)
+     ======================================================================= */
+
+  --container-width: 1200px;
+  --container-width-wide: 1400px;
+  --container-padding: 24px;
+  --content-narrow: 720px;
+
+  --header-height: 80px;         /* INFERITO */
+
+
+  /* =======================================================================
+     6. SHADOW (INFERITE — sempre in tinta teal, mai nere)
+     ======================================================================= */
+
+  --shadow-soft:      0 8px 24px  rgba(54, 82, 82, 0.08);
+  --shadow-card:      0 16px 48px rgba(54, 82, 82, 0.10);
+  --shadow-elevated:  0 24px 64px rgba(54, 82, 82, 0.12);
+  --shadow-focus-ring: 0 0 0 3px rgba(115, 170, 127, 0.35);
+
+
+  /* =======================================================================
+     7. TRANSITIONS (INFERITE)
+     ======================================================================= */
+
+  --transition-fast: 150ms ease-out;
+  --transition-base: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+
+
+  /* =======================================================================
+     8. Z-INDEX
+     ======================================================================= */
+
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-header: 300;
+  --z-modal-backdrop: 900;
+  --z-modal: 1000;
+  --z-toast: 1100;
+}
+
+
+/* =========================================================================
+   Font sizes mobile — override sotto 768px
+   Valori INFERITI: da verificare in DevTools responsive del sito live.
+   ========================================================================= */
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-h1: 40px;
+    --font-size-h2: 26px;
+    --font-size-h3: 24px;
+    --font-size-h4: 18px;
+
+    --space-2xl: 64px;
+    --space-3xl: 80px;
+
+    --container-padding: 20px;
+  }
+}
+
+
+/* =========================================================================
+   Reduced motion
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+  }
+}

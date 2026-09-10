@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impianti fotovoltaici in Ticino | YouPower</title>
+<meta name="description" content="Impianti fotovoltaici su misura in Ticino. Progettazione, gestione pratiche e incentivi, installazione e assistenza nel tempo. Richiedi un preventivo gratuito a YouPower.">
+<meta name="theme-color" content="#E8F1EC">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap">
+
+<style>
+/* =========================================================================
+   1. BRAND TOKENS — copia integrale di styles/brand-tokens.css
+   Nessun valore aggiunto o modificato.
+   ========================================================================= */
+:root {
+  /* Colori — brand core */
+  --color-primary: #73AA7F;
+  --color-primary-rgb: 115, 170, 127;
+  --color-secondary: #507C7C;
+  --color-secondary-rgb: 80, 124, 124;
+  --color-text: #365252;
+  --color-text-rgb: 54, 82, 82;
+
+  --color-text-muted: var(--color-secondary);
+  --color-heading: var(--color-secondary);
+  --color-heading-hero: var(--color-primary);
+
+  /* Stati derivati */
+  --color-primary-dark: #5C8F68;
+  --color-primary-light: #8FBF9A;
+  --color-secondary-dark: #3F6363;
+  --color-secondary-light: #7A9E9E;
+
+  /* Superfici */
+  --color-background: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #E8F1EC;
+  --color-surface-inverse: var(--color-text);
+
+  /* Bordi */
+  --color-border: #E0E7E3;
+  --color-border-strong: var(--color-secondary);
+  --color-border-focus: var(--color-primary);
+
+  /* Testo su fondo colorato */
+  --color-on-primary: #FFFFFF;
+  --color-on-secondary: #FFFFFF;
+  --color-on-dark: #FFFFFF;
+
+  /* Stati funzionali */
+  --color-success: var(--color-primary);
+  --color-error: #B85450;
+  --color-warning: #D4A574;
+  --color-info: var(--color-secondary);
+
+  /* Tipografia */
+  --font-family-base: "Nunito Sans", system-ui, -apple-system,
+                      BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-heading: var(--font-family-base);
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-size-h1: 60px;
+  --font-size-h2: 32px;
+  --font-size-h3: 28px;
+  --font-size-h4: 20px;
+  --font-size-body-large: 16px;
+  --font-size-body: 16px;
+  --font-size-small: 14px;
+  --font-size-button: 16px;
+
+  --line-height-h1: 1.0;
+  --line-height-h2: 1.31;
+  --line-height-h3: 1.29;
+  --line-height-h4: 1.30;
+  --line-height-body: 1.50;
+  --line-height-tight: 1.0;
+  --line-height-heading: 1.30;
+  --line-height-default: 1.50;
+
+  --letter-spacing-normal: 0;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --radius-button: var(--radius-pill);
+  --radius-input: var(--radius-pill);
+  --radius-card: var(--radius-lg);
+  --radius-card-large: var(--radius-xl);
+
+  /* Spacing */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+  --space-3xl: 128px;
+
+  /* Layout */
+  --container-width: 1200px;
+  --container-width-wide: 1400px;
+  --container-padding: 24px;
+  --content-narrow: 720px;
+  --header-height: 80px;
+
+  /* Shadow */
+  --shadow-soft:      0 8px 24px  rgba(54, 82, 82, 0.08);
+  --shadow-card:      0 16px 48px rgba(54, 82, 82, 0.10);
+  --shadow-elevated:  0 24px 64px rgba(54, 82, 82, 0.12);
+  --shadow-focus-ring: 0 0 0 3px rgba(115, 170, 127, 0.35);
+
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+  --transition-base: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+
+  /* Z-index */
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-header: 300;
+  --z-modal-backdrop: 900;
+  --z-modal: 1000;
+  --z-toast: 1100;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-h1: 40px;
+    --font-size-h2: 26px;
+    --font-size-h3: 24px;
+    --font-size-h4: 18px;
+
+    --space-2xl: 64px;
+    --space-3xl: 80px;
+
+    --container-padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+  }
+}
+
+
+/* =========================================================================
+   2. BASE
+   ========================================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  letter-spacing: var(--letter-spacing-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p, ul, li { margin: 0; }
+ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: var(--z-toast);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+}
+.skip-link:focus {
+  left: var(--space-sm);
+  top: var(--space-sm);
+  box-shadow: var(--shadow-focus-ring);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+  border-radius: var(--radius-pill);
+}
+
+
+/* =========================================================================
+   3. BOTTONI — pill, come da brand kit (sez. 4.1)
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-button);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  border: 0;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* Padding da brand kit 4.1: ~14-16px verticali x 28-32px orizzontali */
+.btn--primary {
+  background: var(--color-text);
+  color: var(--color-on-dark);
+  padding: 16px 32px;
+}
+.btn--primary:hover { background: var(--color-secondary); }
+
+/* Variante compatta per l'header: orizzontale al minimo del range 4.1 */
+.btn--header {
+  padding: 12px 28px;
+  white-space: nowrap;
+}
+
+.btn--hero {
+  padding: var(--space-sm) var(--space-lg);
+}
+
+
+/* =========================================================================
+   4. HEADER
+   ========================================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+.site-header.is-scrolled {
+  background: var(--color-surface);
+  border-bottom-color: var(--color-border);
+}
+
+.site-header__inner {
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.logo { display: inline-flex; align-items: center; }
+.logo__img {
+  height: 44px;
+  width: auto;
+}
+
+
+/* =========================================================================
+   5. HERO
+   ========================================================================= */
+.hero {
+  position: relative;
+  background: var(--color-surface-alt);
+  /* Il wash mint parte dal bordo superiore: l'header trasparente ci scorre sopra */
+  margin-top: calc(-1 * var(--header-height));
+  padding-top: calc(var(--header-height) + var(--space-2xl));
+  padding-bottom: var(--space-2xl);
+  overflow: hidden;
+}
+
+/* Forma organica decorativa (brand kit 4.7 / 6.6) */
+.hero__decoration {
+  position: absolute;
+  top: -14%;
+  left: -14%;
+  width: 46vw;
+  max-width: 720px;
+  aspect-ratio: 1 / 1;
+  color: var(--color-primary);
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: var(--z-base);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.hero__title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h1);
+  /* --color-primary-dark al posto di --color-heading-hero: il sage #73AA7F
+     si ferma a 2.34:1 sul wash mint, sotto la soglia AA per il testo large. */
+  color: var(--color-primary-dark);
+  text-wrap: balance;
+}
+
+/* Riga "Body Light" della scala tipografica (16 / 300 / 1.5 / #365252):
+   sul wash mint il teal #507C7C si ferma a 4.04:1, sotto la soglia AA. */
+.hero__lead {
+  margin-top: var(--space-md);
+  max-width: 46ch;
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+/* Benefit */
+.hero__benefits {
+  margin-top: var(--space-lg);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm) var(--space-md);
+  max-width: 34rem;
+}
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.benefit__icon {
+  flex: none;
+  width: var(--space-md);
+  height: var(--space-md);
+  color: var(--color-primary);
+}
+
+/* CTA */
+.hero__cta-block { margin-top: var(--space-lg); }
+/* Riga "Small / Label" della scala tipografica (14 / 400 / #365252) */
+.hero__microcopy {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+/* Media */
+.hero__media {
+  position: relative;
+  border-radius: var(--radius-card-large);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  aspect-ratio: 4 / 5;
+}
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* =========================================================================
+   6. SEZIONI DI CONTENUTO — impianto comune
+   ========================================================================= */
+.section {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+  background: var(--color-background);
+}
+/* Wash mint: riservato alla sezione progettazione, la piu' autorevole */
+.section--accent { background: var(--color-surface-alt); }
+/* Piu' respiro verticale = piu' peso nella gerarchia */
+.section--lead {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.section__head {
+  max-width: var(--content-narrow);
+  margin-bottom: var(--space-xl);
+}
+.section__title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h2);
+  color: var(--color-heading);
+}
+.section__intro {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-body-large);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+
+/* =========================================================================
+   7. TRUST BAR
+   ========================================================================= */
+/* Fascia leggerissima: nessuna card, nessun fondo scuro, solo un filo
+   in basso a chiudere la fascia e separatori verticali fra le voci. */
+.trust {
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-md);
+}
+.trust__list {
+  display: flex;
+  align-items: center;
+}
+.trust__item {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding-inline: var(--space-sm);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.trust__item + .trust__item { border-left: 1px solid var(--color-border); }
+.trust__icon {
+  flex: none;
+  width: var(--space-md);
+  height: var(--space-md);
+  color: var(--color-primary);
+}
+
+
+/* =========================================================================
+   8. BENEFICI DEL FOTOVOLTAICO
+   ========================================================================= */
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-xl);
+  row-gap: var(--space-xl);
+}
+/* Niente card: ogni blocco e' scandito solo da un filo sottile in alto */
+.benefit-block {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-md);
+}
+.benefit-block__icon {
+  width: var(--space-xl);
+  height: var(--space-xl);
+  color: var(--color-primary);
+}
+.benefit-block__title {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-heading);
+}
+.benefit-block__text {
+  margin-top: var(--space-xs);
+  max-width: 44ch;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+
+/* =========================================================================
+   9. PROGETTAZIONE SU MISURA
+   ========================================================================= */
+.design__inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: var(--space-xl);
+}
+.design__head { margin-bottom: var(--space-lg); }
+
+.design__points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm) var(--space-md);
+}
+.design__point {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.design__point svg {
+  flex: none;
+  width: var(--space-md);
+  height: var(--space-md);
+  color: var(--color-primary);
+}
+
+.design__media {
+  border-radius: var(--radius-card-large);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  aspect-ratio: 4 / 5;
+}
+.design__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* =========================================================================
+   6. ANIMAZIONI FADE-IN
+   ========================================================================= */
+/* Fade-in in CSS puro: nessuna dipendenza da JS, il contenuto resta
+   sempre leggibile anche se le animazioni non vengono eseguite. */
+@keyframes yp-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+.reveal {
+  animation: yp-fade-in var(--transition-slow) ease-out both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none; }
+}
+
+/* Sotto la piega il fade-in scatta allo scroll. Lo stato nascosto viene
+   applicato solo se lo script e' attivo: senza JS il contenuto e' visibile. */
+.has-scroll-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--transition-slow) ease-out,
+              transform var(--transition-slow) ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.has-scroll-reveal [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .has-scroll-reveal [data-reveal] { opacity: 1; transform: none; }
+}
+
+
+/* =========================================================================
+   7. RESPONSIVE
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  /* In colonna singola il contenuto resta su misura di lettura */
+  .hero__content { max-width: var(--content-narrow); }
+  .hero__title { max-width: 17ch; }
+  .hero__media {
+    max-width: var(--content-narrow);
+    aspect-ratio: 16 / 10;
+  }
+  .hero__decoration { width: 70vw; top: -10%; left: -30%; }
+
+  /* Trust bar: sotto i 1024px le quattro voci in riga diventano strette */
+  .trust__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm) var(--space-md);
+  }
+  .trust__item {
+    justify-content: flex-start;
+    padding-inline: 0;
+  }
+  .trust__item + .trust__item { border-left: 0; }
+
+  .design__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .design__content { max-width: var(--content-narrow); }
+  .design__media {
+    max-width: var(--content-narrow);
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 768px) {
+  :root { --header-height: 64px; }
+
+  .logo__img { height: 34px; }
+
+  .btn--header {
+    font-size: var(--font-size-small);
+    padding: var(--space-xs) var(--space-md);
+  }
+
+  .benefits {
+    column-gap: var(--space-lg);
+    row-gap: var(--space-lg);
+  }
+  .benefit-block__icon {
+    width: var(--space-lg);
+    height: var(--space-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero__title,
+  .hero__lead,
+  .hero__content,
+  .hero__media { max-width: none; }
+
+  .hero__benefits {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    max-width: none;
+  }
+
+  .hero__cta-block { text-align: center; }
+  .btn--hero {
+    display: flex;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .hero__media { aspect-ratio: 3 / 2; }
+
+  .section__head { margin-bottom: var(--space-lg); }
+
+  .benefits { grid-template-columns: 1fr; }
+
+  .design__points { grid-template-columns: 1fr; }
+  .design__content,
+  .design__media { max-width: none; }
+  .design__media { aspect-ratio: 3 / 2; }
+}
+
+/* Sotto i 640px la CTA per esteso non entra nell'header accanto al logo
+   senza andare a capo. L'header resta al minimo (solo logo) e la conversione
+   e' affidata alla CTA full-width dell'hero, immediatamente sotto. */
+@media (max-width: 640px) {
+  .btn--header { display: none; }
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#hero">Vai al contenuto principale</a>
+
+<header class="site-header" id="site-header">
+  <div class="container site-header__inner">
+    <a class="logo" href="#hero">
+      <img class="logo__img" src="assets/youpower-logo.png"
+           width="1920" height="450" decoding="async"
+           alt="YouPower — The Energy Company">
+    </a>
+
+    <a class="btn btn--primary btn--header" href="#preventivo">Richiedi un preventivo gratuito</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <svg class="hero__decoration" viewBox="0 0 600 600" fill="currentColor"
+         aria-hidden="true" focusable="false">
+      <path d="M300 12c126 0 234 66 273 168 40 104-1 224-84 300-83 76-207 108-303 78C90 528 18 434 8 330-3 220 55 112 156 52 200 26 249 12 300 12Z"></path>
+    </svg>
+
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <h1 class="hero__title reveal" id="hero-title">L'energia del sole per un futuro più tuo</h1>
+
+        <p class="hero__lead reveal" style="--reveal-delay:80ms">
+          Produci la tua energia, riduci i costi e valorizza il tuo immobile con un impianto
+          fotovoltaico progettato su misura.
+        </p>
+
+        <ul class="hero__benefits reveal" style="--reveal-delay:160ms">
+          <li class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true" focusable="false">
+              <path d="M4 20h4L18.6 9.4a2.1 2.1 0 0 0-3-3L5 17v3Z"></path>
+              <path d="m14.5 7.5 3 3"></path>
+              <path d="M4 3.5h6"></path>
+              <path d="M7 3.5v6"></path>
+            </svg>
+            <span>Progettazione su misura</span>
+          </li>
+
+          <li class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true" focusable="false">
+              <path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"></path>
+              <path d="M14 2.5v5h5"></path>
+              <path d="m8.5 14.5 2 2 4.5-4.5"></path>
+            </svg>
+            <span>Gestione pratiche e incentivi</span>
+          </li>
+
+          <li class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true" focusable="false">
+              <path d="M3.5 17.5h17L18 6.5H6Z"></path>
+              <path d="M4.9 12h14.2"></path>
+              <path d="M11 6.5 10 17.5"></path>
+              <path d="m13 6.5 1 11"></path>
+            </svg>
+            <span>Installazione e collaudo</span>
+          </li>
+
+          <li class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 aria-hidden="true" focusable="false">
+              <path d="M12 2.8 4.5 5.9v5.6c0 4.4 3.1 8.1 7.5 9.7 4.4-1.6 7.5-5.3 7.5-9.7V5.9Z"></path>
+              <path d="M12 8.5v4l2.5 1.6"></path>
+            </svg>
+            <span>Assistenza nel tempo</span>
+          </li>
+        </ul>
+
+        <div class="hero__cta-block reveal" style="--reveal-delay:240ms">
+          <a class="btn btn--primary btn--hero" href="#preventivo">Richiedi un preventivo gratuito</a>
+          <p class="hero__microcopy">Senza impegno · Consulenza personalizzata</p>
+        </div>
+      </div>
+
+      <div class="hero__media reveal" style="--reveal-delay:160ms">
+        <img src="assets/hero-fotovoltaico-ticino.jpg"
+             width="1000" height="1250" fetchpriority="high" decoding="async"
+             alt="Abitazione residenziale in Ticino con impianto fotovoltaico integrato sul tetto, fotografata in luce naturale con le montagne sullo sfondo.">
+      </div>
+    </div>
+  </section>
+
+  <section class="trust" aria-label="Garanzie e riconoscimenti YouPower">
+    <div class="container">
+      <ul class="trust__list">
+        <li class="trust__item">
+          <svg class="trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="3"></rect>
+            <path d="M12 8.5v7"></path>
+            <path d="M8.5 12h7"></path>
+          </svg>
+          <span>Azienda svizzera</span>
+        </li>
+        <li class="trust__item">
+          <svg class="trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path>
+            <circle cx="12" cy="10" r="2.5"></circle>
+          </svg>
+          <span>Operativit&agrave; in Ticino</span>
+        </li>
+        <li class="trust__item">
+          <svg class="trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="9" r="5.5"></circle>
+            <path d="m8.5 13.6-1.4 6.9 4.9-2.4 4.9 2.4-1.4-6.9"></path>
+          </svg>
+          <span>Membro Swiss Solar</span>
+        </li>
+        <li class="trust__item">
+          <svg class="trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="m12 3.6 2.6 5.5 6 .8-4.3 4.2 1 6-5.3-2.9-5.3 2.9 1-6L3.4 9.9l6-.8Z"></path>
+          </svg>
+          <span>Recensioni Google</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="fotovoltaico" aria-labelledby="fotovoltaico-title">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="fotovoltaico-title">Perch&eacute; scegliere il fotovoltaico</h2>
+        <p class="section__intro">
+          Produrre energia direttamente dal sole significa ridurre la dipendenza dalla rete,
+          contenere i costi energetici e valorizzare il proprio immobile.
+        </p>
+      </div>
+
+      <ul class="benefits">
+        <li class="benefit-block" data-reveal>
+          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M3.5 17.5a8.5 8.5 0 1 1 17 0"></path>
+            <path d="M20.5 17.5h-17"></path>
+            <path d="m12 17.5 4-6.5"></path>
+          </svg>
+          <h3 class="benefit-block__title">Risparmio energetico</h3>
+          <p class="benefit-block__text">
+            Riduci l'energia acquistata dalla rete utilizzando direttamente quella
+            prodotta dal tuo impianto.
+          </p>
+        </li>
+
+        <li class="benefit-block" data-reveal style="--reveal-delay:80ms">
+          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="M12.9 7.2 8.6 12.9h3.3l-.8 3.9 4.3-5.7h-3.3z"></path>
+          </svg>
+          <h3 class="benefit-block__title">Maggiore indipendenza energetica</h3>
+          <p class="benefit-block__text">
+            Aumenti la quota di energia prodotta e utilizzata direttamente dal tuo immobile.
+          </p>
+        </li>
+
+        <li class="benefit-block" data-reveal style="--reveal-delay:160ms">
+          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M3.5 20.5h17"></path>
+            <path d="M6 20.5V9.7L12 4.5l6 5.2v10.8"></path>
+            <path d="M10 20.5v-5h4v5"></path>
+          </svg>
+          <h3 class="benefit-block__title">Valorizzazione dell'immobile</h3>
+          <p class="benefit-block__text">
+            Un sistema fotovoltaico contribuisce a migliorare l'efficienza energetica
+            dell'edificio.
+          </p>
+        </li>
+
+        <li class="benefit-block" data-reveal style="--reveal-delay:240ms">
+          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2.5v2.5"></path>
+            <path d="M12 19v2.5"></path>
+            <path d="M2.5 12H5"></path>
+            <path d="M19 12h2.5"></path>
+            <path d="m5.3 5.3 1.8 1.8"></path>
+            <path d="m16.9 16.9 1.8 1.8"></path>
+            <path d="m18.7 5.3-1.8 1.8"></path>
+            <path d="m7.1 16.9-1.8 1.8"></path>
+          </svg>
+          <h3 class="benefit-block__title">Energia rinnovabile</h3>
+          <p class="benefit-block__text">
+            Produci energia da una fonte rinnovabile direttamente sul tuo tetto.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--accent section--lead" id="progettazione"
+           aria-labelledby="progettazione-title">
+    <div class="container design__inner">
+      <div class="design__content">
+        <div class="section__head design__head" data-reveal>
+          <h2 class="section__title" id="progettazione-title">
+            Ogni impianto nasce da una progettazione su misura
+          </h2>
+          <p class="section__intro">
+            YouPower analizza le caratteristiche dell'edificio e progetta ogni impianto
+            per ottenere una soluzione coerente con struttura, consumi e potenziale
+            di produzione.
+          </p>
+        </div>
+
+        <ul class="design__points" data-reveal style="--reveal-delay:80ms">
+          <li class="design__point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
+            <span>Struttura dell'edificio</span>
+          </li>
+          <li class="design__point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
+            <span>Materiali</span>
+          </li>
+          <li class="design__point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
+            <span>Ombreggiamento</span>
+          </li>
+          <li class="design__point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
+            <span>Pendenza del tetto</span>
+          </li>
+          <li class="design__point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
+            <span>Cablaggio</span>
+          </li>
+          <li class="design__point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
+            <span>Progettazione 3D</span>
+          </li>
+          <li class="design__point">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
+            <span>Ottimizzazione della resa</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="design__media" data-reveal style="--reveal-delay:120ms">
+        <img src="assets/progettazione-tetto-fotovoltaico.jpg"
+             width="1000" height="1250" loading="lazy" decoding="async"
+             alt="Tecnico YouPower al lavoro sul rilievo di un tetto residenziale, con la disposizione dei moduli fotovoltaici studiata sulla falda.">
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+/* Unico script della pagina: stato dell'header allo scroll. */
+(function () {
+  var header = document.getElementById('site-header');
+  var onScroll = function () {
+    header.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* Fade-in allo scroll per le sezioni sotto la piega. Progressive
+     enhancement: lo stato nascosto entra solo se l'observer esiste, e un
+     timer di sicurezza mostra comunque tutto se non emette mai. */
+  var items = document.querySelectorAll('[data-reveal]');
+  if (!items.length || !('IntersectionObserver' in window)) { return; }
+
+  document.documentElement.classList.add('has-scroll-reveal');
+  var show = function (el) { el.classList.add('is-revealed'); };
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        show(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -12% 0px' });
+
+  items.forEach(function (el) { observer.observe(el); });
+  setTimeout(function () { items.forEach(show); }, 1500);
+})();
+</script>
+</body>
+</html>
