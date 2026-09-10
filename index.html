@@ -550,16 +550,239 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   6. ANIMAZIONI FADE-IN
+   10. COME FUNZIONA — timeline
    ========================================================================= */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.step {
+  position: relative;
+  padding-top: var(--space-lg);
+}
+/* Nodo: cerchio a contorno sage, stesso tratto delle icone lineari */
+.step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--space-sm);
+  height: var(--space-sm);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+}
+/* Filo verso il nodo successivo, attraverso il gap di colonna */
+.step::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-sm) / 2 - 0.5px);
+  left: var(--space-sm);
+  right: calc(-1 * var(--space-lg));
+  height: 1px;
+  background: var(--color-border);
+}
+.step:last-child::after { display: none; }
+
+.step__number {
+  display: block;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-heading);
+}
+.step__title {
+  margin-top: var(--space-xxs);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-heading);
+}
+.step__text {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+
+/* =========================================================================
+   11. ENERGIA — il fotovoltaico come sorgente
+   ========================================================================= */
+/* Pannello mint con l'impianto al centro e le due estensioni ai lati.
+   Sul mint il testo resta in #365252; i titoli teal stanno sulle card bianche. */
+.energy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  padding: var(--space-lg);
+  border-radius: var(--radius-card-large);
+  background: var(--color-surface-alt);
+}
+.energy__hub {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-inline: var(--space-xl);
+  text-align: center;
+}
+/* Fili di collegamento dall'impianto alle due card */
+.energy__hub::before,
+.energy__hub::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-xl) / 2);
+  width: calc(var(--space-xl) - var(--space-sm));
+  height: 1px;
+  background: var(--color-primary);
+}
+.energy__hub::before { left: 0; }
+.energy__hub::after { right: 0; }
+
+.energy__hub-icon {
+  width: var(--space-xl);
+  height: var(--space-xl);
+  color: var(--color-primary);
+}
+.energy__hub-title {
+  max-width: 14ch;
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-text);
+}
+
+.energy__card {
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+.energy__icon {
+  width: var(--space-lg);
+  height: var(--space-lg);
+  color: var(--color-primary);
+}
+.energy__title {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-heading);
+}
+/* Le sigle restano un sottotitolo discreto, mai il titolo */
+.energy__label {
+  margin-top: var(--space-xxs);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.energy__text {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+/* Accumulo: riferimento secondario, fuori dal pannello */
+.energy__note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  max-width: var(--content-narrow);
+  margin: var(--space-lg) auto 0;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.energy__note svg {
+  flex: none;
+  width: var(--space-md);
+  height: var(--space-md);
+  color: var(--color-primary);
+}
+
+
+/* =========================================================================
+   12. INCENTIVI — accordion nativi <details>, nessun JS
+   ========================================================================= */
+.incentives__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: var(--space-xl);
+}
+.incentives__inner .section__head { margin-bottom: 0; }
+
+.accordion { border-top: 1px solid var(--color-border); }
+.accordion__item { border-bottom: 1px solid var(--color-border); }
+.accordion__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-block: var(--space-md);
+  cursor: pointer;
+  list-style: none;
+}
+.accordion__summary::-webkit-details-marker { display: none; }
+.accordion__title {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-heading);
+}
+.accordion__chevron {
+  flex: none;
+  width: var(--space-md);
+  height: var(--space-md);
+  color: var(--color-primary);
+  transition: transform var(--transition-base);
+}
+.accordion__item[open] .accordion__chevron { transform: rotate(180deg); }
+
+.accordion__body {
+  max-width: 60ch;
+  padding-bottom: var(--space-md);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+/* Transizione leggera all'apertura: fade del testo + rotazione del chevron.
+   Niente animazione dell'altezza via ::details-content: supporto ancora
+   disomogeneo e rischio di pannello bloccato chiuso. */
+.accordion__item[open] .accordion__body {
+  animation: yp-fade-in var(--transition-base) both;
+}
+
+.incentives__cta { margin-top: var(--space-lg); }
+
+
+/* =========================================================================
+   13. ANIMAZIONI FADE-IN
+   =========================================================================
 /* Fade-in in CSS puro: nessuna dipendenza da JS, il contenuto resta
    sempre leggibile anche se le animazioni non vengono eseguite. */
+/* I token --transition-* includono gia' la curva (es. "400ms ease-out"):
+   aggiungerne una seconda rende la dichiarazione invalida e il browser la scarta. */
 @keyframes yp-fade-in {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: none; }
 }
 .reveal {
-  animation: yp-fade-in var(--transition-slow) ease-out both;
+  animation: yp-fade-in var(--transition-slow) both;
   animation-delay: var(--reveal-delay, 0ms);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -571,8 +794,8 @@ a { text-decoration: none; color: inherit; }
 .has-scroll-reveal [data-reveal] {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity var(--transition-slow) ease-out,
-              transform var(--transition-slow) ease-out;
+  transition: opacity var(--transition-slow),
+              transform var(--transition-slow);
   transition-delay: var(--reveal-delay, 0ms);
 }
 .has-scroll-reveal [data-reveal].is-revealed {
@@ -585,7 +808,7 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   7. RESPONSIVE
+   14. RESPONSIVE
    ========================================================================= */
 @media (max-width: 1024px) {
   .hero__inner {
@@ -622,6 +845,33 @@ a { text-decoration: none; color: inherit; }
     max-width: var(--content-narrow);
     aspect-ratio: 16 / 10;
   }
+
+  /* Energia: impianto in alto, le due estensioni affiancate sotto */
+  .energy {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+  .energy__hub {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    padding-inline: 0;
+    padding-bottom: var(--space-lg);
+  }
+  .energy__hub::before { display: none; }
+  .energy__hub::after {
+    top: auto;
+    bottom: var(--space-xs);
+    right: auto;
+    left: calc(50% - 0.5px);
+    width: 1px;
+    height: var(--space-md);
+  }
+
+  .incentives__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .incentives__inner > * { max-width: var(--content-narrow); }
 }
 
 @media (max-width: 768px) {
@@ -641,6 +891,25 @@ a { text-decoration: none; color: inherit; }
   .benefit-block__icon {
     width: var(--space-lg);
     height: var(--space-lg);
+  }
+
+  /* Timeline verticale: nodo a sinistra, filo che scende al passo successivo */
+  .steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .step {
+    padding-top: 0;
+    padding-left: var(--space-lg);
+  }
+  .step::before { top: var(--space-xxs); }
+  .step::after {
+    top: calc(var(--space-xxs) + var(--space-sm));
+    bottom: calc(-1 * (var(--space-md) + var(--space-xxs)));
+    left: calc(var(--space-sm) / 2 - 0.5px);
+    right: auto;
+    width: 1px;
+    height: auto;
   }
 }
 
@@ -673,6 +942,24 @@ a { text-decoration: none; color: inherit; }
   .design__content,
   .design__media { max-width: none; }
   .design__media { aspect-ratio: 3 / 2; }
+
+  .energy {
+    grid-template-columns: 1fr;
+    padding: var(--space-md);
+  }
+  .energy__card { padding: var(--space-md); }
+  .energy__hub-icon {
+    width: var(--space-lg);
+    height: var(--space-lg);
+  }
+  .energy__note { margin-top: var(--space-md); }
+
+  .incentives__inner > * { max-width: none; }
+  .incentives__cta .btn {
+    display: flex;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+  }
 }
 
 /* Sotto i 640px la CTA per esteso non entra nell'header accanto al logo
@@ -931,6 +1218,166 @@ a { text-decoration: none; color: inherit; }
         <img src="assets/progettazione-tetto-fotovoltaico.jpg"
              width="1000" height="1250" loading="lazy" decoding="async"
              alt="Tecnico YouPower al lavoro sul rilievo di un tetto residenziale, con la disposizione dei moduli fotovoltaici studiata sulla falda.">
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--lead" id="come-funziona" aria-labelledby="come-funziona-title">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="come-funziona-title">Dal progetto all’impianto, passo dopo passo</h2>
+        <p class="section__intro">
+          YouPower segue ogni fase, dalla valutazione iniziale fino all’installazione
+          e all’assistenza nel tempo.
+        </p>
+      </div>
+
+      <ol class="steps">
+        <li class="step" data-reveal>
+          <span class="step__number" aria-hidden="true">01</span>
+          <h3 class="step__title">Analisi</h3>
+          <p class="step__text">Valutazione dell’edificio, delle esigenze e del potenziale dell’impianto.</p>
+        </li>
+
+        <li class="step" data-reveal style="--reveal-delay:80ms">
+          <span class="step__number" aria-hidden="true">02</span>
+          <h3 class="step__title">Progettazione</h3>
+          <p class="step__text">Definizione della soluzione tecnica più adatta in base a struttura, consumi e resa attesa.</p>
+        </li>
+
+        <li class="step" data-reveal style="--reveal-delay:160ms">
+          <span class="step__number" aria-hidden="true">03</span>
+          <h3 class="step__title">Installazione e collaudo</h3>
+          <p class="step__text">Realizzazione dell’impianto e verifica del corretto funzionamento.</p>
+        </li>
+
+        <li class="step" data-reveal style="--reveal-delay:240ms">
+          <span class="step__number" aria-hidden="true">04</span>
+          <h3 class="step__title">Assistenza</h3>
+          <p class="step__text">Supporto anche dopo l’installazione, con servizi di controllo e manutenzione.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="energia" aria-labelledby="energia-title">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="energia-title">Il fotovoltaico è solo il punto di partenza</h2>
+        <p class="section__intro">
+          L’energia prodotta può essere utilizzata in modo ancora più efficiente grazie a
+          soluzioni che ne aumentano l’autoconsumo, la condivisione e l’integrazione con
+          la mobilità elettrica.
+        </p>
+      </div>
+
+      <div class="energy" data-reveal style="--reveal-delay:80ms">
+        <div class="energy__hub">
+          <svg class="energy__hub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="4.5" r="1.75"></circle>
+            <path d="M3 17.5 5.5 9.5h13l2.5 8Z"></path>
+            <path d="M4.25 13.5h15.5"></path>
+            <path d="M9.3 9.5 8.6 17.5"></path>
+            <path d="m14.7 9.5.7 8"></path>
+            <path d="M12 17.5v3"></path>
+            <path d="M9 20.5h6"></path>
+          </svg>
+          <p class="energy__hub-title">Il tuo impianto fotovoltaico</p>
+        </div>
+
+        <div class="energy__card">
+          <svg class="energy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="5.5" y="3.5" width="13" height="17" rx="1"></rect>
+            <path d="M9 7.5h1.5"></path>
+            <path d="M13.5 7.5H15"></path>
+            <path d="M9 11.5h1.5"></path>
+            <path d="M13.5 11.5H15"></path>
+            <path d="M10.5 20.5v-4h3v4"></path>
+          </svg>
+          <h3 class="energy__title">Condividi l’energia prodotta</h3>
+          <p class="energy__label">RCP, RCPv e CLE</p>
+          <p class="energy__text">
+            Per edifici con più utenze, queste soluzioni permettono di organizzare e
+            valorizzare localmente l’energia prodotta dall’impianto fotovoltaico.
+          </p>
+        </div>
+
+        <div class="energy__card">
+          <svg class="energy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect x="4.5" y="3.5" width="9" height="17" rx="1.5"></rect>
+            <path d="M3 20.5h12"></path>
+            <path d="m9.5 7-2 3.5h3l-2 3.5"></path>
+            <path d="M13.5 9.5h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V9l-2-2.5"></path>
+          </svg>
+          <h3 class="energy__title">Usa l’energia anche per la mobilità</h3>
+          <p class="energy__label">E-Mobility</p>
+          <p class="energy__text">
+            Integra il fotovoltaico con sistemi di ricarica per veicoli elettrici e utilizza
+            l’energia prodotta anche per la mobilità.
+          </p>
+        </div>
+      </div>
+
+      <p class="energy__note" data-reveal>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <rect x="3.5" y="7.5" width="15" height="9" rx="2"></rect>
+          <path d="M21 10.5v3"></path>
+          <path d="M7 10.5v3"></path>
+          <path d="M10.5 10.5v3"></path>
+        </svg>
+        <span>
+          Con un sistema di accumulo, l’energia prodotta durante il giorno può essere
+          utilizzata anche la sera o nei momenti di scarsa insolazione.
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="incentivi" aria-labelledby="incentivi-title">
+    <div class="container incentives__inner">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="incentivi-title">Riduci l’investimento grazie agli incentivi disponibili</h2>
+        <p class="section__intro">
+          Per gli impianti fotovoltaici possono essere disponibili contributi federali,
+          cantonali e comunali. YouPower ti supporta nella verifica delle opportunità
+          applicabili e nella gestione delle pratiche.
+        </p>
+      </div>
+
+      <div class="incentives__body" data-reveal style="--reveal-delay:80ms">
+        <div class="accordion">
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Incentivi federali</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>A livello federale Pronovo gestisce la rimunerazione unica per gli impianti fotovoltaici: un contributo che riduce il costo iniziale e può essere combinato con gli incentivi cantonali e comunali.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Incentivi cantonali</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>In Ticino il fotovoltaico può beneficiare del Fondo energie rinnovabili (FER). Sono inoltre previste agevolazioni fiscali: i costi dell’impianto possono essere dedotti dal reddito imponibile, con la possibilità di ripartirli su più anni fiscali.</p>
+            </div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Incentivi comunali</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>Alcuni comuni prevedono incentivi aggiuntivi, con condizioni che variano da comune a comune. YouPower verifica quelli applicabili al tuo immobile.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="incentives__cta">
+          <a class="btn btn--primary" href="#contatti">Richiedi una valutazione gratuita</a>
+        </div>
       </div>
     </div>
   </section>

@@ -65,3 +65,24 @@ La voce "Recensioni Google" della trust bar e' oggi solo un'etichetta: non ci
 sono in progetto ne' il punteggio medio ne' il numero di recensioni. Quando il
 dato sara' disponibile andra' deciso se mostrarlo in chiaro (es. "4,9 su 47
 recensioni") — senza stelle grandi ne' badge, per restare nel tono del brand.
+
+---
+
+## Contenuti da validare prima della pubblicazione (sezione Incentivi)
+
+I testi dei tre accordion sono ricavati **solo** dalle pagine youpower.ch
+`/incentivi-fiscali/` e `/prodotti/impianti-fotovoltaici/`, senza importi ne'
+percentuali. Vanno comunque confermati da YouPower, perche' toccano materia
+fiscale e regolamentare:
+
+- **Federali** — Pronovo e la rimunerazione unica, cumulabile con incentivi
+  cantonali e comunali.
+- **Cantonali** — Fondo energie rinnovabili (FER) per il fotovoltaico in Ticino;
+  deducibilita' dei costi dal reddito imponibile con ripartizione su piu' anni
+  fiscali. Da verificare se la deduzione va presentata come cantonale o se
+  riguarda anche l'imposta federale diretta.
+- **Comunali** — incentivi aggiuntivi variabili da comune a comune.
+
+Esclusi di proposito: gli importi CHF presenti sulla pagina incentivi, perche'
+riferiti alle termopompe e non al fotovoltaico, e comunque non validati per
+questa landing.
