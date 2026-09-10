@@ -70,22 +70,23 @@ recensioni") — senza stelle grandi ne' badge, per restare nel tono del brand.
 
 ## Contenuti da validare prima della pubblicazione (sezione Incentivi)
 
-I testi dei tre accordion sono ricavati **solo** dalle pagine youpower.ch
-`/incentivi-fiscali/` e `/prodotti/impianti-fotovoltaici/`, senza importi ne'
-percentuali. Vanno comunque confermati da YouPower, perche' toccano materia
+I testi dei quattro accordion sono ricavati **solo** dalle pagine youpower.ch
+`/incentivi-fiscali/`, `/faq/` e `/prodotti/impianti-fotovoltaici/`, senza importi
+ne' percentuali. Vanno comunque confermati da YouPower, perche' toccano materia
 fiscale e regolamentare:
 
-- **Federali** — Pronovo e la rimunerazione unica, cumulabile con incentivi
+- **Federale — Pronovo** — rimunerazione unica, cumulabile con incentivi
   cantonali e comunali.
-- **Cantonali** — Fondo energie rinnovabili (FER) per il fotovoltaico in Ticino;
-  deducibilita' dei costi dal reddito imponibile con ripartizione su piu' anni
-  fiscali. Da verificare se la deduzione va presentata come cantonale o se
-  riguarda anche l'imposta federale diretta.
-- **Comunali** — incentivi aggiuntivi variabili da comune a comune.
+- **Cantonale — FER** — Fondo energie rinnovabili per il fotovoltaico in Ticino,
+  cumulabile con il contributo federale.
+- **Comunale** — incentivi aggiuntivi variabili da comune a comune.
+- **Agevolazioni fiscali** — deducibilita' dei costi dal reddito imponibile con
+  ripartizione su piu' anni fiscali. Da verificare se vale per l'imposta
+  cantonale, per quella federale diretta o per entrambe, e a quali condizioni
+  (es. immobile esistente).
 
-Esclusi di proposito: gli importi CHF presenti sulla pagina incentivi, perche'
-riferiti alle termopompe e non al fotovoltaico, e comunque non validati per
-questa landing.
+Esclusi di proposito: gli importi CHF della pagina incentivi, riferiti alle
+termopompe, e le percentuali della pagina FAQ, non validati per questa landing.
 
 ---
 

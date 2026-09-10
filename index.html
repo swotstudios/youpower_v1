@@ -634,39 +634,37 @@ a { text-decoration: none; color: inherit; }
 /* =========================================================================
    11. ENERGIA — il fotovoltaico come sorgente
    ========================================================================= */
-/* Pannello mint con l'impianto al centro e le due estensioni ai lati.
-   Sul mint il testo resta in #365252; i titoli teal stanno sulle card bianche. */
+/* Pannello mint: l'impianto in alto come punto di partenza, le tre
+   estensioni affiancate sotto. Sul mint il testo resta in #365252;
+   i titoli teal stanno sulle card bianche. */
 .energy {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
   padding: var(--space-lg);
   border-radius: var(--radius-card-large);
   background: var(--color-surface-alt);
 }
 .energy__hub {
-  grid-column: 2;
-  grid-row: 1;
+  grid-column: 1 / -1;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-sm);
-  padding-inline: var(--space-xl);
+  padding-bottom: var(--space-lg);
   text-align: center;
 }
-/* Fili di collegamento dall'impianto alle due card */
-.energy__hub::before,
+/* Filo che scende dall'impianto verso le card */
 .energy__hub::after {
   content: "";
   position: absolute;
-  top: calc(var(--space-xl) / 2);
-  width: calc(var(--space-xl) - var(--space-sm));
-  height: 1px;
+  bottom: var(--space-xs);
+  left: calc(50% - 0.5px);
+  width: 1px;
+  height: var(--space-md);
   background: var(--color-primary);
 }
-.energy__hub::before { left: 0; }
-.energy__hub::after { right: 0; }
 
 .energy__hub-icon {
   width: var(--space-xl);
@@ -713,25 +711,6 @@ a { text-decoration: none; color: inherit; }
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-body);
   color: var(--color-text);
-}
-
-/* Accumulo: riferimento secondario, fuori dal pannello */
-.energy__note {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-sm);
-  max-width: var(--content-narrow);
-  margin: var(--space-lg) auto 0;
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body);
-  color: var(--color-text);
-}
-.energy__note svg {
-  flex: none;
-  width: var(--space-md);
-  height: var(--space-md);
-  color: var(--color-primary);
 }
 
 
@@ -1276,25 +1255,10 @@ html { scroll-padding-top: var(--header-height); }
     aspect-ratio: 16 / 10;
   }
 
-  /* Energia: impianto in alto, le due estensioni affiancate sotto */
+  /* Energia: sotto i 1024px le tre card vanno in colonna, su misura di lettura */
   .energy {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-md);
-  }
-  .energy__hub {
-    grid-column: 1 / -1;
-    grid-row: auto;
-    padding-inline: 0;
-    padding-bottom: var(--space-lg);
-  }
-  .energy__hub::before { display: none; }
-  .energy__hub::after {
-    top: auto;
-    bottom: var(--space-xs);
-    right: auto;
-    left: calc(50% - 0.5px);
-    width: 1px;
-    height: var(--space-md);
+    grid-template-columns: 1fr;
+    max-width: var(--content-narrow);
   }
 
   .incentives__inner {
@@ -1401,7 +1365,6 @@ html { scroll-padding-top: var(--header-height); }
     width: var(--space-lg);
     height: var(--space-lg);
   }
-  .energy__note { margin-top: var(--space-md); }
 
   .incentives__inner > * { max-width: none; }
   .incentives__cta .btn,
@@ -1754,11 +1717,10 @@ html { scroll-padding-top: var(--header-height); }
   <section class="section" id="energia" aria-labelledby="energia-title">
     <div class="container">
       <div class="section__head" data-reveal>
-        <h2 class="section__title" id="energia-title">Il fotovoltaico è solo il punto di partenza</h2>
+        <h2 class="section__title" id="energia-title">Più dell’energia che produci resta a tua disposizione</h2>
         <p class="section__intro">
-          L’energia prodotta può essere utilizzata in modo ancora più efficiente grazie a
-          soluzioni che ne aumentano l’autoconsumo, la condivisione e l’integrazione con
-          la mobilità elettrica.
+          Con le soluzioni YouPower puoi utilizzare, condividere e conservare meglio l’energia
+          prodotta dal tuo impianto fotovoltaico.
         </p>
       </div>
 
@@ -1777,61 +1739,37 @@ html { scroll-padding-top: var(--header-height); }
         </div>
 
         <div class="energy__card">
-          <svg class="energy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <rect x="5.5" y="3.5" width="13" height="17" rx="1"></rect>
-            <path d="M9 7.5h1.5"></path>
-            <path d="M13.5 7.5H15"></path>
-            <path d="M9 11.5h1.5"></path>
-            <path d="M13.5 11.5H15"></path>
-            <path d="M10.5 20.5v-4h3v4"></path>
-          </svg>
-          <h3 class="energy__title">Condividi l’energia prodotta</h3>
+          <svg class="energy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5.5" y="3.5" width="13" height="17" rx="1"></rect><path d="M9 7.5h1.5"></path><path d="M13.5 7.5H15"></path><path d="M9 11.5h1.5"></path><path d="M13.5 11.5H15"></path><path d="M10.5 20.5v-4h3v4"></path></svg>
+          <h3 class="energy__title">Condividila nell’edificio</h3>
           <p class="energy__label">RCP, RCPv e CLE</p>
-          <p class="energy__text">
-            Per edifici con più utenze, queste soluzioni permettono di organizzare e
-            valorizzare localmente l’energia prodotta dall’impianto fotovoltaico.
-          </p>
+          <p class="energy__text">Per edifici con più utenze, queste soluzioni permettono di condividere e valorizzare localmente l’energia prodotta dall’impianto fotovoltaico.</p>
         </div>
 
         <div class="energy__card">
-          <svg class="energy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <rect x="4.5" y="3.5" width="9" height="17" rx="1.5"></rect>
-            <path d="M3 20.5h12"></path>
-            <path d="m9.5 7-2 3.5h3l-2 3.5"></path>
-            <path d="M13.5 9.5h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V9l-2-2.5"></path>
-          </svg>
-          <h3 class="energy__title">Usa l’energia anche per la mobilità</h3>
+          <svg class="energy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4.5" y="3.5" width="9" height="17" rx="1.5"></rect><path d="M3 20.5h12"></path><path d="m9.5 7-2 3.5h3l-2 3.5"></path><path d="M13.5 9.5h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V9l-2-2.5"></path></svg>
+          <h3 class="energy__title">Usala per ricaricare l’auto</h3>
           <p class="energy__label">E-Mobility</p>
-          <p class="energy__text">
-            Integra il fotovoltaico con sistemi di ricarica per veicoli elettrici e utilizza
-            l’energia prodotta anche per la mobilità.
-          </p>
+          <p class="energy__text">Integra il fotovoltaico con sistemi di ricarica per veicoli elettrici e utilizza il surplus solare anche per la mobilità.</p>
+        </div>
+
+        <div class="energy__card">
+          <svg class="energy__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="7.5" width="15" height="9" rx="2"></rect><path d="M21 10.5v3"></path><path d="M7 10.5v3"></path><path d="M10.5 10.5v3"></path></svg>
+          <h3 class="energy__title">Conservala per quando serve</h3>
+          <p class="energy__label">Sistemi di accumulo</p>
+          <p class="energy__text">Accumula parte dell’energia prodotta durante il giorno per utilizzarla nelle ore successive.</p>
         </div>
       </div>
-
-      <p class="energy__note" data-reveal>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <rect x="3.5" y="7.5" width="15" height="9" rx="2"></rect>
-          <path d="M21 10.5v3"></path>
-          <path d="M7 10.5v3"></path>
-          <path d="M10.5 10.5v3"></path>
-        </svg>
-        <span>
-          Con un sistema di accumulo, l’energia prodotta durante il giorno può essere
-          utilizzata anche la sera o nei momenti di scarsa insolazione.
-        </span>
-      </p>
     </div>
   </section>
 
   <section class="section" id="incentivi" aria-labelledby="incentivi-title">
     <div class="container incentives__inner">
       <div class="section__head" data-reveal>
-        <h2 class="section__title" id="incentivi-title">Riduci l’investimento grazie agli incentivi disponibili</h2>
+        <h2 class="section__title" id="incentivi-title">Non considerare solo il prezzo dell’impianto</h2>
         <p class="section__intro">
-          Per gli impianti fotovoltaici possono essere disponibili contributi federali,
-          cantonali e comunali. YouPower ti supporta nella verifica delle opportunità
-          applicabili e nella gestione delle pratiche.
+          In Svizzera e in Ticino sono disponibili contributi che possono ridurre l’investimento
+          iniziale. YouPower verifica quelli applicabili al tuo progetto e ti supporta nella
+          gestione delle pratiche.
         </p>
       </div>
 
@@ -1839,35 +1777,44 @@ html { scroll-padding-top: var(--header-height); }
         <div class="accordion">
           <details class="accordion__item">
             <summary class="accordion__summary">
-              <h3 class="accordion__title">Incentivi federali</h3>
+              <h3 class="accordion__title">Federale — Pronovo</h3>
               <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
             </summary>
             <div class="accordion__body">
-              <p>A livello federale Pronovo gestisce la rimunerazione unica per gli impianti fotovoltaici: un contributo che riduce il costo iniziale e può essere combinato con gli incentivi cantonali e comunali.</p>
+              <p>Pronovo gestisce la rimunerazione unica per gli impianti fotovoltaici: un contributo federale che riduce il costo iniziale e può essere combinato con gli incentivi cantonali e comunali.</p>
             </div>
           </details>
           <details class="accordion__item">
             <summary class="accordion__summary">
-              <h3 class="accordion__title">Incentivi cantonali</h3>
+              <h3 class="accordion__title">Cantonale — FER</h3>
               <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
             </summary>
             <div class="accordion__body">
-              <p>In Ticino il fotovoltaico può beneficiare del Fondo energie rinnovabili (FER). Sono inoltre previste agevolazioni fiscali: i costi dell’impianto possono essere dedotti dal reddito imponibile, con la possibilità di ripartirli su più anni fiscali.</p>
+              <p>In Ticino il fotovoltaico può beneficiare del Fondo energie rinnovabili (FER), che si aggiunge al contributo federale.</p>
             </div>
           </details>
           <details class="accordion__item">
             <summary class="accordion__summary">
-              <h3 class="accordion__title">Incentivi comunali</h3>
+              <h3 class="accordion__title">Comunale</h3>
               <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
             </summary>
             <div class="accordion__body">
               <p>Alcuni comuni prevedono incentivi aggiuntivi, con condizioni che variano da comune a comune. YouPower verifica quelli applicabili al tuo immobile.</p>
             </div>
           </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <h3 class="accordion__title">Agevolazioni fiscali</h3>
+              <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="accordion__body">
+              <p>I costi dell’impianto possono essere dedotti dal reddito imponibile, con la possibilità di ripartirli su più anni fiscali.</p>
+            </div>
+          </details>
         </div>
 
         <div class="incentives__cta">
-          <a class="btn btn--primary" href="#contatti">Richiedi una valutazione gratuita</a>
+          <a class="btn btn--primary" href="#contatti">Scopri quali incentivi puoi ottenere</a>
         </div>
       </div>
     </div>
