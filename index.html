@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Impianti fotovoltaici in Ticino | YouPower</title>
 <meta name="description" content="Impianti fotovoltaici su misura in Ticino. Progettazione, gestione pratiche e incentivi, installazione e assistenza nel tempo. Richiedi un preventivo gratuito a YouPower.">
 <meta name="theme-color" content="#E8F1EC">
@@ -875,7 +875,311 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   16. ANIMAZIONI FADE-IN
+   16. FORM CONTATTI
+   ========================================================================= */
+[hidden] { display: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Collegamenti interni: le ancore non finiscono sotto l'header sticky */
+html { scroll-padding-top: var(--header-height); }
+
+.contact__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: var(--space-xl);
+}
+.contact__inner .section__head { margin-bottom: 0; }
+
+/* Card da brand kit 4.2: bianca, radius ampio, ombra in tinta */
+.contact__card {
+  padding: var(--space-lg);
+  border-radius: var(--radius-card-large);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.form__required {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+.form > .field,
+.form__actions { margin-top: var(--space-md); }
+
+.field { min-width: 0; }
+.field--group {
+  margin-inline: 0;
+  padding: 0;
+  border: 0;
+}
+.field__label {
+  display: block;
+  padding: 0;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.field__hint {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: var(--color-heading);
+}
+
+/* Input pill da brand kit 4.3. Il bordo usa il teal: l'hairline #E0E7E3
+   non raggiunge il contrasto 3:1 richiesto per i confini dei campi. */
+.field__input {
+  display: block;
+  width: 100%;
+  margin-top: var(--space-xs);
+  padding: calc(var(--space-xs) + var(--space-xxs)) var(--space-md);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-input);
+  appearance: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.field__input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: var(--shadow-focus-ring);
+}
+.field__input:disabled {
+  background: var(--color-surface-alt);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
+
+/* Radio "Tipo di proprieta'": opzioni pill con area di tocco ampia */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+.choice {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: calc(var(--space-xs) + var(--space-xxs)) var(--space-sm);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+.choice:has(input:checked) {
+  border-color: var(--color-primary);
+  background: var(--color-surface-alt);
+}
+
+.choice input,
+.check input {
+  flex: none;
+  width: calc(var(--space-sm) + var(--space-xxs));
+  height: calc(var(--space-sm) + var(--space-xxs));
+  margin: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  cursor: pointer;
+}
+.check--inline {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-body);
+}
+.check a {
+  color: var(--color-heading);
+  text-decoration: underline;
+  text-underline-offset: var(--space-xxs);
+}
+
+.field.is-invalid .field__input,
+.field.is-invalid .choice { border-color: var(--color-error); }
+.field__error {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: var(--color-error);
+}
+
+.form__submit {
+  width: 100%;
+  padding: var(--space-sm) var(--space-lg);
+}
+.form__microcopy {
+  margin-top: var(--space-sm);
+  text-align: center;
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+.form-success {
+  padding-block: var(--space-lg);
+  text-align: center;
+}
+.form-success__icon {
+  display: block;
+  width: var(--space-xl);
+  height: var(--space-xl);
+  margin-inline: auto;
+  color: var(--color-primary);
+}
+.form-success__title {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h3);
+  color: var(--color-heading);
+}
+/* Titolo reso focusabile solo per annunciare la conferma: niente anello */
+.form-success__title:focus,
+.form-success__title:focus-visible { outline: none; box-shadow: none; }
+.form-success__text {
+  max-width: 44ch;
+  margin: var(--space-xs) auto 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+
+/* =========================================================================
+   17. FOOTER — minimale e istituzionale
+   ========================================================================= */
+.site-footer {
+  padding-top: var(--space-xl);
+  padding-bottom: calc(var(--space-lg) + env(safe-area-inset-bottom));
+  background: var(--color-surface);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+.site-footer__logo {
+  height: var(--space-lg);
+  width: auto;
+}
+.site-footer__contacts {
+  margin-top: var(--space-md);
+  font-style: normal;
+}
+.site-footer__contacts span { display: block; }
+.site-footer__legal ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-md);
+}
+.site-footer__legal a {
+  display: inline-block;
+  padding-block: var(--space-xs);
+  text-decoration: underline;
+  text-underline-offset: var(--space-xxs);
+}
+.site-footer__legal a:hover { color: var(--color-heading); }
+.site-footer__bottom { margin-top: var(--space-lg); }
+.site-footer__bottom p {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-heading);
+}
+
+
+/* =========================================================================
+   18. CTA STICKY MOBILE + SAFE AREA
+   ========================================================================= */
+/* Con viewport-fit=cover i contenuti possono arrivare sotto il notch: il
+   container rispetta le safe-area laterali. Sui dispositivi senza notch
+   env() vale 0, quindi il padding resta quello di sempre. */
+.container {
+  padding-left: max(var(--container-padding), env(safe-area-inset-left));
+  padding-right: max(var(--container-padding), env(safe-area-inset-right));
+}
+
+.sticky-cta { display: none; }
+
+@media (max-width: 640px) {
+  /* Elementi raggiunti da tastiera o ancora non restano sotto la barra */
+  html {
+    scroll-padding-bottom: calc(var(--space-xl) + var(--space-xs) + env(safe-area-inset-bottom));
+  }
+
+  .sticky-cta {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-sticky);
+    padding: var(--space-xs) max(var(--container-padding), env(safe-area-inset-right))
+             calc(var(--space-xs) + env(safe-area-inset-bottom))
+             max(var(--container-padding), env(safe-area-inset-left));
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(var(--space-sm));
+    transition: opacity var(--transition-base), transform var(--transition-base),
+                visibility 0s var(--transition-base);
+  }
+  .sticky-cta.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: opacity var(--transition-base), transform var(--transition-base),
+                visibility 0s;
+  }
+  .sticky-cta__btn {
+    display: flex;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
+
+/* =========================================================================
+   19. ANIMAZIONI FADE-IN
    =========================================================================
 /* Fade-in in CSS puro: nessuna dipendenza da JS, il contenuto resta
    sempre leggibile anche se le animazioni non vengono eseguite. */
@@ -912,7 +1216,7 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   17. RESPONSIVE
+   20. RESPONSIVE
    ========================================================================= */
 @media (max-width: 1024px) {
   .hero__inner {
@@ -989,6 +1293,12 @@ a { text-decoration: none; color: inherit; }
     gap: var(--space-lg);
   }
   .faq__inner > * { max-width: var(--content-narrow); }
+
+  .contact__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .contact__inner > * { max-width: var(--content-narrow); }
 }
 
 @media (max-width: 768px) {
@@ -1100,6 +1410,12 @@ a { text-decoration: none; color: inherit; }
   .assist__title { margin-top: 0; }
 
   .faq__inner > * { max-width: none; }
+
+  .contact__inner > * { max-width: none; }
+  .contact__card { padding: var(--space-md) var(--space-sm); }
+  .form__grid { grid-template-columns: 1fr; }
+  .choices { flex-direction: column; }
+  .choice { width: 100%; }
 }
 
 /* Sotto i 640px la CTA per esteso non entra nell'header accanto al logo
@@ -1122,7 +1438,7 @@ a { text-decoration: none; color: inherit; }
            alt="YouPower — The Energy Company">
     </a>
 
-    <a class="btn btn--primary btn--header" href="#preventivo">Richiedi un preventivo gratuito</a>
+    <a class="btn btn--primary btn--header" href="#contatti">Richiedi un preventivo gratuito</a>
   </div>
 </header>
 
@@ -1190,7 +1506,7 @@ a { text-decoration: none; color: inherit; }
         </ul>
 
         <div class="hero__cta-block reveal" style="--reveal-delay:240ms">
-          <a class="btn btn--primary btn--hero" href="#preventivo">Richiedi un preventivo gratuito</a>
+          <a class="btn btn--primary btn--hero" href="#contatti">Richiedi un preventivo gratuito</a>
           <p class="hero__microcopy">Senza impegno · Consulenza personalizzata</p>
         </div>
       </div>
@@ -1679,10 +1995,140 @@ a { text-decoration: none; color: inherit; }
       </div>
     </div>
   </section>
+
+  <section class="section section--accent section--lead contact" id="contatti" aria-labelledby="contatti-title">
+    <div class="container contact__inner">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="contatti-title">Scopri la soluzione fotovoltaica più adatta al tuo immobile</h2>
+        <p class="section__intro">
+          Richiedi una valutazione gratuita e senza impegno. YouPower analizzerà le informazioni
+          fornite per ricontattarti con una proposta coerente con le tue esigenze.
+        </p>
+      </div>
+
+      <div class="contact__card" data-reveal style="--reveal-delay:80ms">
+        <!-- DEMO: nessun backend collegato. Senza JavaScript il form resta in POST
+             sulla pagina stessa (mai dati in URL); con JavaScript l'invio reale e'
+             bloccato e viene mostrata la conferma. Vedi DEMO_MODE nello script. -->
+        <form class="form" id="contact-form" method="post" data-demo="true"
+              aria-label="Richiesta di preventivo gratuito">
+          <p class="form__required">Tutti i campi sono obbligatori.</p>
+
+          <div class="form__grid">
+          <div class="field" data-field="nome">
+            <label class="field__label" for="nome">Nome</label>
+            <input class="field__input" id="nome" name="nome" type="text" autocomplete="given-name" autocapitalize="words" required aria-describedby="error-nome">
+            <p class="field__error" id="error-nome" hidden></p>
+          </div>
+          <div class="field" data-field="cognome">
+            <label class="field__label" for="cognome">Cognome</label>
+            <input class="field__input" id="cognome" name="cognome" type="text" autocomplete="family-name" autocapitalize="words" required aria-describedby="error-cognome">
+            <p class="field__error" id="error-cognome" hidden></p>
+          </div>
+          <div class="field" data-field="email">
+            <label class="field__label" for="email">Email</label>
+            <input class="field__input" id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required aria-describedby="error-email">
+            <p class="field__error" id="error-email" hidden></p>
+          </div>
+          <div class="field" data-field="telefono">
+            <label class="field__label" for="telefono">Telefono</label>
+            <input class="field__input" id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="error-telefono">
+            <p class="field__error" id="error-telefono" hidden></p>
+          </div>
+          </div>
+
+          <fieldset class="field field--group" data-field="proprieta">
+            <legend class="field__label">Tipo di proprietà</legend>
+            <div class="choices">
+              <label class="choice">
+                <input type="radio" name="proprieta" value="Casa Indipendente" required aria-describedby="error-proprieta">
+                <span>Casa indipendente</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="proprieta" value="Condominio" required aria-describedby="error-proprieta">
+                <span>Condominio</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="proprieta" value="Azienda/Attività Commerciale" required aria-describedby="error-proprieta">
+                <span>Azienda o attività commerciale</span>
+              </label>
+            </div>
+            <p class="field__error" id="error-proprieta" hidden></p>
+          </fieldset>
+
+          <div class="field" data-field="consumo">
+            <label class="field__label" for="consumo">Consumo energetico annuale</label>
+            <p class="field__hint" id="hint-consumo">In kWh o in CHF, come preferisci.</p>
+            <input class="field__input" id="consumo" name="consumo" type="text" aria-describedby="hint-consumo error-consumo">
+            <label class="check check--inline">
+              <input type="checkbox" name="consumo-non-lo-so" value="1">
+              <span>Non lo so</span>
+            </label>
+            <p class="field__error" id="error-consumo" hidden></p>
+          </div>
+
+          <div class="field" data-field="privacy">
+            <label class="check">
+              <input type="checkbox" name="privacy" value="1" required aria-describedby="error-privacy">
+              <span>Ho letto e accetto l’<a href="https://www.youpower.ch/privacy-policy/" target="_blank" rel="noopener">informativa sulla privacy<span class="sr-only"> (si apre in una nuova scheda)</span></a>.</span>
+            </label>
+            <p class="field__error" id="error-privacy" hidden></p>
+          </div>
+
+          <div class="form__actions">
+            <button class="btn btn--primary form__submit" type="submit">Richiedi il preventivo gratuito</button>
+            <p class="form__microcopy">Senza impegno · Consulenza personalizzata</p>
+          </div>
+        </form>
+
+        <div class="form-success" id="form-success" hidden>
+          <svg class="form-success__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="m8.5 12.5 2.5 2.5 5-5"></path>
+          </svg>
+          <h3 class="form-success__title" tabindex="-1">Grazie, abbiamo ricevuto la tua richiesta</h3>
+          <p class="form-success__text">
+            YouPower analizzerà le informazioni fornite e ti ricontatterà per la valutazione gratuita.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <img class="site-footer__logo" src="assets/youpower-logo.png"
+           width="1920" height="450" loading="lazy" decoding="async"
+           alt="YouPower — The Energy Company">
+      <address class="site-footer__contacts">
+        <span>YouPower AG</span>
+        <span>Sede operativa: Via Cantonale 10, 6805 Mezzovico (CH)</span>
+        <span>Sede legale: Via Vedeggio 2, 6814 Lamone (CH)</span>
+        <span>Tel. +41 (0)91 290 30 32 · info@youpower.ch</span>
+      </address>
+    </div>
+
+    <nav class="site-footer__legal" aria-label="Informazioni legali">
+      <ul>
+        <li><a href="https://www.youpower.ch/privacy-policy/" target="_blank" rel="noopener">Privacy policy<span class="sr-only"> (si apre in una nuova scheda)</span></a></li>
+        <li><a href="https://www.youpower.ch/cookie-policy/" target="_blank" rel="noopener">Cookie policy<span class="sr-only"> (si apre in una nuova scheda)</span></a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>© 2026 YouPower AG · CHE-218.462.329</p>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky-cta">
+  <a class="btn btn--primary sticky-cta__btn" href="#contatti">Richiedi preventivo</a>
+</div>
+
 <script>
-/* Unico script della pagina: stato dell'header allo scroll. */
+/* Header allo scroll e fade-in delle sezioni. */
 (function () {
   var header = document.getElementById('site-header');
   var onScroll = function () {
@@ -1710,6 +2156,138 @@ a { text-decoration: none; color: inherit; }
 
   items.forEach(function (el) { observer.observe(el); });
   setTimeout(function () { items.forEach(show); }, 1500);
+})();
+
+/* CTA sticky mobile e form contatti. */
+(function () {
+  var hero = document.getElementById('hero');
+  var contact = document.getElementById('contatti');
+  var sticky = document.getElementById('sticky-cta');
+
+  /* La barra e' visibile solo sotto i 640px (CSS). Compare dopo la hero e
+     sparisce appena la sezione del form entra nello schermo. */
+  if (hero && contact && sticky) {
+    var updateSticky = function () {
+      var afterHero = hero.getBoundingClientRect().bottom <= 0;
+      var beforeForm = contact.getBoundingClientRect().top > window.innerHeight;
+      sticky.classList.toggle('is-visible', afterHero && beforeForm);
+    };
+    updateSticky();
+    window.addEventListener('scroll', updateSticky, { passive: true });
+    window.addEventListener('resize', updateSticky);
+  }
+
+  var form = document.getElementById('contact-form');
+  var success = document.getElementById('form-success');
+  if (!form || !success) { return; }
+
+  /* ===================================================================
+     DEMO — nessun backend collegato.
+     Con DEMO_MODE = true l'invio reale e' bloccato: a richiesta valida si
+     mostra la conferma e nessun dato lascia il browser. Prima di andare
+     online collegare l'endpoint e sostituire il blocco DEMO nel submit.
+     =================================================================== */
+  var DEMO_MODE = true;
+
+  form.noValidate = true;
+  var f = form.elements;
+  var submitted = false;
+
+  var checks = {
+    nome: function () {
+      return f.nome.value.trim() ? '' : 'Inserisci il tuo nome.';
+    },
+    cognome: function () {
+      return f.cognome.value.trim() ? '' : 'Inserisci il tuo cognome.';
+    },
+    email: function () {
+      var v = f.email.value.trim();
+      if (!v) { return 'Inserisci la tua email.'; }
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? '' : 'Controlla l’indirizzo email: sembra incompleto.';
+    },
+    telefono: function () {
+      var v = f.telefono.value.trim();
+      if (!v) { return 'Inserisci il tuo numero di telefono.'; }
+      var ok = /^[+\d\s().\/-]+$/.test(v) && v.replace(/\D/g, '').length >= 8;
+      return ok ? '' : 'Controlla il numero di telefono: sembra incompleto.';
+    },
+    proprieta: function () {
+      return f.proprieta.value ? '' : 'Seleziona il tipo di proprietà.';
+    },
+    consumo: function () {
+      return f['consumo-non-lo-so'].checked || f.consumo.value.trim()
+        ? '' : 'Indica il consumo annuale oppure seleziona “Non lo so”.';
+    },
+    privacy: function () {
+      return f.privacy.checked ? '' : 'Per inviare la richiesta accetta l’informativa sulla privacy.';
+    }
+  };
+
+  var fieldName = function (input) {
+    var field = input.closest('[data-field]');
+    return field ? field.getAttribute('data-field') : null;
+  };
+
+  /* Mostra o toglie l'errore di un campo. I valori inseriti non vengono mai toccati. */
+  var validate = function (name) {
+    var message = checks[name]();
+    var field = form.querySelector('[data-field="' + name + '"]');
+    var error = document.getElementById('error-' + name);
+    field.classList.toggle('is-invalid', Boolean(message));
+    error.textContent = message;
+    error.hidden = !message;
+    field.querySelectorAll('input').forEach(function (input) {
+      if (input.name === 'consumo-non-lo-so') { return; }
+      if (message) { input.setAttribute('aria-invalid', 'true'); }
+      else { input.removeAttribute('aria-invalid'); }
+    });
+    return !message;
+  };
+
+  /* "Non lo so" disattiva il campo consumo */
+  f['consumo-non-lo-so'].addEventListener('change', function () {
+    f.consumo.disabled = this.checked;
+    if (submitted || this.checked) { validate('consumo'); }
+  });
+
+  /* Prima del primo invio un campo si controlla quando lo si lascia compilato;
+     dopo, gli errori si aggiornano mentre si scrive. */
+  form.addEventListener('focusout', function (e) {
+    var t = e.target;
+    if (/^(text|email|tel)$/.test(t.type) && t.value.trim()) { validate(fieldName(t)); }
+  });
+  form.addEventListener('input', function (e) {
+    if (submitted && fieldName(e.target)) { validate(fieldName(e.target)); }
+  });
+  form.addEventListener('change', function (e) {
+    if (submitted && fieldName(e.target)) { validate(fieldName(e.target)); }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    submitted = true;
+
+    var firstInvalid = null;
+    Object.keys(checks).forEach(function (name) {
+      if (!validate(name) && !firstInvalid) {
+        firstInvalid = form.querySelector('[data-field="' + name + '"] input:not([disabled])');
+      }
+    });
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return;
+    }
+
+    if (DEMO_MODE) {
+      /* DEMO: nessun dato viene inviato. */
+      form.hidden = true;
+      success.hidden = false;
+      success.querySelector('[tabindex="-1"]').focus();
+      return;
+    }
+
+    form.submit();
+  });
 })();
 </script>
 </body>

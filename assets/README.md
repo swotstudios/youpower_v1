@@ -127,3 +127,37 @@ nome e stelle come pubblicati. Non riformulare il testo.
   **Esclusi di proposito** le percentuali sui contributi presenti in `/faq/`
   (20% federale, circa 40% complessivo, RUE fino al 60%): non validati per questa
   landing.
+
+---
+
+## Form contatti — integrazioni ancora mancanti
+
+Il form della sezione `#contatti` e' in **modalita' demo** (`DEMO_MODE = true`
+nello script in fondo a `index.html`, e `data-demo="true"` sul `<form>`):
+valida i campi e mostra la conferma, ma **non invia nessun dato**.
+**Non pubblicare la landing con il form in demo:** l'utente vedrebbe una
+conferma per una richiesta mai ricevuta.
+
+Da collegare prima del go-live:
+
+1. **Destinazione dell'invio** — endpoint del CRM o del gestionale YouPower,
+   form service o funzione serverless su Vercel. Il blocco da sostituire e'
+   segnato `DEMO` nel listener `submit`.
+2. **Notifica interna** — email o CRM verso il team commerciale.
+3. **Anti-spam** — honeypot, rate limit lato server o captcha invisibile, a
+   seconda del backend scelto.
+4. **Tracciamento conversione** — evento su invio riuscito (GA4, Meta, Ads),
+   da attivare solo dopo il consenso cookie.
+5. **Registrazione del consenso privacy** — data, ora e versione
+   dell'informativa accettata, lato backend.
+
+Campi inviati (`name`): `nome`, `cognome`, `email`, `telefono`, `proprieta`
+(stessi valori del form di youpower.ch: "Casa Indipendente", "Condominio",
+"Azienda/Attività Commerciale"), `consumo` (testo libero, kWh o CHF),
+`consumo-non-lo-so` (`1` se selezionato), `privacy` (`1`).
+
+## Footer — fonti
+
+Contatti, sedi, numero CHE e link Privacy e Cookie policy sono presi dal footer
+di youpower.ch. Telefono ed email sono testo semplice, non link `tel:`/`mailto:`:
+il brief ammette nel footer solo link legali.
