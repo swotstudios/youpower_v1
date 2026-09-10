@@ -163,3 +163,36 @@ Campi inviati (`name`): `nome`, `cognome`, `email`, `telefono`, `proprieta`
 Contatti, sedi, numero CHE e link Privacy e Cookie policy sono presi dal footer
 di youpower.ch. Telefono ed email sono testo semplice, non link `tel:`/`mailto:`:
 il brief ammette nel footer solo link legali.
+
+---
+
+## Case history "Progetti reali, soluzioni su misura" — immagini richieste
+
+Le tre card mostrano per ora un **placeholder** (fondo mint e icona lineare).
+Nel markup ogni `case__media` contiene il commento con l'`<img>` da inserire.
+
+| File da creare | Progetto | Foto di riferimento su youpower.ch |
+|---|---|---|
+| `assets/case-davesco.jpg` | Davesco — edificio residenziale, RCPv | `/impianti/impianto-fotovoltaico-per-edificio-residenziale-2/` (drone `DJI_20260616092705_0657_D`) |
+| `assets/case-viganello.jpg` | Viganello — Condominio Hubertus Galbo, RCPv | `/impianti/impianto-fotovoltaico-per-edificio-residenziale-3/` (drone `DJI_20260618093930_0708_D`) |
+| `assets/case-vacallo.jpg` | Vacallo — studio Comal, tetto piano + facciata | `/impianti/impianto-fotovoltaico-per-studio-di-ingegneria-e-architettura/` (drone `DJI_20260615115049_0559_D`) |
+
+**Specifiche**
+- orizzontale 16:9 su desktop; sotto i 1024px il riquadro ritaglia a 3:1,
+  quindi tenere l'impianto al centro
+- almeno 1024 x 576 px, meglio l'originale ad alta risoluzione (le versioni
+  sul sito sono gia' ridotte a 1024 px)
+- peso target < 200 KB ciascuna, caricate `loading="lazy"`
+- per Vacallo scegliere uno scatto in cui si veda anche la **facciata**:
+  e' la caratteristica distintiva della card
+- dopo l'inserimento, scrivere un `alt` che descriva lo scatto reale
+
+## Case history — fonti dei dati
+
+Tutti i dati delle card sono verificati sulle pagine Referenze di youpower.ch
+(settembre 2026): localita', tipologia, anno, potenza, produzione annua stimata,
+RCPv e tetto piano + facciata.
+
+Esclusi di proposito i claim presenti su quelle pagine e non verificabili:
+"azzera gli sprechi e taglia i costi in bolletta", "drastica riduzione delle spese
+condominiali", "riducendo drasticamente l'impatto ambientale".

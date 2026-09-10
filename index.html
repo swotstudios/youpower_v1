@@ -632,6 +632,112 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
+   10b. CASE HISTORY — progetti reali in Ticino
+   ========================================================================= */
+/* Card da brand kit 4.2 con i dati tecnici subito leggibili. Il racconto sta
+   in un accordion nativo dentro la card, stesso componente di FAQ e Incentivi. */
+.cases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--space-md);
+}
+.case {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+/* Placeholder finche' non arrivano le foto dei progetti (vedi assets/README.md) */
+.case__media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  background: var(--color-surface-alt);
+  color: var(--color-primary);
+}
+.case__media svg {
+  width: var(--space-xl);
+  height: var(--space-xl);
+}
+.case__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.case__body { padding: var(--space-md) var(--space-md) 0; }
+
+.case__place {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-heading);
+}
+.case__place svg {
+  flex: none;
+  width: var(--space-md);
+  height: var(--space-md);
+  color: var(--color-primary);
+}
+.case__type {
+  margin-top: var(--space-xxs);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+.case__data {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-sm) var(--space-md);
+  margin: var(--space-md) 0 0;
+}
+.case__data dt {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: var(--color-heading);
+}
+.case__data dd {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h4);
+  color: var(--color-text);
+}
+
+/* Badge secondario: pill mint, frase normale */
+.case__badge {
+  display: inline-flex;
+  margin-top: var(--space-md);
+  padding: var(--space-xxs) var(--space-sm);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-alt);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+
+.case__details.accordion__item {
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 0;
+}
+.case__toggle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-heading);
+}
+.case__details .accordion__body { font-size: var(--font-size-small); }
+
+.cases__cta { margin-top: var(--space-lg); }
+
+
+/* =========================================================================
    11. ENERGIA — il fotovoltaico come sorgente
    ========================================================================= */
 /* Pannello mint: l'impianto in alto come punto di partenza, le tre
@@ -1294,6 +1400,13 @@ html { scroll-padding-top: var(--header-height); }
     gap: var(--space-lg);
   }
   .contact__inner > * { max-width: var(--content-narrow); }
+
+  /* Case history: una card per riga, immagine piu' bassa */
+  .cases {
+    grid-template-columns: 1fr;
+    max-width: var(--content-narrow);
+  }
+  .case__media { aspect-ratio: 3 / 1; }
 }
 
 @media (max-width: 768px) {
@@ -1411,6 +1524,14 @@ html { scroll-padding-top: var(--header-height); }
   .form__grid { grid-template-columns: 1fr; }
   .choices { flex-direction: column; }
   .choice { width: 100%; }
+
+  .cases { max-width: none; }
+  .case__body { padding: var(--space-md) var(--space-sm) 0; }
+  .cases__cta .btn {
+    display: flex;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+  }
 }
 
 /* Sotto i 640px la CTA per esteso non entra nell'header accanto al logo
@@ -1685,6 +1806,124 @@ html { scroll-padding-top: var(--header-height); }
           <p class="step__text">Gestiamo installazione, pratiche e collaudo.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="section" id="progetti" aria-labelledby="progetti-title">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="progetti-title">Progetti reali, soluzioni su misura</h2>
+        <p class="section__intro">
+          Ogni edificio richiede un approccio diverso. Ecco alcuni impianti realizzati da YouPower
+          in Ticino, con caratteristiche e obiettivi differenti.
+        </p>
+      </div>
+
+      <!-- Dati verificati sulle pagine Referenze di youpower.ch (vedi assets/README.md) -->
+      <ul class="cases">
+        <li class="case" data-reveal>
+          <div class="case__media" aria-hidden="true">
+            <!-- IMMAGINE: sostituire l'icona con
+                 <img src="assets/case-davesco.jpg" width="1024" height="576" loading="lazy" decoding="async" alt="…">
+                 e togliere aria-hidden dal contenitore. Vedi assets/README.md -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="1.75"></circle><path d="M3 17.5 5.5 9.5h13l2.5 8Z"></path><path d="M4.25 13.5h15.5"></path><path d="M9.3 9.5 8.6 17.5"></path><path d="m14.7 9.5.7 8"></path><path d="M12 17.5v3"></path><path d="M9 20.5h6"></path></svg>
+          </div>
+          <div class="case__body">
+            <h3 class="case__place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Davesco</h3>
+            <p class="case__type">Edificio residenziale</p>
+            <dl class="case__data">
+              <div>
+                <dt>Potenza</dt>
+                <dd>15,52 kWp</dd>
+              </div>
+              <div>
+                <dt>Produzione stimata</dt>
+                <dd>15.500 kWh/anno</dd>
+              </div>
+            </dl>
+            <p class="case__badge"><span class="sr-only">Caratteristica distintiva: </span>RCPv</p>
+            <details class="accordion__item case__details">
+              <summary class="accordion__summary">
+                <span class="case__toggle">Scopri il progetto</span>
+                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>Nel 2025 YouPower ha realizzato a Davesco un impianto fotovoltaico su tetto piano, progettato per massimizzare l’autoconsumo. Attraverso il modello RCPv, l’energia prodotta viene condivisa tra più utenze, aumentando l’utilizzo locale dell’energia solare.</p>
+              </div>
+            </details>
+          </div>
+        </li>
+
+        <li class="case" data-reveal style="--reveal-delay:80ms">
+          <div class="case__media" aria-hidden="true">
+            <!-- IMMAGINE: sostituire l'icona con
+                 <img src="assets/case-viganello.jpg" width="1024" height="576" loading="lazy" decoding="async" alt="…">
+                 e togliere aria-hidden dal contenitore. Vedi assets/README.md -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="1.75"></circle><path d="M3 17.5 5.5 9.5h13l2.5 8Z"></path><path d="M4.25 13.5h15.5"></path><path d="M9.3 9.5 8.6 17.5"></path><path d="m14.7 9.5.7 8"></path><path d="M12 17.5v3"></path><path d="M9 20.5h6"></path></svg>
+          </div>
+          <div class="case__body">
+            <h3 class="case__place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Viganello</h3>
+            <p class="case__type">Condominio</p>
+            <dl class="case__data">
+              <div>
+                <dt>Potenza</dt>
+                <dd>36,19 kWp</dd>
+              </div>
+              <div>
+                <dt>Produzione stimata</dt>
+                <dd>36.190 kWh/anno</dd>
+              </div>
+            </dl>
+            <p class="case__badge"><span class="sr-only">Caratteristica distintiva: </span>RCPv</p>
+            <details class="accordion__item case__details">
+              <summary class="accordion__summary">
+                <span class="case__toggle">Scopri il progetto</span>
+                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>Nel 2025 YouPower ha realizzato un impianto fotovoltaico sul tetto piano del Condominio Hubertus Galbo. Il progetto integra un modello RCPv che consente di distribuire l’energia prodotta tra le diverse unità dell’edificio e migliorare la gestione dell’autoconsumo.</p>
+              </div>
+            </details>
+          </div>
+        </li>
+
+        <li class="case" data-reveal style="--reveal-delay:160ms">
+          <div class="case__media" aria-hidden="true">
+            <!-- IMMAGINE: sostituire l'icona con
+                 <img src="assets/case-vacallo.jpg" width="1024" height="576" loading="lazy" decoding="async" alt="…">
+                 e togliere aria-hidden dal contenitore. Vedi assets/README.md -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="4.5" r="1.75"></circle><path d="M3 17.5 5.5 9.5h13l2.5 8Z"></path><path d="M4.25 13.5h15.5"></path><path d="M9.3 9.5 8.6 17.5"></path><path d="m14.7 9.5.7 8"></path><path d="M12 17.5v3"></path><path d="M9 20.5h6"></path></svg>
+          </div>
+          <div class="case__body">
+            <h3 class="case__place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Vacallo</h3>
+            <p class="case__type">Studio di ingegneria e architettura</p>
+            <dl class="case__data">
+              <div>
+                <dt>Potenza</dt>
+                <dd>49,22 kWp</dd>
+              </div>
+              <div>
+                <dt>Produzione stimata</dt>
+                <dd>circa 49 MWh/anno</dd>
+              </div>
+            </dl>
+            <p class="case__badge"><span class="sr-only">Caratteristica distintiva: </span>Tetto piano + facciata</p>
+            <details class="accordion__item case__details">
+              <summary class="accordion__summary">
+                <span class="case__toggle">Scopri il progetto</span>
+                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>Nel 2023 YouPower ha realizzato a Vacallo un impianto fotovoltaico integrando moduli sia sul tetto piano sia sulla facciata dello stabile. Una soluzione progettata per sfruttare meglio le superfici disponibili e aumentare la capacità produttiva complessiva dell’edificio.</p>
+              </div>
+            </details>
+          </div>
+        </li>
+      </ul>
+
+      <div class="cases__cta" data-reveal>
+        <a class="btn btn--primary" href="#contatti">Valuta il tuo progetto</a>
+      </div>
     </div>
   </section>
 
