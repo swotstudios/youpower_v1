@@ -788,7 +788,8 @@ a { text-decoration: none; color: inherit; }
   animation: yp-fade-in var(--transition-base) both;
 }
 
-.incentives__cta { margin-top: var(--space-lg); }
+.incentives__cta,
+.design__cta { margin-top: var(--space-lg); }
 
 
 /* =========================================================================
@@ -1403,7 +1404,8 @@ html { scroll-padding-top: var(--header-height); }
   .energy__note { margin-top: var(--space-md); }
 
   .incentives__inner > * { max-width: none; }
-  .incentives__cta .btn {
+  .incentives__cta .btn,
+  .design__cta .btn {
     display: flex;
     width: 100%;
     padding: var(--space-sm) var(--space-md);
@@ -1584,70 +1586,38 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section" id="fotovoltaico" aria-labelledby="fotovoltaico-title">
+  <section class="section" id="perche-youpower" aria-labelledby="perche-youpower-title">
     <div class="container">
       <div class="section__head" data-reveal>
-        <h2 class="section__title" id="fotovoltaico-title">Perch&eacute; scegliere il fotovoltaico</h2>
+        <h2 class="section__title" id="perche-youpower-title">Perché scegliere YouPower</h2>
         <p class="section__intro">
-          Produrre energia direttamente dal sole significa ridurre la dipendenza dalla rete,
-          contenere i costi energetici e valorizzare il proprio immobile.
+          Un partner locale, un approccio su misura e un supporto completo in ogni fase del progetto.
         </p>
       </div>
 
       <ul class="benefits">
         <li class="benefit-block" data-reveal>
-          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <path d="M3.5 17.5a8.5 8.5 0 1 1 17 0"></path>
-            <path d="M20.5 17.5h-17"></path>
-            <path d="m12 17.5 4-6.5"></path>
-          </svg>
-          <h3 class="benefit-block__title">Risparmio energetico</h3>
-          <p class="benefit-block__text">
-            Riduci l'energia acquistata dalla rete utilizzando direttamente quella
-            prodotta dal tuo impianto.
-          </p>
+          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20h4L18.6 9.4a2.1 2.1 0 0 0-3-3L5 17v3Z"></path><path d="m14.5 7.5 3 3"></path><path d="M4 3.5h6"></path><path d="M7 3.5v6"></path></svg>
+          <h3 class="benefit-block__title">Progettazione su misura</h3>
+          <p class="benefit-block__text">Il progetto parte dal tuo tetto e dai tuoi consumi reali, per ottenere la massima resa dallo spazio disponibile.</p>
         </li>
 
         <li class="benefit-block" data-reveal style="--reveal-delay:80ms">
-          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="12" r="8.5"></circle>
-            <path d="M12.9 7.2 8.6 12.9h3.3l-.8 3.9 4.3-5.7h-3.3z"></path>
-          </svg>
-          <h3 class="benefit-block__title">Maggiore indipendenza energetica</h3>
-          <p class="benefit-block__text">
-            Aumenti la quota di energia prodotta e utilizzata direttamente dal tuo immobile.
-          </p>
+          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"></path><path d="M14 2.5v5h5"></path><path d="m8.5 14.5 2 2 4.5-4.5"></path></svg>
+          <h3 class="benefit-block__title">Gestione completa</h3>
+          <p class="benefit-block__text">Un unico interlocutore per tutto il progetto, comprese le pratiche per autorizzazioni e incentivi.</p>
         </li>
 
         <li class="benefit-block" data-reveal style="--reveal-delay:160ms">
-          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <path d="M3.5 20.5h17"></path>
-            <path d="M6 20.5V9.7L12 4.5l6 5.2v10.8"></path>
-            <path d="M10 20.5v-5h4v5"></path>
-          </svg>
-          <h3 class="benefit-block__title">Valorizzazione dell'immobile</h3>
-          <p class="benefit-block__text">
-            Un sistema fotovoltaico contribuisce a migliorare l'efficienza energetica
-            dell'edificio.
-          </p>
+          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 17.5h17L18 6.5H6Z"></path><path d="M4.9 12h14.2"></path><path d="M11 6.5 10 17.5"></path><path d="m13 6.5 1 11"></path></svg>
+          <h3 class="benefit-block__title">Installazione e collaudo</h3>
+          <p class="benefit-block__text">YouPower installa l’impianto con i materiali scelti in fase di progetto e ne verifica il corretto funzionamento.</p>
         </li>
 
         <li class="benefit-block" data-reveal style="--reveal-delay:240ms">
-          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2.5v2.5"></path>
-            <path d="M12 19v2.5"></path>
-            <path d="M2.5 12H5"></path>
-            <path d="M19 12h2.5"></path>
-            <path d="m5.3 5.3 1.8 1.8"></path>
-            <path d="m16.9 16.9 1.8 1.8"></path>
-            <path d="m18.7 5.3-1.8 1.8"></path>
-            <path d="m7.1 16.9-1.8 1.8"></path>
-          </svg>
-          <h3 class="benefit-block__title">Energia rinnovabile</h3>
-          <p class="benefit-block__text">
-            Produci energia da una fonte rinnovabile direttamente sul tuo tetto.
-          </p>
+          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.8 4.5 5.9v5.6c0 4.4 3.1 8.1 7.5 9.7 4.4-1.6 7.5-5.3 7.5-9.7V5.9Z"></path><path d="M12 8.5v4l2.5 1.6"></path></svg>
+          <h3 class="benefit-block__title">Assistenza nel tempo</h3>
+          <p class="benefit-block__text">Controlli periodici, manutenzione, pulizia e supporto tecnico per mantenere l’impianto efficiente negli anni.</p>
         </li>
       </ul>
     </div>
@@ -1662,20 +1632,16 @@ html { scroll-padding-top: var(--header-height); }
             Ogni impianto nasce da una progettazione su misura
           </h2>
           <p class="section__intro">
-            YouPower analizza le caratteristiche dell'edificio e progetta ogni impianto
-            per ottenere una soluzione coerente con struttura, consumi e potenziale
-            di produzione.
+            Non esiste un impianto giusto per tutti. Orientamento, ombre, struttura del tetto
+            e consumi cambiano radicalmente il risultato. Per questo YouPower progetta ogni
+            impianto sulla base delle caratteristiche reali dell’immobile.
           </p>
         </div>
 
         <ul class="design__points" data-reveal style="--reveal-delay:80ms">
           <li class="design__point">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
-            <span>Struttura dell'edificio</span>
-          </li>
-          <li class="design__point">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
-            <span>Materiali</span>
+            <span>Analisi di struttura e orientamento</span>
           </li>
           <li class="design__point">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4.5 12.5 4.5 4.5 10.5-10.5"></path></svg>
@@ -1698,6 +1664,10 @@ html { scroll-padding-top: var(--header-height); }
             <span>Ottimizzazione della resa</span>
           </li>
         </ul>
+
+        <div class="design__cta" data-reveal style="--reveal-delay:120ms">
+          <a class="btn btn--primary" href="#contatti">Valuta il tuo tetto</a>
+        </div>
       </div>
 
       <div class="design__media" data-reveal style="--reveal-delay:120ms">
@@ -1721,28 +1691,63 @@ html { scroll-padding-top: var(--header-height); }
       <ol class="steps">
         <li class="step" data-reveal>
           <span class="step__number" aria-hidden="true">01</span>
-          <h3 class="step__title">Analisi</h3>
-          <p class="step__text">Valutazione dell’edificio, delle esigenze e del potenziale dell’impianto.</p>
+          <h3 class="step__title">Raccontaci il tuo immobile</h3>
+          <p class="step__text">Ci fornisci alcune informazioni di base.</p>
         </li>
 
         <li class="step" data-reveal style="--reveal-delay:80ms">
           <span class="step__number" aria-hidden="true">02</span>
-          <h3 class="step__title">Progettazione</h3>
-          <p class="step__text">Definizione della soluzione tecnica più adatta in base a struttura, consumi e resa attesa.</p>
+          <h3 class="step__title">Valutiamo consumi, tetto e incentivi</h3>
+          <p class="step__text">Analizziamo il potenziale e le opportunità disponibili.</p>
         </li>
 
         <li class="step" data-reveal style="--reveal-delay:160ms">
           <span class="step__number" aria-hidden="true">03</span>
-          <h3 class="step__title">Installazione e collaudo</h3>
-          <p class="step__text">Realizzazione dell’impianto e verifica del corretto funzionamento.</p>
+          <h3 class="step__title">Ricevi una soluzione su misura</h3>
+          <p class="step__text">Ti presentiamo una proposta chiara e coerente con il tuo caso.</p>
         </li>
 
         <li class="step" data-reveal style="--reveal-delay:240ms">
           <span class="step__number" aria-hidden="true">04</span>
-          <h3 class="step__title">Assistenza</h3>
-          <p class="step__text">Supporto anche dopo l’installazione, con servizi di controllo e manutenzione.</p>
+          <h3 class="step__title">Pensiamo noi alla realizzazione</h3>
+          <p class="step__text">Gestiamo installazione, pratiche e collaudo.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="section section--compact" id="fotovoltaico" aria-labelledby="fotovoltaico-title">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="fotovoltaico-title">Perché sempre più proprietari scelgono il fotovoltaico</h2>
+      </div>
+
+      <!-- Sezione secondaria: stesso componente compatto di "Assistenza post-vendita" -->
+      <ul class="assist">
+        <li class="assist__item" data-reveal>
+          <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 17.5a8.5 8.5 0 1 1 17 0"></path><path d="M20.5 17.5h-17"></path><path d="m12 17.5 4-6.5"></path></svg>
+          <h3 class="assist__title">Riduce i costi energetici</h3>
+          <p class="assist__text">Meno energia acquistata dalla rete.</p>
+        </li>
+
+        <li class="assist__item" data-reveal style="--reveal-delay:80ms">
+          <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2.5"></path><path d="M12 19v2.5"></path><path d="M2.5 12H5"></path><path d="M19 12h2.5"></path><path d="m5.3 5.3 1.8 1.8"></path><path d="m16.9 16.9 1.8 1.8"></path><path d="m18.7 5.3-1.8 1.8"></path><path d="m7.1 16.9-1.8 1.8"></path></svg>
+          <h3 class="assist__title">Aumenta l’autoconsumo</h3>
+          <p class="assist__text">Usi direttamente l’energia che produci.</p>
+        </li>
+
+        <li class="assist__item" data-reveal style="--reveal-delay:160ms">
+          <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"></circle><path d="M12.9 7.2 8.6 12.9h3.3l-.8 3.9 4.3-5.7h-3.3z"></path></svg>
+          <h3 class="assist__title">Migliora l’indipendenza energetica</h3>
+          <p class="assist__text">Dipendi meno dal fornitore di elettricità.</p>
+        </li>
+
+        <li class="assist__item" data-reveal style="--reveal-delay:240ms">
+          <svg class="assist__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 20.5h17"></path><path d="M6 20.5V9.7L12 4.5l6 5.2v10.8"></path><path d="M10 20.5v-5h4v5"></path></svg>
+          <h3 class="assist__title">Valorizza l’immobile</h3>
+          <p class="assist__text">Migliora l’efficienza energetica dell’edificio.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
