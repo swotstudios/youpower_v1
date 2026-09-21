@@ -294,7 +294,8 @@ a { text-decoration: none; color: inherit; }
   /* Il wash mint parte dal bordo superiore: l'header trasparente ci scorre sopra */
   margin-top: calc(-1 * var(--header-height));
   padding-top: calc(var(--header-height) + var(--space-2xl));
-  padding-bottom: var(--space-2xl);
+  /* In fondo c'e' la strip dei bullet: il suo padding chiude la hero */
+  padding-bottom: 0;
   overflow: hidden;
 }
 
@@ -369,27 +370,42 @@ a { text-decoration: none; color: inherit; }
   color: var(--color-text);
 }
 
-/* Bullet: riepilogo veloce dei punti di forza, sotto il sottotitolo */
-.hero__benefits {
+/* Strip dei 4 punti di forza in fondo alla hero, sul wash mint:
+   chip trasparenti, icona lineare sage + testo, nessun bordo ne' fondo. */
+.hero__strip {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-sm) var(--space-md);
-  margin-top: var(--space-lg);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(var(--space-sm) * 2);
+  margin-top: var(--space-xl);
+  padding-block: var(--space-lg);
 }
-.benefit {
+.hero__strip-item {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
   font-size: var(--font-size-body);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-body);
-  color: var(--color-text);
+  color: var(--color-secondary);
 }
-.benefit__icon {
+.hero__strip-icon {
   flex: none;
   width: var(--space-md);
   height: var(--space-md);
   color: var(--color-primary);
+}
+@media (max-width: 1023px) {
+  .hero__strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+}
+@media (max-width: 767px) {
+  .hero__strip {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 /* Media */
@@ -486,48 +502,81 @@ a { text-decoration: none; color: inherit; }
 /* =========================================================================
    8. BENEFICI DEL FOTOVOLTAICO
    ========================================================================= */
-.benefits {
+/* "Perche' scegliere YouPower": a sinistra titolo, sottotitolo e logo,
+   a destra le quattro card 2x2. Dimensioni del titolo da specifica. */
+.why {
+  display: grid;
+  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+  gap: var(--space-2xl);
+}
+.why__intro {
+  display: flex;
+  flex-direction: column;
+}
+.why__title {
+  margin-bottom: var(--space-md);
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.15;
+  color: var(--color-secondary);
+}
+.why__lead {
+  margin-bottom: var(--space-xl);
+  font-size: 18px;
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-body);
+  color: var(--color-secondary);
+}
+.why__logo {
+  width: 280px;
+  max-width: 100%;
+  height: auto;
+  margin-top: auto;
+}
+.why__cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--space-xl);
-  row-gap: var(--space-xl);
+  gap: var(--space-md);
 }
-/* "Perche' scegliere YouPower": titolo a sinistra, i quattro punti a destra.
-   Le icone stanno gia' nei bullet della hero: qui c'e' la spiegazione. */
-.why__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  align-items: start;
-  gap: var(--space-xl);
+.why-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
 }
-.why__inner .section__head { margin-bottom: 0; }
-.why__inner .benefits { gap: var(--space-lg); }
-.why__inner .benefit-block__title { margin-top: 0; }
-
-/* Niente card: ogni blocco e' scandito solo da un filo sottile in alto */
-.benefit-block {
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-md);
-}
-.benefit-block__icon {
-  width: var(--space-xl);
-  height: var(--space-xl);
+.why-card__icon {
+  width: calc(var(--space-sm) * 2);
+  height: calc(var(--space-sm) * 2);
   color: var(--color-primary);
 }
-.benefit-block__title {
-  margin-top: var(--space-sm);
+.why-card__title {
   font-size: var(--font-size-h4);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-h4);
-  color: var(--color-heading);
+  color: var(--color-secondary);
 }
-.benefit-block__text {
-  margin-top: var(--space-xs);
-  max-width: 44ch;
+.why-card__text {
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-body);
   color: var(--color-text);
+}
+@media (max-width: 1023px) {
+  .why {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  .why__title { font-size: 36px; }
+  .why__lead { margin-bottom: var(--space-lg); }
+  .why__logo { margin-top: 0; }
+}
+@media (max-width: 767px) {
+  .why__title { font-size: 28px; }
+  .why__cards { grid-template-columns: 1fr; }
+  .why__logo { display: none; }
 }
 
 
@@ -660,11 +709,9 @@ a { text-decoration: none; color: inherit; }
   color: var(--color-secondary);
 }
 
-/* align-items: start — aprire la tendina di una card non allunga le altre */
 .refs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: start;
   gap: var(--space-lg);
 }
 /* La card non e' cliccabile: l'unico elemento interattivo e' il link finale */
@@ -694,7 +741,7 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  padding: calc(var(--space-sm) * 2) calc(var(--space-sm) * 2) var(--space-sm);
+  padding: calc(var(--space-sm) * 2);
 }
 .ref-card__meta {
   font-size: var(--font-size-small);
@@ -734,21 +781,125 @@ a { text-decoration: none; color: inherit; }
   line-height: var(--line-height-body);
   color: var(--color-secondary);
 }
-/* Dettaglio del progetto: tendina nativa <details> dentro la card (stesso
-   componente di FAQ e Incentivi), nessun link verso pagine esterne. */
-.ref-card__details.accordion__item {
+/* "Scopri il progetto": bottone con l'aspetto del link, apre il mini modal */
+.ref-card__more {
+  align-self: flex-start;
   margin-top: auto;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-primary);
+  text-decoration: none;
+  cursor: pointer;
 }
-.ref-card__details .accordion__summary { padding-block: var(--space-sm); }
-.ref-card__toggle {
+.ref-card__more:hover { color: var(--color-primary-dark); }
+
+/* Mini modal (<dialog> nativo in top layer): compatto, non full-screen */
+.modal {
+  width: min(560px, calc(100vw - 32px));
+  max-width: 560px;
+  max-height: 90vh;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-elevated);
+  color: var(--color-text);
+  overflow: hidden;
+}
+/* Backdrop in tinta teal, mai nero */
+.modal::backdrop {
+  background: rgba(54, 82, 82, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.modal[open] { animation: yp-modal-in 200ms ease-out; }
+.modal[open]::backdrop { animation: yp-fade 200ms ease-out; }
+.modal.is-closing { animation: yp-modal-out 150ms ease-out forwards; }
+.modal.is-closing::backdrop { animation: yp-fade-out 150ms ease-out forwards; }
+@keyframes yp-modal-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes yp-modal-out { to { opacity: 0; } }
+@keyframes yp-fade { from { opacity: 0; } }
+@keyframes yp-fade-out { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .modal[open],
+  .modal[open]::backdrop,
+  .modal.is-closing,
+  .modal.is-closing::backdrop { animation: none; }
+}
+.modal__scroll {
+  max-height: 90vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.modal__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  z-index: var(--z-base);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+}
+.modal__close svg {
+  width: var(--space-md);
+  height: var(--space-md);
+}
+.modal__close:hover { background: var(--color-surface-alt); }
+.modal__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: calc(var(--space-sm) * 2);
+}
+.modal__title {
+  font-size: 24px;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-heading);
+  color: var(--color-secondary);
+}
+.modal__text {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.modal__link {
+  align-self: flex-start;
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-body);
   color: var(--color-primary);
 }
-.ref-card__details .accordion__summary:hover .ref-card__toggle { color: var(--color-primary-dark); }
+.modal__link:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+@media (max-width: 767px) {
+  .modal__body { padding: var(--space-md); }
+}
 
 /* Tablet: due colonne, la terza card sotto e centrata */
 @media (max-width: 1023px) {
@@ -1466,11 +1617,6 @@ html { scroll-padding-top: var(--header-height); }
   }
   .form-card { max-width: var(--content-narrow); }
 
-  .why__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-  }
-  .why__inner .section__head { max-width: var(--content-narrow); }
   /* In colonna singola il contenuto resta su misura di lettura */
   .hero__content { max-width: var(--content-narrow); }
   .hero__title { max-width: 17ch; }
@@ -1540,14 +1686,6 @@ html { scroll-padding-top: var(--header-height); }
     padding: var(--space-xs) var(--space-md);
   }
 
-  .benefits {
-    column-gap: var(--space-lg);
-    row-gap: var(--space-lg);
-  }
-  .benefit-block__icon {
-    width: var(--space-lg);
-    height: var(--space-lg);
-  }
 
   /* Timeline verticale: nodo a sinistra, filo che scende al passo successivo */
   .steps {
@@ -1580,16 +1718,11 @@ html { scroll-padding-top: var(--header-height); }
     padding: var(--space-md) var(--space-sm);
   }
 
-  .hero__benefits {
-    grid-template-columns: 1fr;
-    gap: var(--space-sm);
-  }
 
   .hero__media { aspect-ratio: 3 / 2; }
 
   .section__head { margin-bottom: var(--space-lg); }
 
-  .benefits { grid-template-columns: 1fr; }
 
   .design__points { grid-template-columns: 1fr; }
   .design__content,
@@ -1697,25 +1830,6 @@ html { scroll-padding-top: var(--header-height); }
           YouPower analizza consumi, caratteristiche dell’immobile e incentivi disponibili
           per progettare la soluzione più adatta al tuo caso.
         </p>
-
-        <ul class="hero__benefits reveal" style="--reveal-delay:120ms">
-          <li class="benefit">
-            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20h4L18.6 9.4a2.1 2.1 0 0 0-3-3L5 17v3Z"></path><path d="m14.5 7.5 3 3"></path><path d="M4 3.5h6"></path><path d="M7 3.5v6"></path></svg>
-            <span>Progettazione su misura</span>
-          </li>
-          <li class="benefit">
-            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"></path><path d="M14 2.5v5h5"></path><path d="m8.5 14.5 2 2 4.5-4.5"></path></svg>
-            <span>Gestione completa</span>
-          </li>
-          <li class="benefit">
-            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 17.5h17L18 6.5H6Z"></path><path d="M4.9 12h14.2"></path><path d="M11 6.5 10 17.5"></path><path d="m13 6.5 1 11"></path></svg>
-            <span>Installazione e collaudo</span>
-          </li>
-          <li class="benefit">
-            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.8 4.5 5.9v5.6c0 4.4 3.1 8.1 7.5 9.7 4.4-1.6 7.5-5.3 7.5-9.7V5.9Z"></path><path d="M12 8.5v4l2.5 1.6"></path></svg>
-            <span>Assistenza nel tempo</span>
-          </li>
-        </ul>
       </div>
 
       <div class="hero__media reveal" style="--reveal-delay:160ms">
@@ -1814,6 +1928,27 @@ html { scroll-padding-top: var(--header-height); }
         </div>
       </div>
     </div>
+
+    <div class="container">
+      <ul class="hero__strip reveal" style="--reveal-delay:200ms">
+        <li class="hero__strip-item">
+          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path><path d="m8 6 2-2"></path><path d="m18 16 2-2"></path><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path><path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z"></path><path d="m15 5 4 4"></path></svg>
+          <span>Progettazione su misura</span>
+        </li>
+        <li class="hero__strip-item">
+          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>
+          <span>Gestione completa</span>
+        </li>
+        <li class="hero__strip-item">
+          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          <span>Installazione e collaudo</span>
+        </li>
+        <li class="hero__strip-item">
+          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle></svg>
+          <span>Assistenza nel tempo</span>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <section class="trust" aria-label="Garanzie e riconoscimenti YouPower">
@@ -1851,34 +1986,38 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section" id="perche-youpower" aria-labelledby="perche-youpower-title">
-    <div class="container why__inner">
-      <div class="section__head" data-reveal>
-        <h2 class="section__title" id="perche-youpower-title">Perché scegliere YouPower</h2>
-        <p class="section__intro">
-          Un partner locale, un approccio su misura e un supporto completo in ogni fase del progetto.
-        </p>
+  <section class="section section--lead" id="perche-youpower" aria-labelledby="perche-youpower-title">
+    <div class="container why">
+      <div class="why__intro" data-reveal>
+        <h2 class="why__title" id="perche-youpower-title">Perché scegliere YouPower</h2>
+        <p class="why__lead">Un partner locale, un approccio su misura e un supporto completo in ogni fase del progetto.</p>
+        <img class="why__logo" src="assets/youpower-logo.png" width="1920" height="450"
+             loading="lazy" decoding="async" alt="YouPower — The Energy Company">
       </div>
 
-      <ul class="benefits">
-        <li class="benefit-block" data-reveal>
-          <h3 class="benefit-block__title">Progettazione su misura</h3>
-          <p class="benefit-block__text">Il progetto parte dal tuo tetto e dai tuoi consumi reali, per ottenere la massima resa dallo spazio disponibile.</p>
+      <ul class="why__cards">
+        <li class="why-card" data-reveal>
+          <svg class="why-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path><path d="m8 6 2-2"></path><path d="m18 16 2-2"></path><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path><path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z"></path><path d="m15 5 4 4"></path></svg>
+          <h3 class="why-card__title">Progettazione su misura</h3>
+          <p class="why-card__text">Il progetto parte dal tuo tetto e dai tuoi consumi reali, per ottenere la massima resa dallo spazio disponibile.</p>
         </li>
 
-        <li class="benefit-block" data-reveal style="--reveal-delay:80ms">
-          <h3 class="benefit-block__title">Gestione completa</h3>
-          <p class="benefit-block__text">Un unico interlocutore per tutto il progetto, comprese le pratiche per autorizzazioni e incentivi.</p>
+        <li class="why-card" data-reveal style="--reveal-delay:80ms">
+          <svg class="why-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>
+          <h3 class="why-card__title">Gestione completa</h3>
+          <p class="why-card__text">Un unico interlocutore per tutto il progetto, comprese le pratiche per autorizzazioni e incentivi.</p>
         </li>
 
-        <li class="benefit-block" data-reveal style="--reveal-delay:160ms">
-          <h3 class="benefit-block__title">Installazione e collaudo</h3>
-          <p class="benefit-block__text">YouPower installa l’impianto con i materiali scelti in fase di progetto e ne verifica il corretto funzionamento.</p>
+        <li class="why-card" data-reveal style="--reveal-delay:160ms">
+          <svg class="why-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          <h3 class="why-card__title">Installazione e collaudo</h3>
+          <p class="why-card__text">YouPower installa l’impianto con i materiali scelti in fase di progetto e ne verifica il corretto funzionamento.</p>
         </li>
 
-        <li class="benefit-block" data-reveal style="--reveal-delay:240ms">
-          <h3 class="benefit-block__title">Assistenza nel tempo</h3>
-          <p class="benefit-block__text">Controlli periodici, manutenzione, pulizia e supporto tecnico per mantenere l’impianto efficiente negli anni.</p>
+        <li class="why-card" data-reveal style="--reveal-delay:240ms">
+          <svg class="why-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle></svg>
+          <h3 class="why-card__title">Assistenza nel tempo</h3>
+          <p class="why-card__text">Controlli periodici, manutenzione, pulizia e supporto tecnico per mantenere l’impianto efficiente negli anni.</p>
         </li>
       </ul>
     </div>
@@ -2006,15 +2145,7 @@ html { scroll-padding-top: var(--header-height); }
                 <dd>31.500 kWh</dd>
               </div>
             </dl>
-            <details class="accordion__item ref-card__details">
-              <summary class="accordion__summary">
-                <span class="ref-card__toggle">Scopri il progetto</span>
-                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
-              </summary>
-              <div class="accordion__body">
-                <p>Completato nel 2026, il progetto di Canobbio va oltre i soli pannelli: sul tetto a falde dell’abitazione YouPower ha installato l’impianto fotovoltaico e, attorno a esso, un’infrastruttura energetica completa. La termopompa e la climatizzazione gestiscono il clima interno in modo intelligente in ogni stagione, mentre la colonnina di ricarica permette di fare il pieno all’auto elettrica direttamente con l’energia del sole. L’intero pacchetto è stato consegnato chiavi in mano, con YouPower a seguire ogni fase e a sollevare il proprietario dalla gestione burocratica e logistica.</p>
-              </div>
-            </details>
+            <button class="ref-card__more" type="button" data-modal-open="modal-canobbio" aria-haspopup="dialog">Scopri il progetto<span class="sr-only">: Canobbio</span></button>
           </div>
         </li>
 
@@ -2035,15 +2166,7 @@ html { scroll-padding-top: var(--header-height); }
                 <dd>32,4 MWh</dd>
               </div>
             </dl>
-            <details class="accordion__item ref-card__details">
-              <summary class="accordion__summary">
-                <span class="ref-card__toggle">Scopri il progetto</span>
-                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
-              </summary>
-              <div class="accordion__body">
-                <p>Per il complesso residenziale Lugano Campus, realizzato nel 2025, l’obiettivo era usare il più possibile l’energia prodotta direttamente all’interno dell’edificio. Per questo l’impianto è stato sviluppato in configurazione RCP: l’energia solare viene condivisa tra gli utenti dello stabile, che riducono il prelievo dalla rete e si ripartiscono i benefici economici dell’autoconsumo, migliorando al tempo stesso l’efficienza energetica dell’intero complesso. YouPower ha gestito il progetto chiavi in mano, dalla progettazione all’installazione fino alla messa in esercizio.</p>
-              </div>
-            </details>
+            <button class="ref-card__more" type="button" data-modal-open="modal-lugano" aria-haspopup="dialog">Scopri il progetto<span class="sr-only">: Lugano Campus</span></button>
           </div>
         </li>
 
@@ -2064,18 +2187,86 @@ html { scroll-padding-top: var(--header-height); }
                 <dd>44,2 MWh</dd>
               </div>
             </dl>
-            <details class="accordion__item ref-card__details">
-              <summary class="accordion__summary">
-                <span class="ref-card__toggle">Scopri il progetto</span>
-                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
-              </summary>
-              <div class="accordion__body">
-                <p>Nel 2025 YouPower ha contribuito a un progetto promosso da Valeur Concept SA e realizzato insieme a Veragouth Xilema: un complesso di cinque ville residenziali, ognuna con il proprio impianto fotovoltaico su tetto piano. Invece di una soluzione uguale per tutte, ogni impianto è stato dimensionato sulle esigenze energetiche della singola villa, così da aumentare l’autoconsumo di ciascuna abitazione e ridurre l’impatto energetico dell’intero complesso. Anche qui la formula è stata chiavi in mano, con particolare attenzione all’integrazione dei moduli nell’architettura delle ville.</p>
-              </div>
-            </details>
+            <button class="ref-card__more" type="button" data-modal-open="modal-valeur" aria-haspopup="dialog">Scopri il progetto<span class="sr-only">: cinque ville Valeur Concept SA</span></button>
           </div>
         </li>
       </ul>
+
+      <!-- Mini modal delle case study: uno per progetto, aperti da "Scopri il progetto" -->
+      <dialog class="modal" id="modal-canobbio" role="dialog" aria-modal="true" aria-labelledby="modal-canobbio-title">
+        <button class="modal__close" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+        <div class="modal__scroll">
+          <img class="modal__img" src="assets/case-studies/edificio-residenziale-youpower.jpg"
+               width="2560" height="1440" loading="lazy" decoding="async"
+               alt="Impianto fotovoltaico su tetto a falde di abitazione privata a Canobbio">
+          <div class="modal__body">
+            <p class="ref-card__meta">Canobbio · 2026</p>
+            <h3 class="modal__title" id="modal-canobbio-title">Abitazione privata con ecosistema completo</h3>
+            <dl class="ref-card__metrics">
+                  <div class="ref-card__metric">
+                    <dt>Potenza installata</dt>
+                    <dd>31,52 kWp</dd>
+                  </div>
+                  <div class="ref-card__metric">
+                    <dt>Produzione annua</dt>
+                    <dd>31.500 kWh</dd>
+                  </div>
+                </dl>
+            <p class="modal__text">Completato nel 2026, il progetto di Canobbio va oltre i soli pannelli: sul tetto a falde dell’abitazione YouPower ha installato l’impianto fotovoltaico e, attorno a esso, un’infrastruttura energetica completa. La termopompa e la climatizzazione gestiscono il clima interno in modo intelligente in ogni stagione, mentre la colonnina di ricarica permette di fare il pieno all’auto elettrica direttamente con l’energia del sole. L’intero pacchetto è stato consegnato chiavi in mano, con YouPower a seguire ogni fase e a sollevare il proprietario dalla gestione burocratica e logistica.</p>
+            <a class="modal__link" href="https://www.youpower.ch/impianti/impianto-fotovoltaico-per-edificio-residenziale/" target="_blank" rel="noopener">Vai al progetto completo su youpower.ch<span class="sr-only"> (si apre in una nuova scheda)</span></a>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog class="modal" id="modal-lugano" role="dialog" aria-modal="true" aria-labelledby="modal-lugano-title">
+        <button class="modal__close" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+        <div class="modal__scroll">
+          <img class="modal__img" src="assets/case-studies/rcp-lugano-campus-youpower.jpg"
+               width="2560" height="1440" loading="lazy" decoding="async"
+               alt="Impianto fotovoltaico in configurazione RCP sul complesso residenziale Lugano Campus">
+          <div class="modal__body">
+            <p class="ref-card__meta">Lugano · 2025</p>
+            <h3 class="modal__title" id="modal-lugano-title">Lugano Campus in configurazione RCP</h3>
+            <dl class="ref-card__metrics">
+                  <div class="ref-card__metric">
+                    <dt>Potenza installata</dt>
+                    <dd>32,43 kWp</dd>
+                  </div>
+                  <div class="ref-card__metric">
+                    <dt>Produzione annua</dt>
+                    <dd>32,4 MWh</dd>
+                  </div>
+                </dl>
+            <p class="modal__text">Per il complesso residenziale Lugano Campus, realizzato nel 2025, l’obiettivo era usare il più possibile l’energia prodotta direttamente all’interno dell’edificio. Per questo l’impianto è stato sviluppato in configurazione RCP: l’energia solare viene condivisa tra gli utenti dello stabile, che riducono il prelievo dalla rete e si ripartiscono i benefici economici dell’autoconsumo, migliorando al tempo stesso l’efficienza energetica dell’intero complesso. YouPower ha gestito il progetto chiavi in mano, dalla progettazione all’installazione fino alla messa in esercizio.</p>
+            <a class="modal__link" href="https://www.youpower.ch/impianti/impianto-fotovoltaico-residenziale-in-configurazione-rcp-lugano-campus/" target="_blank" rel="noopener">Vai al progetto completo su youpower.ch<span class="sr-only"> (si apre in una nuova scheda)</span></a>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog class="modal" id="modal-valeur" role="dialog" aria-modal="true" aria-labelledby="modal-valeur-title">
+        <button class="modal__close" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+        <div class="modal__scroll">
+          <img class="modal__img" src="assets/case-studies/valeur-concept-sa-youpower.jpg"
+               width="2560" height="1440" loading="lazy" decoding="async"
+               alt="Impianti fotovoltaici su tetti piani di un complesso di cinque ville realizzato con Valeur Concept SA">
+          <div class="modal__body">
+            <p class="ref-card__meta">Complesso residenziale · 2025</p>
+            <h3 class="modal__title" id="modal-valeur-title">Cinque ville per Valeur Concept SA</h3>
+            <dl class="ref-card__metrics">
+                  <div class="ref-card__metric">
+                    <dt>Potenza complessiva</dt>
+                    <dd>44,18 kWp</dd>
+                  </div>
+                  <div class="ref-card__metric">
+                    <dt>Produzione annua</dt>
+                    <dd>44,2 MWh</dd>
+                  </div>
+                </dl>
+            <p class="modal__text">Nel 2025 YouPower ha contribuito a un progetto promosso da Valeur Concept SA e realizzato insieme a Veragouth Xilema: un complesso di cinque ville residenziali, ognuna con il proprio impianto fotovoltaico su tetto piano. Invece di una soluzione uguale per tutte, ogni impianto è stato dimensionato sulle esigenze energetiche della singola villa, così da aumentare l’autoconsumo di ciascuna abitazione e ridurre l’impatto energetico dell’intero complesso. Anche qui la formula è stata chiavi in mano, con particolare attenzione all’integrazione dei moduli nell’architettura delle ville.</p>
+            <a class="modal__link" href="https://www.youpower.ch/impianti/impianti-fotovoltaici-per-un-complesso-di-cinque-ville-valeur-concept-sa/" target="_blank" rel="noopener">Vai al progetto completo su youpower.ch<span class="sr-only"> (si apre in una nuova scheda)</span></a>
+          </div>
+        </div>
+      </dialog>
     </div>
   </section>
 
@@ -2595,6 +2786,99 @@ html { scroll-padding-top: var(--header-height); }
     }
 
     form.submit();
+  });
+})();
+/* Mini modal delle case study. */
+(function () {
+  var triggers = document.querySelectorAll('[data-modal-open]');
+  if (!triggers.length || typeof HTMLDialogElement === 'undefined') { return; }
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var active = null;
+  var lastTrigger = null;
+
+  var focusables = function (root) {
+    return Array.prototype.filter.call(
+      root.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+      function (el) { return el.getClientRects().length > 0; }
+    );
+  };
+
+  /* Blocco dello scroll: compensa la scrollbar per non far saltare il layout */
+  var lockScroll = function () {
+    var gap = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = 'hidden';
+    if (gap > 0) { document.body.style.paddingRight = gap + 'px'; }
+  };
+  var unlockScroll = function () {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  };
+
+  var open = function (dialog, trigger) {
+    lastTrigger = trigger;
+    active = dialog;
+    dialog.classList.remove('is-closing');
+    lockScroll();
+    dialog.showModal();
+    dialog.querySelector('.modal__close').focus();
+  };
+
+  var close = function () {
+    if (!active) { return; }
+    var dialog = active;
+    active = null;
+    var finish = function () {
+      dialog.classList.remove('is-closing');
+      dialog.close();
+      unlockScroll();
+      if (lastTrigger) { lastTrigger.focus(); }
+    };
+    if (reduceMotion.matches) { finish(); return; }
+    dialog.classList.add('is-closing');
+    setTimeout(finish, 150);
+  };
+
+  Array.prototype.forEach.call(triggers, function (btn) {
+    btn.addEventListener('click', function () {
+      var dialog = document.getElementById(btn.getAttribute('data-modal-open'));
+      if (dialog) { open(dialog, btn); }
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.modal'), function (dialog) {
+    /* ESC: il browser emette "cancel"; lo intercettiamo per animare la chiusura */
+    dialog.addEventListener('cancel', function (e) {
+      e.preventDefault();
+      close();
+    });
+
+    dialog.addEventListener('click', function (e) {
+      if (e.target.closest('.modal__close')) { close(); return; }
+      /* Click sul backdrop: arriva al <dialog> con coordinate fuori dal box */
+      if (e.target === dialog) {
+        var r = dialog.getBoundingClientRect();
+        var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                     e.clientY >= r.top && e.clientY <= r.bottom;
+        if (!inside) { close(); }
+      }
+    });
+
+    /* Focus trap: TAB e SHIFT+TAB ciclano dentro il modal */
+    dialog.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab') { return; }
+      var items = focusables(dialog);
+      if (!items.length) { return; }
+      var first = items[0];
+      var last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
   });
 })();
 </script>
