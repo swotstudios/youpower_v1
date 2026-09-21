@@ -992,6 +992,55 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
+   15b. FASCE SAGE — "Perche' scegliere YouPower" e CTA finale
+   ========================================================================= */
+/* Solo queste due sezioni sono su fondo verde. Si usa --color-primary-dark:
+   il bianco su #73AA7F si ferma a 2,6:1, sotto il 3:1 richiesto dai titoli;
+   su #5C8F68 arriva a 3,8:1. */
+.section--sage {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+  background: var(--color-primary-dark);
+}
+.section--sage .section__title { color: var(--color-on-primary); }
+.section--sage .section__intro { color: rgba(255, 255, 255, 0.9); }
+.section--sage .benefit-block__icon { color: var(--color-on-primary); }
+.section--sage .benefit-block__title { color: var(--color-on-primary); }
+.section--sage .benefit-block__text { color: rgba(255, 255, 255, 0.9); }
+/* Il focus ring sage sparirebbe sul verde: contorno bianco */
+.section--sage :focus-visible {
+  outline: 2px solid var(--color-on-primary);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.cta-band__inner {
+  max-width: var(--content-narrow);
+  text-align: center;
+}
+.cta-band__title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h2);
+  color: var(--color-on-primary);
+}
+.cta-band__text {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-body);
+  color: rgba(255, 255, 255, 0.9);
+}
+.cta-band__btn {
+  margin-top: var(--space-lg);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+.cta-band__btn:hover { background: var(--color-surface-alt); }
+
+
+/* =========================================================================
    16. FORM CONTATTI
    ========================================================================= */
 [hidden] { display: none !important; }
@@ -1524,6 +1573,12 @@ html { scroll-padding-top: var(--header-height); }
   .choices { flex-direction: column; }
   .choice { width: 100%; }
 
+  .cta-band__btn {
+    display: flex;
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+  }
+
 }
 
 /* Sotto i 640px la CTA per esteso non entra nell'header accanto al logo
@@ -1709,7 +1764,7 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section" id="perche-youpower" aria-labelledby="perche-youpower-title">
+  <section class="section section--sage" id="perche-youpower" aria-labelledby="perche-youpower-title">
     <div class="container">
       <div class="section__head" data-reveal>
         <h2 class="section__title" id="perche-youpower-title">Perché scegliere YouPower</h2>
@@ -2249,6 +2304,14 @@ html { scroll-padding-top: var(--header-height); }
             </div>
           </details>
       </div>
+    </div>
+  </section>
+
+  <section class="section section--sage cta-band" id="cta-finale" aria-labelledby="cta-finale-title">
+    <div class="container cta-band__inner" data-reveal>
+      <h2 class="cta-band__title" id="cta-finale-title">Non perdere l’opportunità di risparmiare energia</h2>
+      <p class="cta-band__text">Richiedi una consulenza gratuita e scopri il potenziale del tuo progetto.</p>
+      <a class="btn cta-band__btn" href="#contatti">Richiedi una consulenza gratuita</a>
     </div>
   </section>
 </main>
