@@ -502,17 +502,9 @@ a { text-decoration: none; color: inherit; }
 /* =========================================================================
    8. BENEFICI DEL FOTOVOLTAICO
    ========================================================================= */
-/* "Perche' scegliere YouPower": a sinistra titolo, sottotitolo e logo,
-   a destra le quattro card 2x2. Dimensioni del titolo da specifica. */
-.why {
-  display: grid;
-  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
-  gap: var(--space-2xl);
-}
-.why__intro {
-  display: flex;
-  flex-direction: column;
-}
+/* "Perche' scegliere YouPower": titolo e sottotitolo in alto, le quattro
+   card sotto (4 in fila da 1200px, 2x2 fino al tablet, 1 su mobile). */
+.why__intro { max-width: var(--content-narrow); }
 .why__title {
   margin-bottom: var(--space-md);
   font-size: 48px;
@@ -527,22 +519,17 @@ a { text-decoration: none; color: inherit; }
   line-height: var(--line-height-body);
   color: var(--color-secondary);
 }
-.why__logo {
-  width: 280px;
-  max-width: 100%;
-  height: auto;
-  margin-top: auto;
-}
 .why__cards {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-md);
 }
+/* Padding 32px con 4 card in fila, per lasciare spazio al testo */
 .why-card {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  padding: var(--space-lg);
+  padding: calc(var(--space-sm) * 2);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   box-shadow: var(--shadow-soft);
@@ -564,19 +551,17 @@ a { text-decoration: none; color: inherit; }
   line-height: var(--line-height-body);
   color: var(--color-text);
 }
+@media (max-width: 1199px) {
+  .why__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .why-card { padding: var(--space-lg); }
+}
 @media (max-width: 1023px) {
-  .why {
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
   .why__title { font-size: 36px; }
   .why__lead { margin-bottom: var(--space-lg); }
-  .why__logo { margin-top: 0; }
 }
 @media (max-width: 767px) {
   .why__title { font-size: 28px; }
   .why__cards { grid-template-columns: 1fr; }
-  .why__logo { display: none; }
 }
 
 
@@ -1991,8 +1976,6 @@ html { scroll-padding-top: var(--header-height); }
       <div class="why__intro" data-reveal>
         <h2 class="why__title" id="perche-youpower-title">Perché scegliere YouPower</h2>
         <p class="why__lead">Un partner locale, un approccio su misura e un supporto completo in ogni fase del progetto.</p>
-        <img class="why__logo" src="assets/youpower-logo.png" width="1920" height="450"
-             loading="lazy" decoding="async" alt="YouPower — The Energy Company">
       </div>
 
       <ul class="why__cards">
