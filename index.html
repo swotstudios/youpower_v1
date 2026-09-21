@@ -1278,6 +1278,7 @@ html { scroll-padding-top: var(--header-height); }
 .form-card .form { margin-top: var(--space-md); }
 
 .form__required {
+  margin-top: var(--space-sm);
   font-size: var(--font-size-small);
   line-height: var(--line-height-body);
   color: var(--color-text);
@@ -1288,8 +1289,47 @@ html { scroll-padding-top: var(--header-height); }
   gap: var(--space-md);
   margin-top: var(--space-md);
 }
-.form > .field,
+.form-step > .field,
 .form__actions { margin-top: var(--space-md); }
+
+/* Indicatore dei due passi: frase normale + barretta a due segmenti */
+.form-progress__label {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-secondary);
+}
+.form-progress__bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+.form-progress__seg {
+  height: var(--space-xxs);
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+  transition: background-color var(--transition-base);
+}
+.form-progress__seg.is-done { background: var(--color-primary); }
+
+/* "Indietro": bottone testuale secondario, torna al passo 1 */
+.form__back {
+  margin-top: var(--space-md);
+  padding: var(--space-xs) 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body);
+  color: var(--color-secondary);
+  cursor: pointer;
+}
+.form__back:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+}
 
 .field { min-width: 0; }
 .field--group {
@@ -1832,72 +1872,92 @@ html { scroll-padding-top: var(--header-height); }
              bloccato e viene mostrata la conferma. Vedi DEMO_MODE nello script. -->
         <form class="form" id="contact-form" method="post" data-demo="true"
               aria-labelledby="form-title">
+          <div class="form-progress">
+            <p class="form-progress__label" aria-live="polite">Passo <span data-step-current>1</span> di 2 · <span data-step-name>Il tuo immobile</span></p>
+            <div class="form-progress__bar" aria-hidden="true">
+              <span class="form-progress__seg is-done"></span>
+              <span class="form-progress__seg"></span>
+            </div>
+          </div>
           <p class="form__required">Tutti i campi sono obbligatori.</p>
 
-          <div class="form__grid">
-          <div class="field" data-field="nome">
-            <label class="field__label" for="nome">Nome</label>
-            <input class="field__input" id="nome" name="nome" type="text" autocomplete="given-name" autocapitalize="words" required aria-describedby="error-nome">
-            <p class="field__error" id="error-nome" hidden></p>
-          </div>
-          <div class="field" data-field="cognome">
-            <label class="field__label" for="cognome">Cognome</label>
-            <input class="field__input" id="cognome" name="cognome" type="text" autocomplete="family-name" autocapitalize="words" required aria-describedby="error-cognome">
-            <p class="field__error" id="error-cognome" hidden></p>
-          </div>
-          <div class="field" data-field="email">
-            <label class="field__label" for="email">Email</label>
-            <input class="field__input" id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required aria-describedby="error-email">
-            <p class="field__error" id="error-email" hidden></p>
-          </div>
-          <div class="field" data-field="telefono">
-            <label class="field__label" for="telefono">Numero di telefono</label>
-            <input class="field__input" id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="error-telefono">
-            <p class="field__error" id="error-telefono" hidden></p>
-          </div>
-          </div>
+          <!-- Passo 1: immobile e consumi -->
+          <div class="form-step" data-step="1">
+            <fieldset class="field field--group" data-field="proprieta">
+              <legend class="field__label">Tipo di proprietà</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input type="radio" name="proprieta" value="Casa Indipendente" required aria-describedby="error-proprieta">
+                  <span>Casa Indipendente</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="proprieta" value="Condominio" required aria-describedby="error-proprieta">
+                  <span>Condominio</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="proprieta" value="Azienda/Attività Commerciale" required aria-describedby="error-proprieta">
+                  <span>Azienda</span>
+                </label>
+              </div>
+              <p class="field__error" id="error-proprieta" hidden></p>
+            </fieldset>
 
-          <fieldset class="field field--group" data-field="proprieta">
-            <legend class="field__label">Tipo di proprietà</legend>
-            <div class="choices">
-              <label class="choice">
-                <input type="radio" name="proprieta" value="Casa Indipendente" required aria-describedby="error-proprieta">
-                <span>Casa Indipendente</span>
+            <div class="field" data-field="consumo">
+              <label class="field__label" for="consumo">Consumo Energetico Annuale (kWh o CHF)</label>
+              <p class="field__hint" id="hint-consumo">Lo trovi in bolletta. Se non lo sai, seleziona “Non lo so”.</p>
+              <input class="field__input" id="consumo" name="consumo" type="text" aria-describedby="hint-consumo error-consumo">
+              <label class="check check--inline">
+                <input type="checkbox" name="consumo-non-lo-so" value="1">
+                <span>Non lo so</span>
               </label>
-              <label class="choice">
-                <input type="radio" name="proprieta" value="Condominio" required aria-describedby="error-proprieta">
-                <span>Condominio</span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="proprieta" value="Azienda/Attività Commerciale" required aria-describedby="error-proprieta">
-                <span>Azienda</span>
-              </label>
+              <p class="field__error" id="error-consumo" hidden></p>
             </div>
-            <p class="field__error" id="error-proprieta" hidden></p>
-          </fieldset>
 
-          <div class="field" data-field="consumo">
-            <label class="field__label" for="consumo">Consumo Energetico Annuale (kWh o CHF)</label>
-            <p class="field__hint" id="hint-consumo">Lo trovi in bolletta. Se non lo sai, seleziona “Non lo so”.</p>
-            <input class="field__input" id="consumo" name="consumo" type="text" aria-describedby="hint-consumo error-consumo">
-            <label class="check check--inline">
-              <input type="checkbox" name="consumo-non-lo-so" value="1">
-              <span>Non lo so</span>
-            </label>
-            <p class="field__error" id="error-consumo" hidden></p>
+            <div class="form__actions">
+              <button class="btn form__submit" type="button" data-step-next>Continua</button>
+              <p class="form__microcopy">Senza impegno · Consulenza personalizzata</p>
+            </div>
           </div>
 
-          <div class="field" data-field="privacy">
-            <label class="check">
-              <input type="checkbox" name="privacy" value="1" required aria-describedby="error-privacy">
-              <span>Ho letto e accetto l’<a href="https://www.youpower.ch/privacy-policy/" target="_blank" rel="noopener">informativa sulla privacy<span class="sr-only"> (si apre in una nuova scheda)</span></a>.</span>
-            </label>
-            <p class="field__error" id="error-privacy" hidden></p>
-          </div>
+          <!-- Passo 2: dati personali -->
+          <div class="form-step" data-step="2" hidden>
+            <button class="form__back" type="button" data-step-back>Indietro</button>
 
-          <div class="form__actions">
-            <button class="btn form__submit" type="submit">Invia le informazioni</button>
-            <p class="form__microcopy">Senza impegno · Consulenza personalizzata</p>
+            <div class="form__grid">
+            <div class="field" data-field="nome">
+              <label class="field__label" for="nome">Nome</label>
+              <input class="field__input" id="nome" name="nome" type="text" autocomplete="given-name" autocapitalize="words" required aria-describedby="error-nome">
+              <p class="field__error" id="error-nome" hidden></p>
+            </div>
+            <div class="field" data-field="cognome">
+              <label class="field__label" for="cognome">Cognome</label>
+              <input class="field__input" id="cognome" name="cognome" type="text" autocomplete="family-name" autocapitalize="words" required aria-describedby="error-cognome">
+              <p class="field__error" id="error-cognome" hidden></p>
+            </div>
+            <div class="field" data-field="email">
+              <label class="field__label" for="email">Email</label>
+              <input class="field__input" id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required aria-describedby="error-email">
+              <p class="field__error" id="error-email" hidden></p>
+            </div>
+            <div class="field" data-field="telefono">
+              <label class="field__label" for="telefono">Numero di telefono</label>
+              <input class="field__input" id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="error-telefono">
+              <p class="field__error" id="error-telefono" hidden></p>
+            </div>
+            </div>
+
+            <div class="field" data-field="privacy">
+              <label class="check">
+                <input type="checkbox" name="privacy" value="1" required aria-describedby="error-privacy">
+                <span>Ho letto e accetto l’<a href="https://www.youpower.ch/privacy-policy/" target="_blank" rel="noopener">informativa sulla privacy<span class="sr-only"> (si apre in una nuova scheda)</span></a>.</span>
+              </label>
+              <p class="field__error" id="error-privacy" hidden></p>
+            </div>
+
+            <div class="form__actions">
+              <button class="btn form__submit" type="submit">Invia le informazioni</button>
+              <p class="form__microcopy">Senza impegno · Consulenza personalizzata</p>
+            </div>
           </div>
         </form>
 
@@ -2673,7 +2733,17 @@ html { scroll-padding-top: var(--header-height); }
 
   form.noValidate = true;
   var f = form.elements;
-  var submitted = false;
+
+  /* Due passi: prima immobile e consumi, poi i dati personali */
+  var stepFields = {
+    1: ['proprieta', 'consumo'],
+    2: ['nome', 'cognome', 'email', 'telefono', 'privacy']
+  };
+  var stepNames = { 1: 'Il tuo immobile', 2: 'I tuoi dati' };
+  var currentStep = 1;
+  /* Gli errori si aggiornano mentre si scrive solo dopo un tentativo nel passo */
+  var attempted = { 1: false, 2: false };
+  var stepOf = function (name) { return stepFields[1].indexOf(name) > -1 ? 1 : 2; };
 
   var checks = {
     nome: function () {
@@ -2729,8 +2799,38 @@ html { scroll-padding-top: var(--header-height); }
   /* "Non lo so" disattiva il campo consumo */
   f['consumo-non-lo-so'].addEventListener('change', function () {
     f.consumo.disabled = this.checked;
-    if (submitted || this.checked) { validate('consumo'); }
+    if (attempted[1] || this.checked) { validate('consumo'); }
   });
+
+  var validateStep = function (n) {
+    var firstInvalid = null;
+    stepFields[n].forEach(function (name) {
+      if (!validate(name) && !firstInvalid) {
+        firstInvalid = form.querySelector('[data-field="' + name + '"] input:not([disabled])');
+      }
+    });
+    if (firstInvalid) { firstInvalid.focus(); }
+    return !firstInvalid;
+  };
+
+  var segments = form.querySelectorAll('.form-progress__seg');
+  var showStep = function (n) {
+    currentStep = n;
+    Array.prototype.forEach.call(form.querySelectorAll('[data-step]'), function (el) {
+      el.hidden = Number(el.getAttribute('data-step')) !== n;
+    });
+    form.querySelector('[data-step-current]').textContent = n;
+    form.querySelector('[data-step-name]').textContent = stepNames[n];
+    segments[1].classList.toggle('is-done', n === 2);
+    (n === 2 ? f.nome : form.querySelector('[data-step="1"] input')).focus();
+  };
+
+  var goNext = function () {
+    attempted[1] = true;
+    if (validateStep(1)) { showStep(2); }
+  };
+  form.querySelector('[data-step-next]').addEventListener('click', goNext);
+  form.querySelector('[data-step-back]').addEventListener('click', function () { showStep(1); });
 
   /* Prima del primo invio un campo si controlla quando lo si lascia compilato;
      dopo, gli errori si aggiornano mentre si scrive. */
@@ -2739,24 +2839,26 @@ html { scroll-padding-top: var(--header-height); }
     if (/^(text|email|tel)$/.test(t.type) && t.value.trim()) { validate(fieldName(t)); }
   });
   form.addEventListener('input', function (e) {
-    if (submitted && fieldName(e.target)) { validate(fieldName(e.target)); }
+    var name = fieldName(e.target);
+    if (name && attempted[stepOf(name)]) { validate(name); }
   });
   form.addEventListener('change', function (e) {
-    if (submitted && fieldName(e.target)) { validate(fieldName(e.target)); }
+    var name = fieldName(e.target);
+    if (name && attempted[stepOf(name)]) { validate(name); }
   });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    submitted = true;
 
-    var firstInvalid = null;
-    Object.keys(checks).forEach(function (name) {
-      if (!validate(name) && !firstInvalid) {
-        firstInvalid = form.querySelector('[data-field="' + name + '"] input:not([disabled])');
-      }
-    });
-    if (firstInvalid) {
-      firstInvalid.focus();
+    /* Invio dal passo 1 (es. tasto Invio nel campo consumo) = "Continua" */
+    if (currentStep === 1) { goNext(); return; }
+
+    attempted[2] = true;
+    if (!validateStep(2)) { return; }
+    /* Sicurezza: se il passo 1 non e' valido si torna li' */
+    if (stepFields[1].some(function (name) { return checks[name](); })) {
+      showStep(1);
+      validateStep(1);
       return;
     }
 
