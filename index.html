@@ -699,12 +699,6 @@ a { text-decoration: none; color: inherit; }
   line-height: var(--line-height-body);
   color: var(--color-secondary);
 }
-.ref-card__text {
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body);
-  color: var(--color-text);
-}
 /* Dettaglio del progetto: tendina nativa <details> dentro la card (stesso
    componente di FAQ e Incentivi), nessun link verso pagine esterne. */
 .ref-card__details.accordion__item {
@@ -721,6 +715,7 @@ a { text-decoration: none; color: inherit; }
 }
 .ref-card__details .accordion__summary:hover .ref-card__toggle { color: var(--color-primary-dark); }
 .ref-card__details .accordion__body { font-size: var(--font-size-small); }
+.ref-card__details .accordion__body p + p { margin-top: var(--space-xs); }
 
 /* Tablet: due colonne, la terza card sotto e centrata */
 @media (max-width: 1023px) {
@@ -1875,13 +1870,13 @@ html { scroll-padding-top: var(--header-height); }
                 <dd>31.500 kWh</dd>
               </div>
             </dl>
-            <p class="ref-card__text">Impianto fotovoltaico su tetto a falde integrato con termopompa, climatizzazione e colonnina di ricarica. Un ecosistema energetico completo consegnato chiavi in mano per massima autonomia.</p>
             <details class="accordion__item ref-card__details">
               <summary class="accordion__summary">
                 <span class="ref-card__toggle">Scopri il progetto</span>
                 <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
               </summary>
               <div class="accordion__body">
+                <p>Impianto fotovoltaico su tetto a falde integrato con termopompa, climatizzazione e colonnina di ricarica. Un ecosistema energetico completo consegnato chiavi in mano per massima autonomia.</p>
                 <p>Completato nel 2026. Termopompa e climatizzazione gestiscono il comfort in ogni stagione, la colonnina ricarica l’auto con l’energia del sole. YouPower ha curato anche la parte burocratica e logistica.</p>
               </div>
             </details>
@@ -1905,13 +1900,13 @@ html { scroll-padding-top: var(--header-height); }
                 <dd>32,4 MWh</dd>
               </div>
             </dl>
-            <p class="ref-card__text">Complesso residenziale con impianto in configurazione RCP: l’energia prodotta viene condivisa tra gli utenti dell’edificio, riducendo il prelievo dalla rete e distribuendo i benefici economici.</p>
             <details class="accordion__item ref-card__details">
               <summary class="accordion__summary">
                 <span class="ref-card__toggle">Scopri il progetto</span>
                 <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
               </summary>
               <div class="accordion__body">
+                <p>Complesso residenziale con impianto in configurazione RCP: l’energia prodotta viene condivisa tra gli utenti dell’edificio, riducendo il prelievo dalla rete e distribuendo i benefici economici.</p>
                 <p>Realizzato nel 2025 per usare il più possibile l’energia direttamente nell’edificio. Produzione annua prevista: circa 32,4 MWh. Formula chiavi in mano, dalla progettazione alla messa in esercizio.</p>
               </div>
             </details>
@@ -1935,13 +1930,13 @@ html { scroll-padding-top: var(--header-height); }
                 <dd>44,2 MWh</dd>
               </div>
             </dl>
-            <p class="ref-card__text">Progetto sviluppato con Valeur Concept SA e Veragouth Xilema: cinque impianti su tetto piano, dimensionati sui consumi di ciascuna villa per massimizzare l’autoconsumo di ogni abitazione.</p>
             <details class="accordion__item ref-card__details">
               <summary class="accordion__summary">
                 <span class="ref-card__toggle">Scopri il progetto</span>
                 <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
               </summary>
               <div class="accordion__body">
+                <p>Progetto sviluppato con Valeur Concept SA e Veragouth Xilema: cinque impianti su tetto piano, dimensionati sui consumi di ciascuna villa per massimizzare l’autoconsumo di ogni abitazione.</p>
                 <p>Realizzato nel 2025 con formula chiavi in mano. L’obiettivo: aumentare l’autoconsumo di ogni villa e ridurre l’impatto energetico del complesso, con impianti integrati nell’architettura delle case.</p>
               </div>
             </details>
