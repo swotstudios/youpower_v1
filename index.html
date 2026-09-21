@@ -369,6 +369,29 @@ a { text-decoration: none; color: inherit; }
   color: var(--color-text);
 }
 
+/* Bullet: riepilogo veloce dei punti di forza, sotto il sottotitolo */
+.hero__benefits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm) var(--space-md);
+  margin-top: var(--space-lg);
+}
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+}
+.benefit__icon {
+  flex: none;
+  width: var(--space-md);
+  height: var(--space-md);
+  color: var(--color-primary);
+}
+
 /* Media */
 .hero__media {
   grid-area: media;
@@ -469,6 +492,18 @@ a { text-decoration: none; color: inherit; }
   column-gap: var(--space-xl);
   row-gap: var(--space-xl);
 }
+/* "Perche' scegliere YouPower": titolo a sinistra, i quattro punti a destra.
+   Le icone stanno gia' nei bullet della hero: qui c'e' la spiegazione. */
+.why__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: var(--space-xl);
+}
+.why__inner .section__head { margin-bottom: 0; }
+.why__inner .benefits { gap: var(--space-lg); }
+.why__inner .benefit-block__title { margin-top: 0; }
+
 /* Niente card: ogni blocco e' scandito solo da un filo sottile in alto */
 .benefit-block {
   border-top: 1px solid var(--color-border);
@@ -992,22 +1027,17 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   15b. FASCE SCURE — "Perche' scegliere YouPower" e CTA finale
+   15b. FASCE SCURE — "Perche' sempre piu' proprietari…" e CTA finale
    ========================================================================= */
 /* Stesso Deep Teal delle CTA ("Richiedi preventivo"), previsto dai token come
-   --color-surface-inverse. Il bianco qui arriva a 8,4:1: titoli e testi
-   superano l'AA. Il sage resta come accento (icone, decorazione). */
-.section--inverse {
-  padding-top: var(--space-3xl);
-  padding-bottom: var(--space-3xl);
-  background: var(--color-surface-inverse);
-}
+   --color-surface-inverse. Bianco a 8,4:1. Niente sage sul fondo scuro:
+   icone, fili e decorazioni sono bianchi. */
+.section--inverse { background: var(--color-surface-inverse); }
 .section--inverse .section__title { color: var(--color-on-dark); }
-.section--inverse .section__intro { color: rgba(255, 255, 255, 0.9); }
-.section--inverse .benefit-block { border-top-color: var(--color-secondary); }
-.section--inverse .benefit-block__icon { color: var(--color-primary); }
-.section--inverse .benefit-block__title { color: var(--color-on-dark); }
-.section--inverse .benefit-block__text { color: rgba(255, 255, 255, 0.9); }
+.section--inverse .assist__item { border-top-color: rgba(255, 255, 255, 0.2); }
+.section--inverse .assist__icon { color: var(--color-on-dark); }
+.section--inverse .assist__title { color: var(--color-on-dark); }
+.section--inverse .assist__text { color: rgba(255, 255, 255, 0.9); }
 /* Il focus ring sage non si vede sul fondo scuro: contorno bianco */
 .section--inverse :focus-visible {
   outline: 2px solid var(--color-on-dark);
@@ -1015,10 +1045,12 @@ a { text-decoration: none; color: inherit; }
   box-shadow: none;
 }
 
-/* CTA finale: curva organica della hero in sage tenue (brand kit 4.7 / 6.6) */
+/* CTA finale: curva organica della hero, in bianco appena percepibile */
 .cta-band {
   position: relative;
   overflow: hidden;
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
 }
 .cta-band__decoration {
   position: absolute;
@@ -1027,8 +1059,8 @@ a { text-decoration: none; color: inherit; }
   width: 42vw;
   max-width: 560px;
   aspect-ratio: 1 / 1;
-  color: var(--color-primary);
-  opacity: 0.12;
+  color: var(--color-on-dark);
+  opacity: 0.06;
   pointer-events: none;
 }
 .cta-band__inner {
@@ -1433,6 +1465,12 @@ html { scroll-padding-top: var(--header-height); }
     gap: var(--space-lg);
   }
   .form-card { max-width: var(--content-narrow); }
+
+  .why__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .why__inner .section__head { max-width: var(--content-narrow); }
   /* In colonna singola il contenuto resta su misura di lettura */
   .hero__content { max-width: var(--content-narrow); }
   .hero__title { max-width: 17ch; }
@@ -1540,6 +1578,11 @@ html { scroll-padding-top: var(--header-height); }
   .form-card {
     max-width: none;
     padding: var(--space-md) var(--space-sm);
+  }
+
+  .hero__benefits {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
   }
 
   .hero__media { aspect-ratio: 3 / 2; }
@@ -1654,6 +1697,25 @@ html { scroll-padding-top: var(--header-height); }
           YouPower analizza consumi, caratteristiche dell’immobile e incentivi disponibili
           per progettare la soluzione più adatta al tuo caso.
         </p>
+
+        <ul class="hero__benefits reveal" style="--reveal-delay:120ms">
+          <li class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20h4L18.6 9.4a2.1 2.1 0 0 0-3-3L5 17v3Z"></path><path d="m14.5 7.5 3 3"></path><path d="M4 3.5h6"></path><path d="M7 3.5v6"></path></svg>
+            <span>Progettazione su misura</span>
+          </li>
+          <li class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"></path><path d="M14 2.5v5h5"></path><path d="m8.5 14.5 2 2 4.5-4.5"></path></svg>
+            <span>Gestione completa</span>
+          </li>
+          <li class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 17.5h17L18 6.5H6Z"></path><path d="M4.9 12h14.2"></path><path d="M11 6.5 10 17.5"></path><path d="m13 6.5 1 11"></path></svg>
+            <span>Installazione e collaudo</span>
+          </li>
+          <li class="benefit">
+            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.8 4.5 5.9v5.6c0 4.4 3.1 8.1 7.5 9.7 4.4-1.6 7.5-5.3 7.5-9.7V5.9Z"></path><path d="M12 8.5v4l2.5 1.6"></path></svg>
+            <span>Assistenza nel tempo</span>
+          </li>
+        </ul>
       </div>
 
       <div class="hero__media reveal" style="--reveal-delay:160ms">
@@ -1789,8 +1851,8 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section section--inverse" id="perche-youpower" aria-labelledby="perche-youpower-title">
-    <div class="container">
+  <section class="section" id="perche-youpower" aria-labelledby="perche-youpower-title">
+    <div class="container why__inner">
       <div class="section__head" data-reveal>
         <h2 class="section__title" id="perche-youpower-title">Perché scegliere YouPower</h2>
         <p class="section__intro">
@@ -1800,25 +1862,21 @@ html { scroll-padding-top: var(--header-height); }
 
       <ul class="benefits">
         <li class="benefit-block" data-reveal>
-          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 20h4L18.6 9.4a2.1 2.1 0 0 0-3-3L5 17v3Z"></path><path d="m14.5 7.5 3 3"></path><path d="M4 3.5h6"></path><path d="M7 3.5v6"></path></svg>
           <h3 class="benefit-block__title">Progettazione su misura</h3>
           <p class="benefit-block__text">Il progetto parte dal tuo tetto e dai tuoi consumi reali, per ottenere la massima resa dallo spazio disponibile.</p>
         </li>
 
         <li class="benefit-block" data-reveal style="--reveal-delay:80ms">
-          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"></path><path d="M14 2.5v5h5"></path><path d="m8.5 14.5 2 2 4.5-4.5"></path></svg>
           <h3 class="benefit-block__title">Gestione completa</h3>
           <p class="benefit-block__text">Un unico interlocutore per tutto il progetto, comprese le pratiche per autorizzazioni e incentivi.</p>
         </li>
 
         <li class="benefit-block" data-reveal style="--reveal-delay:160ms">
-          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 17.5h17L18 6.5H6Z"></path><path d="M4.9 12h14.2"></path><path d="M11 6.5 10 17.5"></path><path d="m13 6.5 1 11"></path></svg>
           <h3 class="benefit-block__title">Installazione e collaudo</h3>
           <p class="benefit-block__text">YouPower installa l’impianto con i materiali scelti in fase di progetto e ne verifica il corretto funzionamento.</p>
         </li>
 
         <li class="benefit-block" data-reveal style="--reveal-delay:240ms">
-          <svg class="benefit-block__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 2.8 4.5 5.9v5.6c0 4.4 3.1 8.1 7.5 9.7 4.4-1.6 7.5-5.3 7.5-9.7V5.9Z"></path><path d="M12 8.5v4l2.5 1.6"></path></svg>
           <h3 class="benefit-block__title">Assistenza nel tempo</h3>
           <p class="benefit-block__text">Controlli periodici, manutenzione, pulizia e supporto tecnico per mantenere l’impianto efficiente negli anni.</p>
         </li>
@@ -2021,7 +2079,7 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section section--compact" id="fotovoltaico" aria-labelledby="fotovoltaico-title">
+  <section class="section section--compact section--inverse" id="fotovoltaico" aria-labelledby="fotovoltaico-title">
     <div class="container">
       <div class="section__head" data-reveal>
         <h2 class="section__title" id="fotovoltaico-title">Perché sempre più proprietari scelgono il fotovoltaico</h2>
