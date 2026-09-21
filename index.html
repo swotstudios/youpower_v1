@@ -992,29 +992,48 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   15b. FASCE SAGE — "Perche' scegliere YouPower" e CTA finale
+   15b. FASCE SCURE — "Perche' scegliere YouPower" e CTA finale
    ========================================================================= */
-/* Solo queste due sezioni sono su fondo verde. Si usa --color-primary-dark:
-   il bianco su #73AA7F si ferma a 2,6:1, sotto il 3:1 richiesto dai titoli;
-   su #5C8F68 arriva a 3,8:1. */
-.section--sage {
+/* Stesso Deep Teal delle CTA ("Richiedi preventivo"), previsto dai token come
+   --color-surface-inverse. Il bianco qui arriva a 8,4:1: titoli e testi
+   superano l'AA. Il sage resta come accento (icone, decorazione). */
+.section--inverse {
   padding-top: var(--space-3xl);
   padding-bottom: var(--space-3xl);
-  background: var(--color-primary-dark);
+  background: var(--color-surface-inverse);
 }
-.section--sage .section__title { color: var(--color-on-primary); }
-.section--sage .section__intro { color: rgba(255, 255, 255, 0.9); }
-.section--sage .benefit-block__icon { color: var(--color-on-primary); }
-.section--sage .benefit-block__title { color: var(--color-on-primary); }
-.section--sage .benefit-block__text { color: rgba(255, 255, 255, 0.9); }
-/* Il focus ring sage sparirebbe sul verde: contorno bianco */
-.section--sage :focus-visible {
-  outline: 2px solid var(--color-on-primary);
+.section--inverse .section__title { color: var(--color-on-dark); }
+.section--inverse .section__intro { color: rgba(255, 255, 255, 0.9); }
+.section--inverse .benefit-block { border-top-color: var(--color-secondary); }
+.section--inverse .benefit-block__icon { color: var(--color-primary); }
+.section--inverse .benefit-block__title { color: var(--color-on-dark); }
+.section--inverse .benefit-block__text { color: rgba(255, 255, 255, 0.9); }
+/* Il focus ring sage non si vede sul fondo scuro: contorno bianco */
+.section--inverse :focus-visible {
+  outline: 2px solid var(--color-on-dark);
   outline-offset: 2px;
   box-shadow: none;
 }
 
+/* CTA finale: curva organica della hero in sage tenue (brand kit 4.7 / 6.6) */
+.cta-band {
+  position: relative;
+  overflow: hidden;
+}
+.cta-band__decoration {
+  position: absolute;
+  right: -12%;
+  bottom: -40%;
+  width: 42vw;
+  max-width: 560px;
+  aspect-ratio: 1 / 1;
+  color: var(--color-primary);
+  opacity: 0.12;
+  pointer-events: none;
+}
 .cta-band__inner {
+  position: relative;
+  z-index: var(--z-base);
   max-width: var(--content-narrow);
   text-align: center;
 }
@@ -1022,7 +1041,7 @@ a { text-decoration: none; color: inherit; }
   font-size: var(--font-size-h2);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-h2);
-  color: var(--color-on-primary);
+  color: var(--color-on-dark);
 }
 .cta-band__text {
   margin-top: var(--space-sm);
@@ -1038,6 +1057,12 @@ a { text-decoration: none; color: inherit; }
   color: var(--color-text);
 }
 .cta-band__btn:hover { background: var(--color-surface-alt); }
+.cta-band__microcopy {
+  margin-top: var(--space-sm);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-body);
+  color: rgba(255, 255, 255, 0.9);
+}
 
 
 /* =========================================================================
@@ -1764,7 +1789,7 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section section--sage" id="perche-youpower" aria-labelledby="perche-youpower-title">
+  <section class="section section--inverse" id="perche-youpower" aria-labelledby="perche-youpower-title">
     <div class="container">
       <div class="section__head" data-reveal>
         <h2 class="section__title" id="perche-youpower-title">Perché scegliere YouPower</h2>
@@ -2307,11 +2332,16 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section section--sage cta-band" id="cta-finale" aria-labelledby="cta-finale-title">
+  <section class="section section--inverse cta-band" id="cta-finale" aria-labelledby="cta-finale-title">
+    <svg class="cta-band__decoration" viewBox="0 0 600 600" fill="currentColor"
+         aria-hidden="true" focusable="false">
+      <path d="M300 12c126 0 234 66 273 168 40 104-1 224-84 300-83 76-207 108-303 78C90 528 18 434 8 330-3 220 55 112 156 52 200 26 249 12 300 12Z"></path>
+    </svg>
     <div class="container cta-band__inner" data-reveal>
       <h2 class="cta-band__title" id="cta-finale-title">Non perdere l’opportunità di risparmiare energia</h2>
       <p class="cta-band__text">Richiedi una consulenza gratuita e scopri il potenziale del tuo progetto.</p>
       <a class="btn cta-band__btn" href="#contatti">Richiedi una consulenza gratuita</a>
+      <p class="cta-band__microcopy">Senza impegno · Consulenza personalizzata</p>
     </div>
   </section>
 </main>
