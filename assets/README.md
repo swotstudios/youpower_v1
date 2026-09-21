@@ -134,7 +134,7 @@ nome e stelle come pubblicati. Non riformulare il testo.
 
 ## Form contatti — integrazioni ancora mancanti
 
-Il form della sezione `#contatti` e' in **modalita' demo** (`DEMO_MODE = true`
+Il form (card nella hero, `id="contatti"`) e' in **modalita' demo** (`DEMO_MODE = true`
 nello script in fondo a `index.html`, e `data-demo="true"` sul `<form>`):
 valida i campi e mostra la conferma, ma **non invia nessun dato**.
 **Non pubblicare la landing con il form in demo:** l'utente vedrebbe una

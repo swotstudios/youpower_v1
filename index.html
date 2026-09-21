@@ -253,10 +253,6 @@ a { text-decoration: none; color: inherit; }
   white-space: nowrap;
 }
 
-.btn--hero {
-  padding: var(--space-sm) var(--space-lg);
-}
-
 
 /* =========================================================================
    4. HEADER
@@ -315,14 +311,22 @@ a { text-decoration: none; color: inherit; }
   pointer-events: none;
 }
 
+/* Due colonne come la pagina prodotto youpower.ch: a sinistra titolo e foto,
+   a destra la card del form. La foto riempie lo spazio fino al fondo della card. */
 .hero__inner {
   position: relative;
   z-index: var(--z-base);
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: center;
-  gap: var(--space-xl);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "intro form"
+    "media form";
+  align-items: start;
+  column-gap: var(--space-xl);
+  row-gap: var(--space-lg);
 }
+.hero__content { grid-area: intro; }
 
 /* Riferimento territoriale: visibile ma secondario rispetto all'H1.
    Frase normale con icona lineare, niente maiuscolo tracciato (brand kit 6.2). */
@@ -365,52 +369,20 @@ a { text-decoration: none; color: inherit; }
   color: var(--color-text);
 }
 
-/* Benefit */
-.hero__benefits {
-  margin-top: var(--space-lg);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-sm) var(--space-md);
-  max-width: 34rem;
-}
-.benefit {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body);
-  color: var(--color-text);
-}
-.benefit__icon {
-  flex: none;
-  width: var(--space-md);
-  height: var(--space-md);
-  color: var(--color-primary);
-}
-
-/* CTA */
-.hero__cta-block { margin-top: var(--space-lg); }
-/* Riga "Small / Label" della scala tipografica (14 / 400 / #365252) */
-.hero__microcopy {
-  margin-top: var(--space-sm);
-  text-wrap: balance;
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body);
-  color: var(--color-text);
-}
-
 /* Media */
 .hero__media {
+  grid-area: media;
+  align-self: stretch;
   position: relative;
+  min-height: calc(var(--space-3xl) * 2);
   border-radius: var(--radius-card-large);
   overflow: hidden;
   background: var(--color-surface);
   box-shadow: var(--shadow-card);
-  aspect-ratio: 4 / 5;
 }
 .hero__media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1010,21 +982,29 @@ a { text-decoration: none; color: inherit; }
 /* Collegamenti interni: le ancore non finiscono sotto l'header sticky */
 html { scroll-padding-top: var(--header-height); }
 
-.contact__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  align-items: start;
-  gap: var(--space-xl);
-}
-.contact__inner .section__head { margin-bottom: 0; }
-
-/* Card da brand kit 4.2: bianca, radius ampio, ombra in tinta */
-.contact__card {
+/* Card del form nella hero, come nella pagina prodotto youpower.ch:
+   bianca, radius xl, ombra in tinta, padding ampio (brand kit 4.2). */
+.form-card {
+  grid-area: form;
   padding: var(--space-lg);
-  border-radius: var(--radius-card-large);
+  border-radius: var(--radius-xl);
   background: var(--color-surface);
   box-shadow: var(--shadow-card);
 }
+.form-card__title {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-h3);
+  color: var(--color-secondary);
+}
+.form-card__subtitle {
+  margin-top: var(--space-xs);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-body);
+  color: var(--color-secondary);
+}
+.form-card .form { margin-top: var(--space-md); }
 
 .form__required {
   font-size: var(--font-size-small);
@@ -1060,19 +1040,19 @@ html { scroll-padding-top: var(--header-height); }
   color: var(--color-heading);
 }
 
-/* Input pill da brand kit 4.3. Il bordo usa il teal: l'hairline #E0E7E3
-   non raggiunge il contrasto 3:1 richiesto per i confini dei campi. */
+/* Input pill da brand kit 4.3: bordo hairline, 14px x 24px di padding
+   (14px da specifica: non c'e' un token corrispondente). */
 .field__input {
   display: block;
   width: 100%;
   margin-top: var(--space-xs);
-  padding: calc(var(--space-xs) + var(--space-xxs)) var(--space-md);
+  padding: 14px var(--space-md);
   font-family: var(--font-family-base);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   color: var(--color-text);
   background: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-input);
   appearance: none;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
@@ -1104,7 +1084,7 @@ html { scroll-padding-top: var(--header-height); }
   line-height: var(--line-height-body);
   color: var(--color-text);
   background: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: border-color var(--transition-fast), background-color var(--transition-fast);
@@ -1153,10 +1133,14 @@ html { scroll-padding-top: var(--header-height); }
   color: var(--color-error);
 }
 
+/* Submit come nella pagina prodotto youpower.ch: pill sage, testo bianco 600 */
 .form__submit {
   width: 100%;
   padding: var(--space-sm) var(--space-lg);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
 }
+.form__submit:hover { background: var(--color-primary-dark); }
 .form__microcopy {
   margin-top: var(--space-sm);
   text-align: center;
@@ -1335,15 +1319,23 @@ html { scroll-padding-top: var(--header-height); }
    20. RESPONSIVE
    ========================================================================= */
 @media (max-width: 1024px) {
+  /* Colonna singola: titolo, poi form, poi foto */
   .hero__inner {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "intro"
+      "form"
+      "media";
     gap: var(--space-lg);
   }
+  .form-card { max-width: var(--content-narrow); }
   /* In colonna singola il contenuto resta su misura di lettura */
   .hero__content { max-width: var(--content-narrow); }
   .hero__title { max-width: 17ch; }
   .hero__media {
     max-width: var(--content-narrow);
+    min-height: 0;
     aspect-ratio: 16 / 10;
   }
   .hero__decoration { width: 70vw; top: -10%; left: -30%; }
@@ -1394,12 +1386,6 @@ html { scroll-padding-top: var(--header-height); }
     gap: var(--space-lg);
   }
   .faq__inner > * { max-width: var(--content-narrow); }
-
-  .contact__inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-  }
-  .contact__inner > * { max-width: var(--content-narrow); }
 
   /* Case history: una card per riga, immagine piu' bassa */
   .cases {
@@ -1454,17 +1440,9 @@ html { scroll-padding-top: var(--header-height); }
   .hero__content,
   .hero__media { max-width: none; }
 
-  .hero__benefits {
-    grid-template-columns: 1fr;
-    gap: var(--space-sm);
+  .form-card {
     max-width: none;
-  }
-
-  .hero__cta-block { text-align: center; }
-  .btn--hero {
-    display: flex;
-    width: 100%;
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-md) var(--space-sm);
   }
 
   .hero__media { aspect-ratio: 3 / 2; }
@@ -1519,8 +1497,6 @@ html { scroll-padding-top: var(--header-height); }
 
   .faq__inner > * { max-width: none; }
 
-  .contact__inner > * { max-width: none; }
-  .contact__card { padding: var(--space-md) var(--space-sm); }
   .form__grid { grid-template-columns: 1fr; }
   .choices { flex-direction: column; }
   .choice { width: 100%; }
@@ -1582,64 +1558,102 @@ html { scroll-padding-top: var(--header-height); }
           YouPower analizza consumi, caratteristiche dell’immobile e incentivi disponibili
           per progettare la soluzione più adatta al tuo caso.
         </p>
-
-        <ul class="hero__benefits reveal" style="--reveal-delay:160ms">
-          <li class="benefit">
-            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                 aria-hidden="true" focusable="false">
-              <path d="M4 20h4L18.6 9.4a2.1 2.1 0 0 0-3-3L5 17v3Z"></path>
-              <path d="m14.5 7.5 3 3"></path>
-              <path d="M4 3.5h6"></path>
-              <path d="M7 3.5v6"></path>
-            </svg>
-            <span>Progettazione su misura</span>
-          </li>
-
-          <li class="benefit">
-            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                 aria-hidden="true" focusable="false">
-              <path d="M14 2.5H7a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7.5Z"></path>
-              <path d="M14 2.5v5h5"></path>
-              <path d="m8.5 14.5 2 2 4.5-4.5"></path>
-            </svg>
-            <span>Gestione pratiche e incentivi</span>
-          </li>
-
-          <li class="benefit">
-            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                 aria-hidden="true" focusable="false">
-              <path d="M3.5 17.5h17L18 6.5H6Z"></path>
-              <path d="M4.9 12h14.2"></path>
-              <path d="M11 6.5 10 17.5"></path>
-              <path d="m13 6.5 1 11"></path>
-            </svg>
-            <span>Installazione e collaudo</span>
-          </li>
-
-          <li class="benefit">
-            <svg class="benefit__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                 aria-hidden="true" focusable="false">
-              <path d="M12 2.8 4.5 5.9v5.6c0 4.4 3.1 8.1 7.5 9.7 4.4-1.6 7.5-5.3 7.5-9.7V5.9Z"></path>
-              <path d="M12 8.5v4l2.5 1.6"></path>
-            </svg>
-            <span>Assistenza nel tempo</span>
-          </li>
-        </ul>
-
-        <div class="hero__cta-block reveal" style="--reveal-delay:240ms">
-          <a class="btn btn--primary btn--hero" href="#contatti">Richiedi una valutazione gratuita</a>
-          <p class="hero__microcopy">Senza impegno · Ti aiutiamo anche con incentivi e pratiche</p>
-        </div>
       </div>
 
       <div class="hero__media reveal" style="--reveal-delay:160ms">
         <img src="assets/hero-fotovoltaico-ticino.jpg"
-             width="1000" height="1250" fetchpriority="high" decoding="async"
+             width="1000" height="1250" decoding="async"
              alt="Abitazione residenziale in Ticino con impianto fotovoltaico integrato sul tetto, fotografata in luce naturale con le montagne sullo sfondo.">
+      </div>
+
+      <div class="form-card reveal" id="contatti" style="--reveal-delay:120ms">
+        <h2 class="form-card__title" id="form-title">Vuoi scoprire quanto puoi risparmiare con un impianto fotovoltaico?</h2>
+        <p class="form-card__subtitle">Compila il form per ricevere un preventivo gratuito</p>
+
+        <!-- DEMO: nessun backend collegato. Senza JavaScript il form resta in POST
+             sulla pagina stessa (mai dati in URL); con JavaScript l'invio reale e'
+             bloccato e viene mostrata la conferma. Vedi DEMO_MODE nello script. -->
+        <form class="form" id="contact-form" method="post" data-demo="true"
+              aria-labelledby="form-title">
+          <p class="form__required">Tutti i campi sono obbligatori.</p>
+
+          <div class="form__grid">
+          <div class="field" data-field="nome">
+            <label class="field__label" for="nome">Nome</label>
+            <input class="field__input" id="nome" name="nome" type="text" autocomplete="given-name" autocapitalize="words" required aria-describedby="error-nome">
+            <p class="field__error" id="error-nome" hidden></p>
+          </div>
+          <div class="field" data-field="cognome">
+            <label class="field__label" for="cognome">Cognome</label>
+            <input class="field__input" id="cognome" name="cognome" type="text" autocomplete="family-name" autocapitalize="words" required aria-describedby="error-cognome">
+            <p class="field__error" id="error-cognome" hidden></p>
+          </div>
+          <div class="field" data-field="email">
+            <label class="field__label" for="email">Email</label>
+            <input class="field__input" id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required aria-describedby="error-email">
+            <p class="field__error" id="error-email" hidden></p>
+          </div>
+          <div class="field" data-field="telefono">
+            <label class="field__label" for="telefono">Numero di telefono</label>
+            <input class="field__input" id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="error-telefono">
+            <p class="field__error" id="error-telefono" hidden></p>
+          </div>
+          </div>
+
+          <fieldset class="field field--group" data-field="proprieta">
+            <legend class="field__label">Tipo di proprietà</legend>
+            <div class="choices">
+              <label class="choice">
+                <input type="radio" name="proprieta" value="Casa Indipendente" required aria-describedby="error-proprieta">
+                <span>Casa Indipendente</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="proprieta" value="Condominio" required aria-describedby="error-proprieta">
+                <span>Condominio</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="proprieta" value="Azienda/Attività Commerciale" required aria-describedby="error-proprieta">
+                <span>Azienda</span>
+              </label>
+            </div>
+            <p class="field__error" id="error-proprieta" hidden></p>
+          </fieldset>
+
+          <div class="field" data-field="consumo">
+            <label class="field__label" for="consumo">Consumo Energetico Annuale (kWh o CHF)</label>
+            <p class="field__hint" id="hint-consumo">Lo trovi in bolletta. Se non lo sai, seleziona “Non lo so”.</p>
+            <input class="field__input" id="consumo" name="consumo" type="text" aria-describedby="hint-consumo error-consumo">
+            <label class="check check--inline">
+              <input type="checkbox" name="consumo-non-lo-so" value="1">
+              <span>Non lo so</span>
+            </label>
+            <p class="field__error" id="error-consumo" hidden></p>
+          </div>
+
+          <div class="field" data-field="privacy">
+            <label class="check">
+              <input type="checkbox" name="privacy" value="1" required aria-describedby="error-privacy">
+              <span>Ho letto e accetto l’<a href="https://www.youpower.ch/privacy-policy/" target="_blank" rel="noopener">informativa sulla privacy<span class="sr-only"> (si apre in una nuova scheda)</span></a>.</span>
+            </label>
+            <p class="field__error" id="error-privacy" hidden></p>
+          </div>
+
+          <div class="form__actions">
+            <button class="btn form__submit" type="submit">Invia le informazioni</button>
+            <p class="form__microcopy">Senza impegno · Consulenza personalizzata</p>
+          </div>
+        </form>
+
+        <div class="form-success" id="form-success" hidden>
+          <svg class="form-success__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="8.5"></circle>
+            <path d="m8.5 12.5 2.5 2.5 5-5"></path>
+          </svg>
+          <h3 class="form-success__title" tabindex="-1">Grazie, abbiamo ricevuto la tua richiesta</h3>
+          <p class="form-success__text">
+            YouPower analizzerà le informazioni fornite e ti ricontatterà per la valutazione gratuita.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -2237,105 +2251,6 @@ html { scroll-padding-top: var(--header-height); }
       </div>
     </div>
   </section>
-
-  <section class="section section--accent section--lead contact" id="contatti" aria-labelledby="contatti-title">
-    <div class="container contact__inner">
-      <div class="section__head" data-reveal>
-        <h2 class="section__title" id="contatti-title">Inizia dalla valutazione del tuo immobile</h2>
-        <p class="section__intro">
-          Lasciaci alcune informazioni. Ti ricontatteremo per valutare insieme consumi,
-          caratteristiche dell’immobile e incentivi disponibili.
-        </p>
-      </div>
-
-      <div class="contact__card" data-reveal style="--reveal-delay:80ms">
-        <!-- DEMO: nessun backend collegato. Senza JavaScript il form resta in POST
-             sulla pagina stessa (mai dati in URL); con JavaScript l'invio reale e'
-             bloccato e viene mostrata la conferma. Vedi DEMO_MODE nello script. -->
-        <form class="form" id="contact-form" method="post" data-demo="true"
-              aria-label="Richiesta di preventivo gratuito">
-          <p class="form__required">Tutti i campi sono obbligatori.</p>
-
-          <div class="form__grid">
-          <div class="field" data-field="nome">
-            <label class="field__label" for="nome">Nome</label>
-            <input class="field__input" id="nome" name="nome" type="text" autocomplete="given-name" autocapitalize="words" required aria-describedby="error-nome">
-            <p class="field__error" id="error-nome" hidden></p>
-          </div>
-          <div class="field" data-field="cognome">
-            <label class="field__label" for="cognome">Cognome</label>
-            <input class="field__input" id="cognome" name="cognome" type="text" autocomplete="family-name" autocapitalize="words" required aria-describedby="error-cognome">
-            <p class="field__error" id="error-cognome" hidden></p>
-          </div>
-          <div class="field" data-field="email">
-            <label class="field__label" for="email">Email</label>
-            <input class="field__input" id="email" name="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required aria-describedby="error-email">
-            <p class="field__error" id="error-email" hidden></p>
-          </div>
-          <div class="field" data-field="telefono">
-            <label class="field__label" for="telefono">Telefono</label>
-            <input class="field__input" id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="error-telefono">
-            <p class="field__error" id="error-telefono" hidden></p>
-          </div>
-          </div>
-
-          <fieldset class="field field--group" data-field="proprieta">
-            <legend class="field__label">Tipo di proprietà</legend>
-            <div class="choices">
-              <label class="choice">
-                <input type="radio" name="proprieta" value="Casa Indipendente" required aria-describedby="error-proprieta">
-                <span>Casa indipendente</span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="proprieta" value="Condominio" required aria-describedby="error-proprieta">
-                <span>Condominio</span>
-              </label>
-              <label class="choice">
-                <input type="radio" name="proprieta" value="Azienda/Attività Commerciale" required aria-describedby="error-proprieta">
-                <span>Azienda o attività commerciale</span>
-              </label>
-            </div>
-            <p class="field__error" id="error-proprieta" hidden></p>
-          </fieldset>
-
-          <div class="field" data-field="consumo">
-            <label class="field__label" for="consumo">Consumo energetico annuale</label>
-            <p class="field__hint" id="hint-consumo">Lo trovi in bolletta: indica i kWh consumati in un anno oppure la spesa annua in CHF. Se non lo sai, seleziona “Non lo so”.</p>
-            <input class="field__input" id="consumo" name="consumo" type="text" aria-describedby="hint-consumo error-consumo">
-            <label class="check check--inline">
-              <input type="checkbox" name="consumo-non-lo-so" value="1">
-              <span>Non lo so</span>
-            </label>
-            <p class="field__error" id="error-consumo" hidden></p>
-          </div>
-
-          <div class="field" data-field="privacy">
-            <label class="check">
-              <input type="checkbox" name="privacy" value="1" required aria-describedby="error-privacy">
-              <span>Ho letto e accetto l’<a href="https://www.youpower.ch/privacy-policy/" target="_blank" rel="noopener">informativa sulla privacy<span class="sr-only"> (si apre in una nuova scheda)</span></a>.</span>
-            </label>
-            <p class="field__error" id="error-privacy" hidden></p>
-          </div>
-
-          <div class="form__actions">
-            <button class="btn btn--primary form__submit" type="submit">Richiedi la valutazione gratuita</button>
-            <p class="form__microcopy">Senza impegno · Consulenza personalizzata</p>
-          </div>
-        </form>
-
-        <div class="form-success" id="form-success" hidden>
-          <svg class="form-success__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-            <circle cx="12" cy="12" r="8.5"></circle>
-            <path d="m8.5 12.5 2.5 2.5 5-5"></path>
-          </svg>
-          <h3 class="form-success__title" tabindex="-1">Grazie, abbiamo ricevuto la tua richiesta</h3>
-          <p class="form-success__text">
-            YouPower analizzerà le informazioni fornite e ti ricontatterà per la valutazione gratuita.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="site-footer">
@@ -2402,17 +2317,17 @@ html { scroll-padding-top: var(--header-height); }
 
 /* CTA sticky mobile e form contatti. */
 (function () {
-  var hero = document.getElementById('hero');
-  var contact = document.getElementById('contatti');
+  var formCard = document.getElementById('contatti');
+  var footer = document.querySelector('.site-footer');
   var sticky = document.getElementById('sticky-cta');
 
-  /* La barra e' visibile solo sotto i 640px (CSS). Compare dopo la hero e
-     sparisce appena la sezione del form entra nello schermo. */
-  if (hero && contact && sticky) {
+  /* La barra e' visibile solo sotto i 640px (CSS). Compare quando il form
+     nella hero e' uscito dallo schermo verso l'alto e sparisce sul footer. */
+  if (formCard && footer && sticky) {
     var updateSticky = function () {
-      var afterHero = hero.getBoundingClientRect().bottom <= 0;
-      var beforeForm = contact.getBoundingClientRect().top > window.innerHeight;
-      sticky.classList.toggle('is-visible', afterHero && beforeForm);
+      var formPassed = formCard.getBoundingClientRect().bottom < 0;
+      var beforeFooter = footer.getBoundingClientRect().top > window.innerHeight;
+      sticky.classList.toggle('is-visible', formPassed && beforeFooter);
     };
     updateSticky();
     window.addEventListener('scroll', updateSticky, { passive: true });
