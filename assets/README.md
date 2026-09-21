@@ -166,33 +166,21 @@ il brief ammette nel footer solo link legali.
 
 ---
 
-## Case history "Progetti reali, soluzioni su misura" — immagini richieste
+## Referenze "Impianti realizzati in Ticino" — immagini e fonti
 
-Le tre card mostrano per ora un **placeholder** (fondo mint e icona lineare).
-Nel markup ogni `case__media` contiene il commento con l'`<img>` da inserire.
+Immagini in `assets/case-studies/` (nomi senza spazi, per URL statiche):
 
-| File da creare | Progetto | Foto di riferimento su youpower.ch |
+| File | Progetto | Pagina di riferimento (link della card) |
 |---|---|---|
-| `assets/case-davesco.jpg` | Davesco — edificio residenziale, RCPv | `/impianti/impianto-fotovoltaico-per-edificio-residenziale-2/` (drone `DJI_20260616092705_0657_D`) |
-| `assets/case-viganello.jpg` | Viganello — Condominio Hubertus Galbo, RCPv | `/impianti/impianto-fotovoltaico-per-edificio-residenziale-3/` (drone `DJI_20260618093930_0708_D`) |
-| `assets/case-vacallo.jpg` | Vacallo — studio Comal, tetto piano + facciata | `/impianti/impianto-fotovoltaico-per-studio-di-ingegneria-e-architettura/` (drone `DJI_20260615115049_0559_D`) |
+| `edificio-residenziale-youpower.jpg` | Canobbio · 2026 | `/impianti/impianto-fotovoltaico-per-edificio-residenziale/` |
+| `rcp-lugano-campus-youpower.jpg` | Lugano Campus · 2025, RCP | `/impianti/impianto-fotovoltaico-residenziale-in-configurazione-rcp-lugano-campus/` |
+| `valeur-concept-sa-youpower.jpg` | Cinque ville Valeur Concept SA · 2025 | `/impianti/impianti-fotovoltaici-per-un-complesso-di-cinque-ville-valeur-concept-sa/` |
 
-**Specifiche**
-- orizzontale 16:9 su desktop; sotto i 1024px il riquadro ritaglia a 3:1,
-  quindi tenere l'impianto al centro
-- almeno 1024 x 576 px, meglio l'originale ad alta risoluzione (le versioni
-  sul sito sono gia' ridotte a 1024 px)
-- peso target < 200 KB ciascuna, caricate `loading="lazy"`
-- per Vacallo scegliere uno scatto in cui si veda anche la **facciata**:
-  e' la caratteristica distintiva della card
-- dopo l'inserimento, scrivere un `alt` che descriva lo scatto reale
-
-## Case history — fonti dei dati
-
-Tutti i dati delle card sono verificati sulle pagine Referenze di youpower.ch
-(settembre 2026): localita', tipologia, anno, potenza, produzione annua stimata,
-RCPv e tetto piano + facciata.
-
-Esclusi di proposito i claim presenti su quelle pagine e non verificabili:
-"azzera gli sprechi e taglia i costi in bolletta", "drastica riduzione delle spese
-condominiali", "riducendo drasticamente l'impatto ambientale".
+- Originali 2560 x 1440 px, 0,9–1,4 MB ciascuna: la card le mostra a circa
+  370 px di larghezza (ritaglio 3:2). Sono `loading="lazy"`, ma conviene
+  generare versioni da ~1200 px (< 200 KB) con `srcset` prima del go-live.
+- Dati verificati sulle pagine youpower.ch indicate (settembre 2026). Le
+  produzioni di Lugano e Valeur sono "circa" / "prevista" sul sito.
+- I link "Scopri il progetto" portano volutamente fuori dalla landing
+  (nuova scheda) su richiesta: sono gli unici link esterni oltre a font e
+  pagine legali.
