@@ -625,9 +625,11 @@ a { text-decoration: none; color: inherit; }
   color: var(--color-secondary);
 }
 
+/* align-items: start — aprire la tendina di una card non allunga le altre */
 .refs {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
   gap: var(--space-lg);
 }
 /* La card non e' cliccabile: l'unico elemento interattivo e' il link finale */
@@ -657,7 +659,7 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  padding: calc(var(--space-sm) * 2);
+  padding: calc(var(--space-sm) * 2) calc(var(--space-sm) * 2) var(--space-sm);
 }
 .ref-card__meta {
   font-size: var(--font-size-small);
@@ -703,19 +705,22 @@ a { text-decoration: none; color: inherit; }
   line-height: var(--line-height-body);
   color: var(--color-text);
 }
-.ref-card__link {
-  align-self: flex-start;
+/* Dettaglio del progetto: tendina nativa <details> dentro la card (stesso
+   componente di FAQ e Incentivi), nessun link verso pagine esterne. */
+.ref-card__details.accordion__item {
   margin-top: auto;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 0;
+}
+.ref-card__details .accordion__summary { padding-block: var(--space-sm); }
+.ref-card__toggle {
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-body);
   color: var(--color-primary);
-  text-decoration: none;
 }
-.ref-card__link:hover {
-  color: var(--color-primary-dark);
-  text-decoration: underline;
-}
+.ref-card__details .accordion__summary:hover .ref-card__toggle { color: var(--color-primary-dark); }
+.ref-card__details .accordion__body { font-size: var(--font-size-small); }
 
 /* Tablet: due colonne, la terza card sotto e centrata */
 @media (max-width: 1023px) {
@@ -1851,7 +1856,7 @@ html { scroll-padding-top: var(--header-height); }
         </p>
       </div>
 
-      <!-- Dati verificati sulle pagine Referenze di youpower.ch (vedi assets/README.md) -->
+      <!-- Dati e dettagli verificati sulle pagine Referenze di youpower.ch (vedi assets/README.md) -->
       <ul class="refs" data-reveal style="--reveal-delay:80ms">
         <li class="ref-card">
           <img class="ref-card__img" src="assets/case-studies/edificio-residenziale-youpower.jpg"
@@ -1871,7 +1876,15 @@ html { scroll-padding-top: var(--header-height); }
               </div>
             </dl>
             <p class="ref-card__text">Impianto fotovoltaico su tetto a falde integrato con termopompa, climatizzazione e colonnina di ricarica. Un ecosistema energetico completo consegnato chiavi in mano per massima autonomia.</p>
-            <a class="ref-card__link" href="https://www.youpower.ch/impianti/impianto-fotovoltaico-per-edificio-residenziale/" target="_blank" rel="noopener noreferrer">Scopri il progetto<span class="sr-only">: Canobbio (si apre in una nuova scheda su youpower.ch)</span></a>
+            <details class="accordion__item ref-card__details">
+              <summary class="accordion__summary">
+                <span class="ref-card__toggle">Scopri il progetto</span>
+                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>Completato nel 2026. Termopompa e climatizzazione gestiscono il comfort in ogni stagione, la colonnina ricarica l’auto con l’energia del sole. YouPower ha curato anche la parte burocratica e logistica.</p>
+              </div>
+            </details>
           </div>
         </li>
 
@@ -1893,7 +1906,15 @@ html { scroll-padding-top: var(--header-height); }
               </div>
             </dl>
             <p class="ref-card__text">Complesso residenziale con impianto in configurazione RCP: l’energia prodotta viene condivisa tra gli utenti dell’edificio, riducendo il prelievo dalla rete e distribuendo i benefici economici.</p>
-            <a class="ref-card__link" href="https://www.youpower.ch/impianti/impianto-fotovoltaico-residenziale-in-configurazione-rcp-lugano-campus/" target="_blank" rel="noopener noreferrer">Scopri il progetto<span class="sr-only">: Lugano Campus (si apre in una nuova scheda su youpower.ch)</span></a>
+            <details class="accordion__item ref-card__details">
+              <summary class="accordion__summary">
+                <span class="ref-card__toggle">Scopri il progetto</span>
+                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>Realizzato nel 2025 per usare il più possibile l’energia direttamente nell’edificio. Produzione annua prevista: circa 32,4 MWh. Formula chiavi in mano, dalla progettazione alla messa in esercizio.</p>
+              </div>
+            </details>
           </div>
         </li>
 
@@ -1915,7 +1936,15 @@ html { scroll-padding-top: var(--header-height); }
               </div>
             </dl>
             <p class="ref-card__text">Progetto sviluppato con Valeur Concept SA e Veragouth Xilema: cinque impianti su tetto piano, dimensionati sui consumi di ciascuna villa per massimizzare l’autoconsumo di ogni abitazione.</p>
-            <a class="ref-card__link" href="https://www.youpower.ch/impianti/impianti-fotovoltaici-per-un-complesso-di-cinque-ville-valeur-concept-sa/" target="_blank" rel="noopener noreferrer">Scopri il progetto<span class="sr-only">: cinque ville Valeur Concept SA (si apre in una nuova scheda su youpower.ch)</span></a>
+            <details class="accordion__item ref-card__details">
+              <summary class="accordion__summary">
+                <span class="ref-card__toggle">Scopri il progetto</span>
+                <svg class="accordion__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"></path></svg>
+              </summary>
+              <div class="accordion__body">
+                <p>Realizzato nel 2025 con formula chiavi in mano. L’obiettivo: aumentare l’autoconsumo di ogni villa e ridurre l’impatto energetico del complesso, con impianti integrati nell’architettura delle case.</p>
+              </div>
+            </details>
           </div>
         </li>
       </ul>

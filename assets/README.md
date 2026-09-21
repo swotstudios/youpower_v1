@@ -170,7 +170,7 @@ il brief ammette nel footer solo link legali.
 
 Immagini in `assets/case-studies/` (nomi senza spazi, per URL statiche):
 
-| File | Progetto | Pagina di riferimento (link della card) |
+| File | Progetto | Pagina di riferimento (fonte dei testi) |
 |---|---|---|
 | `edificio-residenziale-youpower.jpg` | Canobbio · 2026 | `/impianti/impianto-fotovoltaico-per-edificio-residenziale/` |
 | `rcp-lugano-campus-youpower.jpg` | Lugano Campus · 2025, RCP | `/impianti/impianto-fotovoltaico-residenziale-in-configurazione-rcp-lugano-campus/` |
@@ -181,6 +181,7 @@ Immagini in `assets/case-studies/` (nomi senza spazi, per URL statiche):
   generare versioni da ~1200 px (< 200 KB) con `srcset` prima del go-live.
 - Dati verificati sulle pagine youpower.ch indicate (settembre 2026). Le
   produzioni di Lugano e Valeur sono "circa" / "prevista" sul sito.
-- I link "Scopri il progetto" portano volutamente fuori dalla landing
-  (nuova scheda) su richiesta: sono gli unici link esterni oltre a font e
-  pagine legali.
+- "Scopri il progetto" apre una tendina nella card con il racconto del
+  progetto: nessun link esterno. I testi riprendono solo i fatti delle
+  pagine indicate; esclusi i claim enfatici ("autonomia energetica totale",
+  "a impatto zero", "drasticamente piu' efficiente").
