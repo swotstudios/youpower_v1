@@ -1452,6 +1452,25 @@ html { scroll-padding-top: var(--header-height); }
   color: var(--color-on-primary);
 }
 .form__submit:hover { background: var(--color-primary-dark); }
+/* Honeypot: fuori schermo, mai display:none (i bot lo salterebbero) */
+.form__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form__banner {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-error);
+}
+.form__submit[disabled] {
+  background: var(--color-primary-light);
+  cursor: progress;
+}
 .form__microcopy {
   margin-top: var(--space-sm);
   text-align: center;
@@ -1867,10 +1886,9 @@ html { scroll-padding-top: var(--header-height); }
         <h2 class="form-card__title" id="form-title">Vuoi scoprire quanto puoi risparmiare con un impianto fotovoltaico?</h2>
         <p class="form-card__subtitle">Compila il form per ricevere un preventivo gratuito</p>
 
-        <!-- DEMO: nessun backend collegato. Senza JavaScript il form resta in POST
-             sulla pagina stessa (mai dati in URL); con JavaScript l'invio reale e'
-             bloccato e viene mostrata la conferma. Vedi DEMO_MODE nello script. -->
-        <form class="form" id="contact-form" method="post" data-demo="true"
+        <!-- Le lead vanno alla serverless function /api/lead, che crea il crm.lead
+             in Odoo. Le credenziali stanno solo lato server (vedi .env.example). -->
+        <form class="form" id="contact-form" method="post" action="/api/lead"
               aria-labelledby="form-title">
           <div class="form-progress">
             <p class="form-progress__label" aria-live="polite">Passo <span data-step-current>1</span> di 2 · <span data-step-name>Il tuo immobile</span></p>
@@ -1880,6 +1898,13 @@ html { scroll-padding-top: var(--header-height); }
             </div>
           </div>
           <p class="form__required">Tutti i campi sono obbligatori.</p>
+
+          <!-- Honeypot anti-spam: fuori schermo e non raggiungibile da tastiera.
+               Se arriva compilato, il server scarta la richiesta. -->
+          <div class="form__hp" aria-hidden="true">
+            <label for="website">Non compilare questo campo</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
 
           <!-- Passo 1: immobile e consumi -->
           <div class="form-step" data-step="1">
@@ -1953,6 +1978,8 @@ html { scroll-padding-top: var(--header-height); }
               </label>
               <p class="field__error" id="error-privacy" hidden></p>
             </div>
+
+            <p class="form__banner" id="form-error" role="alert" hidden></p>
 
             <div class="form__actions">
               <button class="btn form__submit" type="submit">Invia le informazioni</button>
@@ -2723,13 +2750,23 @@ html { scroll-padding-top: var(--header-height); }
   var success = document.getElementById('form-success');
   if (!form || !success) { return; }
 
-  /* ===================================================================
-     DEMO — nessun backend collegato.
-     Con DEMO_MODE = true l'invio reale e' bloccato: a richiesta valida si
-     mostra la conferma e nessun dato lascia il browser. Prima di andare
-     online collegare l'endpoint e sostituire il blocco DEMO nel submit.
-     =================================================================== */
-  var DEMO_MODE = true;
+  /* Le lead vengono inviate a /api/lead, che crea il crm.lead in Odoo.
+     Nessuna credenziale passa dal browser. */
+  var ENDPOINT = form.getAttribute('action');
+  var banner = document.getElementById('form-error');
+  var submitButton = form.querySelector('[type="submit"]');
+  var submitLabel = submitButton.textContent;
+  var sending = false;
+
+  /* UTM letti dall'URL: il server li mette in fondo alla descrizione della lead */
+  var utm = (function () {
+    var params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || ''
+    };
+  })();
 
   form.noValidate = true;
   var f = form.elements;
@@ -2862,15 +2899,55 @@ html { scroll-padding-top: var(--header-height); }
       return;
     }
 
-    if (DEMO_MODE) {
-      /* DEMO: nessun dato viene inviato. */
-      form.hidden = true;
-      success.hidden = false;
-      success.querySelector('[tabindex="-1"]').focus();
-      return;
-    }
+    if (sending) { return; }
+    sending = true;
+    banner.hidden = true;
+    submitButton.disabled = true;
+    submitButton.setAttribute('aria-busy', 'true');
+    submitButton.textContent = 'Invio in corso…';
 
-    form.submit();
+    var payload = {
+      nome: f.nome.value.trim(),
+      cognome: f.cognome.value.trim(),
+      email: f.email.value.trim(),
+      telefono: f.telefono.value.trim(),
+      proprieta: f.proprieta.value,
+      consumo: f.consumo.disabled ? '' : f.consumo.value.trim(),
+      consumoNonSo: f['consumo-non-lo-so'].checked,
+      privacy: f.privacy.checked,
+      website: f.website.value,
+      pageUrl: window.location.href.split('#')[0],
+      utm_source: utm.utm_source,
+      utm_medium: utm.utm_medium,
+      utm_campaign: utm.utm_campaign
+    };
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (response) {
+        if (!response.ok) { throw new Error('HTTP ' + response.status); }
+        return response.json();
+      })
+      .then(function (data) {
+        if (!data || !data.ok) { throw new Error('risposta inattesa'); }
+        form.hidden = true;
+        success.hidden = false;
+        success.querySelector('[tabindex="-1"]').focus();
+      })
+      .catch(function () {
+        /* Nessun dettaglio tecnico all'utente: quelli restano nei log del server */
+        banner.textContent = 'Non siamo riusciti a inviare la richiesta. Riprova tra qualche istante oppure scrivici a info@youpower.ch.';
+        banner.hidden = false;
+      })
+      .finally(function () {
+        sending = false;
+        submitButton.disabled = false;
+        submitButton.removeAttribute('aria-busy');
+        submitButton.textContent = submitLabel;
+      });
   });
 })();
 /* Mini modal delle case study. */

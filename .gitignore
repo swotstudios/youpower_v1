@@ -1,1 +1,10 @@
 .DS_Store
+
+# Variabili d'ambiente: mai nel repository
+.env
+.env.*
+!.env.example
+
+# Vercel e dipendenze locali
+.vercel
+node_modules
