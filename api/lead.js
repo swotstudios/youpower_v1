@@ -1,5 +1,5 @@
 /**
- * POST /api/lead — crea un crm.lead in Odoo a partire dal form della landing.
+ * POST /api/lead — crea un'opportunita' nel CRM di Odoo dal form della landing.
  *
  * Le credenziali arrivano solo da variabili d'ambiente e restano sul server:
  * ODOO_URL, ODOO_DB, ODOO_UID, ODOO_API_KEY (vedi .env.example).
@@ -7,6 +7,10 @@
  * Odoo di YouPower e' alla versione 18.0 (verificata su
  * /web/webclient/version_info), quindi si usa JSON-RPC: service "object",
  * metodo execute_kw, modello crm.lead, metodo create.
+ *
+ * Il record nasce con type = "opportunity" (entra subito nella pipeline, prima
+ * fase "Nuova") e user_id = false, cioe' non assegnato: senza quel false Odoo
+ * lo assegnerebbe all'utente dell'API key.
  * Dalla 19 in poi servirebbe invece la JSON-2 API
  * (POST /json/2/crm.lead/create con header Authorization: bearer <API_KEY>).
  */
@@ -147,7 +151,8 @@ module.exports = async function handler(req, res) {
 
   var fullName = (data.nome + ' ' + data.cognome).trim();
   var values = {
-    type: 'lead',
+    type: 'opportunity',
+    user_id: false,
     name: 'Lead da landing – ' + fullName,
     contact_name: fullName,
     email_from: data.email,
@@ -157,7 +162,7 @@ module.exports = async function handler(req, res) {
 
   try {
     var leadId = await odooCreateLead(env, values);
-    console.log('[lead] creato crm.lead id', leadId);
+    console.log('[lead] creata opportunita\' crm.lead id', leadId);
     return res.status(201).json({ ok: true });
   } catch (error) {
     /* Il dettaglio resta nei log del server: all'utente non diciamo nulla di tecnico. */
