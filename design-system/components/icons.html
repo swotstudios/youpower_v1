@@ -1,0 +1,370 @@
+<!-- @dsCard group="Components" name="Icone" subtitle="Line icons sage, tratto 1,5" -->
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouPower — Icone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap">
+<style>
+/* =========================================================================
+   YouPower — Brand Design Tokens
+   =========================================================================
+   Fonte: analisi diretta di https://www.youpower.ch/
+   Estrazione tipografica: WhatFont sul DOM live (valori marcati OSSERVATI).
+   Valori marcati INFERITI vanno confermati con ispezione DevTools sul sito.
+
+   Uso: importare questo file PRIMA di qualsiasi altro CSS di componente
+   in tutte le nuove landing e prodotti YouPower.
+
+     @import "./styles/brand-tokens.css";
+
+   Nessuna regola di stile viene applicata da questo file: solo variabili.
+   ========================================================================= */
+
+:root {
+  /* -----------------------------------------------------------------------
+     1. COLORI — Brand core (OSSERVATI da WhatFont)
+     ----------------------------------------------------------------------- */
+
+  /* Primary: verde salvia YouPower — H1 hero, logo accent, icone */
+  --color-primary: #73AA7F;         /* rgb(115, 170, 127) */
+  --color-primary-rgb: 115, 170, 127;
+
+  /* Secondary: teal medio — H2/H3/H4, label */
+  --color-secondary: #507C7C;       /* rgb(80, 124, 124) */
+  --color-secondary-rgb: 80, 124, 124;
+
+  /* Text: teal scuro — body */
+  --color-text: #365252;            /* rgb(54, 82, 82) */
+  --color-text-rgb: 54, 82, 82;
+
+  /* Alias semantici */
+  --color-text-muted: var(--color-secondary);
+  --color-heading: var(--color-secondary);
+  --color-heading-hero: var(--color-primary);
+
+  /* -----------------------------------------------------------------------
+     Stati derivati (INFERITI — da verificare hover/pressed su sito live)
+     ----------------------------------------------------------------------- */
+
+  --color-primary-dark: #5C8F68;    /* hover / pressed del primary */
+  --color-primary-light: #8FBF9A;   /* stati hover-out / disabled soft */
+  --color-secondary-dark: #3F6363;
+  --color-secondary-light: #7A9E9E;
+
+  /* -----------------------------------------------------------------------
+     Superfici e background
+     ----------------------------------------------------------------------- */
+
+  --color-background: #FFFFFF;              /* OSSERVATO — superficie principale */
+  --color-surface: #FFFFFF;                 /* OSSERVATO — card, blocchi */
+  --color-surface-alt: #E8F1EC;             /* INFERITO — mint wash hero (da campionare) */
+  --color-surface-inverse: var(--color-text); /* fondo scuro per sezioni "dark" */
+
+  /* -----------------------------------------------------------------------
+     Bordi (INFERITI)
+     ----------------------------------------------------------------------- */
+
+  --color-border: #E0E7E3;
+  --color-border-strong: var(--color-secondary);
+  --color-border-focus: var(--color-primary);
+
+  /* -----------------------------------------------------------------------
+     Testo su fondo colorato
+     ----------------------------------------------------------------------- */
+
+  --color-on-primary: #FFFFFF;
+  --color-on-secondary: #FFFFFF;
+  --color-on-dark: #FFFFFF;
+
+  /* -----------------------------------------------------------------------
+     Stati funzionali (INFERITI — nessuno visibile nel sito osservato,
+     definiti per coerenza; da approvare prima di usarli in produzione)
+     ----------------------------------------------------------------------- */
+
+  --color-success: var(--color-primary);
+  --color-error: #B85450;
+  --color-warning: #D4A574;
+  --color-info: var(--color-secondary);
+
+
+  /* =======================================================================
+     2. TIPOGRAFIA (OSSERVATA)
+     ======================================================================= */
+
+  --font-family-base: "Nunito Sans", system-ui, -apple-system,
+                      BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-heading: var(--font-family-base);
+
+  /* Pesi — solo questi quattro sono usati sul sito */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font sizes desktop (OSSERVATE) */
+  --font-size-h1: 60px;
+  --font-size-h2: 32px;
+  --font-size-h3: 28px;
+  --font-size-h4: 20px;
+  --font-size-body-large: 16px;
+  --font-size-body: 16px;
+  --font-size-small: 14px;   /* INFERITO */
+  --font-size-button: 16px;  /* INFERITO */
+
+  /* Line-heights (OSSERVATE) */
+  --line-height-h1: 1.0;      /* 60/60 — cifra distintiva */
+  --line-height-h2: 1.31;     /* 42/32 */
+  --line-height-h3: 1.29;     /* 36/28 */
+  --line-height-h4: 1.30;     /* 26/20 */
+  --line-height-body: 1.50;   /* 24/16 */
+  --line-height-tight: 1.0;
+  --line-height-heading: 1.30;
+  --line-height-default: 1.50;
+
+  /* Letter-spacing — nessuno rilevato sul sito */
+  --letter-spacing-normal: 0;
+
+
+  /* =======================================================================
+     3. RADIUS (INFERITI dallo stile visivo osservato)
+     ======================================================================= */
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;   /* bottoni CTA e input di form */
+
+  --radius-button: var(--radius-pill);
+  --radius-input: var(--radius-pill);
+  --radius-card: var(--radius-lg);
+  --radius-card-large: var(--radius-xl);
+
+
+  /* =======================================================================
+     4. SPACING (INFERITO — scala 4-based)
+     ======================================================================= */
+
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;    /* padding verticale tra macro-sezioni */
+  --space-3xl: 128px;   /* separazione hero / prima sezione */
+
+
+  /* =======================================================================
+     5. LAYOUT (INFERITO)
+     ======================================================================= */
+
+  --container-width: 1200px;
+  --container-width-wide: 1400px;
+  --container-padding: 24px;
+  --content-narrow: 720px;
+
+  --header-height: 80px;         /* INFERITO */
+
+
+  /* =======================================================================
+     6. SHADOW (INFERITE — sempre in tinta teal, mai nere)
+     ======================================================================= */
+
+  --shadow-soft:      0 8px 24px  rgba(54, 82, 82, 0.08);
+  --shadow-card:      0 16px 48px rgba(54, 82, 82, 0.10);
+  --shadow-elevated:  0 24px 64px rgba(54, 82, 82, 0.12);
+  --shadow-focus-ring: 0 0 0 3px rgba(115, 170, 127, 0.35);
+
+
+  /* =======================================================================
+     7. TRANSITIONS (INFERITE)
+     ======================================================================= */
+
+  --transition-fast: 150ms ease-out;
+  --transition-base: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+
+
+  /* =======================================================================
+     8. Z-INDEX
+     ======================================================================= */
+
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-header: 300;
+  --z-modal-backdrop: 900;
+  --z-modal: 1000;
+  --z-toast: 1100;
+}
+
+
+/* =========================================================================
+   Font sizes mobile — override sotto 768px
+   Valori INFERITI: da verificare in DevTools responsive del sito live.
+   ========================================================================= */
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-h1: 40px;
+    --font-size-h2: 26px;
+    --font-size-h3: 24px;
+    --font-size-h4: 18px;
+
+    --space-2xl: 64px;
+    --space-3xl: 80px;
+
+    --container-padding: 20px;
+  }
+}
+
+
+/* =========================================================================
+   Reduced motion
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, p, ul, li, figure, dl, dd { margin: 0; }
+ul { padding: 0; list-style: none; }
+.ds { max-width: 900px; margin-inline: auto; display: flex; flex-direction: column; gap: var(--space-xl); }
+.ds__head { display: flex; flex-direction: column; gap: var(--space-xs); }
+.ds__title { font-size: var(--font-size-h2); font-weight: var(--font-weight-semibold); line-height: var(--line-height-h2); color: var(--color-secondary); }
+.ds__lead { font-size: var(--font-size-body); font-weight: var(--font-weight-light); color: var(--color-secondary); max-width: 62ch; }
+.ds__block { display: flex; flex-direction: column; gap: var(--space-md); }
+.ds__label { font-size: var(--font-size-small); font-weight: var(--font-weight-semibold); color: var(--color-text); }
+.ds__note { font-size: var(--font-size-small); color: var(--color-secondary); }
+.ds__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-md); }
+.ds__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--space-md); }
+.ds__rule { height: 1px; background: var(--color-border); }
+
+
+
+/* Bottoni — brand kit 4.1: pill, 600, padding 14-16 x 28-32 */
+.btn { display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-family-base); font-size: var(--font-size-button); font-weight: var(--font-weight-semibold); line-height: 1.2; padding: var(--space-sm) calc(var(--space-sm) * 2); border: 0; border-radius: var(--radius-pill); cursor: pointer; transition: background-color var(--transition-base), color var(--transition-base); }
+.btn--primary { background: var(--color-text); color: var(--color-on-dark); }
+.btn--primary:hover { background: var(--color-secondary); }
+.btn--sage { background: var(--color-primary); color: var(--color-on-primary); }
+.btn--sage:hover { background: var(--color-primary-dark); }
+.btn--onDark { background: var(--color-surface); color: var(--color-text); }
+.btn--onDark:hover { background: var(--color-surface-alt); }
+.btn--text { padding: 0; background: none; color: var(--color-primary); }
+.btn--text:hover { color: var(--color-primary-dark); }
+.btn--quiet { padding: var(--space-xs) 0; background: none; font-size: var(--font-size-small); color: var(--color-secondary); }
+.onDark { padding: var(--space-lg); border-radius: var(--radius-lg); background: var(--color-surface-inverse); }
+
+/* Campi — brand kit 4.3: pill, bordo hairline, padding 14 x 24 */
+.field { display: flex; flex-direction: column; max-width: 360px; }
+.field__label { font-size: var(--font-size-small); font-weight: var(--font-weight-semibold); color: var(--color-text); }
+.field__hint { margin-top: var(--space-xxs); font-size: var(--font-size-small); color: var(--color-secondary); }
+.field__input { margin-top: var(--space-xs); width: 100%; padding: 14px var(--space-md); font-family: var(--font-family-base); font-size: var(--font-size-body); color: var(--color-text); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-input); appearance: none; }
+.field__input:focus { outline: none; border-color: var(--color-border-focus); box-shadow: var(--shadow-focus-ring); }
+.field__input:disabled { background: var(--color-surface-alt); cursor: not-allowed; }
+.field--invalid .field__input { border-color: var(--color-error); }
+.field__error { margin-top: var(--space-xs); font-size: var(--font-size-small); color: var(--color-error); }
+.choices { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-xs); }
+.choice { display: inline-flex; align-items: center; gap: var(--space-xs); padding: calc(var(--space-xs) + var(--space-xxs)) var(--space-sm); border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-surface); cursor: pointer; }
+.choice:has(input:checked) { border-color: var(--color-primary); background: var(--color-surface-alt); }
+.choice input, .check input { width: 20px; height: 20px; margin: 0; accent-color: var(--color-primary); }
+.check { display: flex; align-items: flex-start; gap: var(--space-xs); font-size: var(--font-size-small); color: var(--color-text); }
+
+/* Card — brand kit 4.2: bianca, radius ampio, ombra in tinta, niente bordo */
+.card { display: flex; flex-direction: column; gap: var(--space-sm); padding: var(--space-lg); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+.card__icon { width: calc(var(--space-sm) * 2); height: calc(var(--space-sm) * 2); color: var(--color-primary); }
+.card__title { font-size: var(--font-size-h4); font-weight: var(--font-weight-semibold); line-height: var(--line-height-h4); color: var(--color-secondary); }
+.card__text { font-size: var(--font-size-body); color: var(--color-text); }
+.card__meta { font-size: var(--font-size-small); color: var(--color-text); }
+.metrics { display: flex; flex-wrap: wrap; gap: var(--space-md); margin: 0; }
+.metric { display: flex; flex-direction: column; }
+.metric dd { order: -1; margin: 0; font-size: 24px; font-weight: var(--font-weight-bold); line-height: var(--line-height-heading); color: var(--color-primary); }
+.metric dt { font-size: 13px; color: var(--color-secondary); }
+.stars { display: flex; gap: var(--space-xxs); color: var(--color-primary); }
+.stars svg { width: var(--space-sm); height: var(--space-sm); }
+.quote { margin: 0; font-size: var(--font-size-body); color: var(--color-text); }
+.author { font-size: var(--font-size-body); font-weight: var(--font-weight-semibold); color: var(--color-text); }
+.source { font-size: var(--font-size-small); color: var(--color-secondary); }
+
+/* Accordion nativo */
+.accordion { max-width: 640px; border-top: 1px solid var(--color-border); }
+.accordion__item { border-bottom: 1px solid var(--color-border); }
+.accordion__summary { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding-block: var(--space-md); cursor: pointer; list-style: none; }
+.accordion__summary::-webkit-details-marker { display: none; }
+.accordion__title { font-size: var(--font-size-h4); font-weight: var(--font-weight-semibold); line-height: var(--line-height-h4); color: var(--color-secondary); }
+.accordion__chevron { flex: none; width: var(--space-md); height: var(--space-md); color: var(--color-primary); transition: transform var(--transition-base); }
+.accordion__item[open] .accordion__chevron { transform: rotate(180deg); }
+.accordion__body { max-width: 60ch; padding-bottom: var(--space-md); font-size: var(--font-size-body); color: var(--color-text); }
+
+.icon { display: flex; flex-direction: column; align-items: center; gap: var(--space-xs); padding: var(--space-md); border-radius: var(--radius-lg); background: var(--color-surface-alt); }
+.icon__svg { width: var(--space-lg); height: var(--space-lg); color: var(--color-primary); }
+
+</style>
+</head>
+<body>
+<div class="ds">
+  <div class="ds__head">
+    <h1 class="ds__title">Icone</h1>
+    <p class="ds__lead">Solo icone lineari monocromatiche in sage. Mai icone piene, mai con sfondo circolare, mai emoji.</p>
+  </div>
+  <div class="ds__block">
+    <ul class="ds__grid">
+      <li class="icon">
+        <svg class="icon__svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path><path d="m8 6 2-2"></path><path d="m18 16 2-2"></path><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path><path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z"></path><path d="m15 5 4 4"></path></svg>
+        <span class="ds__note">Progettazione</span>
+      </li>
+      <li class="icon">
+        <svg class="icon__svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>
+        <span class="ds__note">Pratiche</span>
+      </li>
+      <li class="icon">
+        <svg class="icon__svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        <span class="ds__note">Installazione</span>
+      </li>
+      <li class="icon">
+        <svg class="icon__svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle></svg>
+        <span class="ds__note">Assistenza</span>
+      </li>
+      <li class="icon">
+        <svg class="icon__svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="1.75"></circle><path d="M3 17.5 5.5 9.5h13l2.5 8Z"></path><path d="M4.25 13.5h15.5"></path><path d="M9.3 9.5 8.6 17.5"></path><path d="m14.7 9.5.7 8"></path><path d="M12 17.5v3"></path><path d="M9 20.5h6"></path></svg>
+        <span class="ds__note">Impianto</span>
+      </li>
+      <li class="icon">
+        <svg class="icon__svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+        <span class="ds__note">Luogo</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="ds__block">
+    <p class="ds__label">Dimensioni</p>
+    <div class="ds__row">
+      <svg style="width:24px;height:24px;color:var(--color-primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="1.75"></circle><path d="M3 17.5 5.5 9.5h13l2.5 8Z"></path><path d="M4.25 13.5h15.5"></path><path d="M9.3 9.5 8.6 17.5"></path><path d="m14.7 9.5.7 8"></path><path d="M12 17.5v3"></path><path d="M9 20.5h6"></path></svg>
+      <svg style="width:40px;height:40px;color:var(--color-primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="1.75"></circle><path d="M3 17.5 5.5 9.5h13l2.5 8Z"></path><path d="M4.25 13.5h15.5"></path><path d="M9.3 9.5 8.6 17.5"></path><path d="m14.7 9.5.7 8"></path><path d="M12 17.5v3"></path><path d="M9 20.5h6"></path></svg>
+      <svg style="width:64px;height:64px;color:var(--color-primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="1.75"></circle><path d="M3 17.5 5.5 9.5h13l2.5 8Z"></path><path d="M4.25 13.5h15.5"></path><path d="M9.3 9.5 8.6 17.5"></path><path d="m14.7 9.5.7 8"></path><path d="M12 17.5v3"></path><path d="M9 20.5h6"></path></svg>
+      <span class="ds__note">24 nelle liste, 40 nelle card compatte, 64-80 nei blocchi feature.</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
