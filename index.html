@@ -45,7 +45,8 @@
       analytics_storage: c.stats ? 'granted' : 'denied',
       ad_storage: c.mkt ? 'granted' : 'denied',
       ad_user_data: c.mkt ? 'granted' : 'denied',
-      ad_personalization: c.mkt ? 'granted' : 'denied'
+      ad_personalization: c.mkt ? 'granted' : 'denied',
+      personalization_storage: c.mkt ? 'granted' : 'denied'
     });
   };
   LP.consent = LP.readConsent();
