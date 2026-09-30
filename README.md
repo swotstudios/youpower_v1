@@ -48,3 +48,14 @@ vercel dev          # serve la landing e la function su http://localhost:3000
 
 Errori di Odoo: registrati nei log del server; l'utente vede solo un messaggio
 generico con l'indirizzo email di contatto.
+
+## Tracking (GA4, Google Ads, Meta)
+
+Hard-coded in `index.html`, senza Google Tag Manager (non aggiungerlo: duplicherebbe i dati).
+
+- **GA4** `G-4G70N7KYDF`, stessa property di youpower.ch. A invio riuscito del form parte
+  `generate_lead` con `form_id = landing_fotovoltaico_ticino`.
+- **Google Ads**: nessun tag diretto, la conversione arriva dall'import di `generate_lead` da GA4.
+- **Meta Pixel** `860950295860981`: `PageView` e `Lead` (con `eventID`), caricato solo con consenso marketing.
+- **Consenso**: banner proprio (cookie `lp_consent`, 180 giorni) con Consent Mode v2, default
+  tutto negato come Complianz sul sito principale. Riapribile da "Preferenze cookie" nel footer.
