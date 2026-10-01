@@ -27,24 +27,21 @@ Il contenitore ha `aspect-ratio` fisso: sostituire la foto non produce layout sh
 
 ---
 
-## progettazione-tetto-fotovoltaico.jpg  *(richiesto)*
+## impianto-fotovoltaico-tetto-piano.jpg
 
 Immagine della colonna destra della sezione "Ogni impianto nasce da una
-progettazione su misura". Il markup punta a questo path esatto; finche' il file
-manca, il contenitore resta un pannello bianco con angoli a `--radius-xl` e
-`--shadow-card`, quindi il layout regge senza rotture.
+progettazione su misura". 1119 x 1400 px, 335 KB, ritaglio 4:5 ricavato da un
+originale 4032 x 2268 fornito da YouPower (`youpower_asset2.JPG`, tenuto fuori
+dal repo perche' pesa 8 MB: vedi `.gitignore`).
 
-**Cosa deve mostrare** — deve leggersi come *progettazione*, non come benefici
-generici del fotovoltaico. In ordine di preferenza:
+**Cosa mostra** — veduta aerea di un edificio residenziale affacciato sul lago,
+con le file di moduli posate sul tetto piano. E' un impianto finito, non la fase
+di progettazione: se in futuro arriva un rilievo tecnico o un render del
+progetto, quello resta la scelta migliore per questa sezione.
 
-1. rilievo tecnico su un tetto reale (sopralluogo, misurazione della falda);
-2. render 3D **del progetto YouPower** con la disposizione dei moduli sulla falda
-   (stile pulito, isolato, ombra morbida a terra — brand kit § 4.7);
-3. dettaglio ravvicinato di moduli posati su una falda, con la struttura di
-   fissaggio visibile.
-
-**Da evitare** (brand kit § 6.5): illustrazioni AI generiche, diagrammi
-futuristici, HUD e overlay "tech", persone stock, cantieri industriali.
+**Da evitare** per un'eventuale sostituzione (brand kit § 6.5): illustrazioni AI
+generiche, diagrammi futuristici, HUD e overlay "tech", persone stock, cantieri
+industriali.
 
 **Specifiche tecniche**
 - verticale ~4:5 su desktop; il contenitore ritaglia in `object-fit: cover`

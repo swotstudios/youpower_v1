@@ -8,3 +8,6 @@
 # Vercel e dipendenze locali
 .vercel
 node_modules
+
+# Originale ad alta risoluzione: nel repo va solo la versione ottimizzata
+assets/youpower_asset2.JPG
