@@ -579,42 +579,6 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
-   7. TRUST BAR
-   ========================================================================= */
-/* Fascia leggerissima: nessuna card, nessun fondo scuro, solo un filo
-   in basso a chiudere la fascia e separatori verticali fra le voci. */
-.trust {
-  background: var(--color-background);
-  border-bottom: 1px solid var(--color-border);
-  padding-top: var(--space-md);
-  padding-bottom: var(--space-md);
-}
-.trust__list {
-  display: flex;
-  align-items: center;
-}
-.trust__item {
-  flex: 1 1 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-xs);
-  padding-inline: var(--space-sm);
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body);
-  color: var(--color-text);
-}
-.trust__item + .trust__item { border-left: 1px solid var(--color-border); }
-.trust__icon {
-  flex: none;
-  width: var(--space-md);
-  height: var(--space-md);
-  color: var(--color-primary);
-}
-
-
-/* =========================================================================
    8. BENEFICI DEL FOTOVOLTAICO
    ========================================================================= */
 /* "Perche' scegliere YouPower": titolo e sottotitolo in alto, le quattro
@@ -1786,18 +1750,6 @@ html { scroll-padding-top: var(--header-height); }
   }
   .hero__decoration { width: 70vw; top: -10%; left: -30%; }
 
-  /* Trust bar: sotto i 1024px le quattro voci in riga diventano strette */
-  .trust__list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-sm) var(--space-md);
-  }
-  .trust__item {
-    justify-content: flex-start;
-    padding-inline: 0;
-  }
-  .trust__item + .trust__item { border-left: 0; }
-
   .design__inner {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
@@ -2174,54 +2126,32 @@ html { scroll-padding-top: var(--header-height); }
     </div>
 
     <div class="container">
-      <ul class="hero__strip reveal" style="--reveal-delay:200ms">
+      <ul class="hero__strip reveal" style="--reveal-delay:200ms"
+          aria-label="Garanzie e riconoscimenti YouPower">
         <li class="hero__strip-item">
-          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"></path><path d="m8 6 2-2"></path><path d="m18 16 2-2"></path><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"></path><path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z"></path><path d="m15 5 4 4"></path></svg>
-          <span>Progettazione su misura</span>
-        </li>
-        <li class="hero__strip-item">
-          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="8" y="2" width="8" height="4" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>
-          <span>Gestione completa</span>
-        </li>
-        <li class="hero__strip-item">
-          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-          <span>Installazione e collaudo</span>
-        </li>
-        <li class="hero__strip-item">
-          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle></svg>
-          <span>Assistenza nel tempo</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="trust" aria-label="Garanzie e riconoscimenti YouPower">
-    <div class="container">
-      <ul class="trust__list">
-        <li class="trust__item">
-          <svg class="trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <rect x="3.5" y="3.5" width="17" height="17" rx="3"></rect>
             <path d="M12 8.5v7"></path>
             <path d="M8.5 12h7"></path>
           </svg>
           <span>Azienda svizzera</span>
         </li>
-        <li class="trust__item">
-          <svg class="trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <li class="hero__strip-item">
+          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"></path>
             <circle cx="12" cy="10" r="2.5"></circle>
           </svg>
           <span>Operativit&agrave; in Ticino</span>
         </li>
-        <li class="trust__item">
-          <svg class="trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <li class="hero__strip-item">
+          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <circle cx="12" cy="9" r="5.5"></circle>
             <path d="m8.5 13.6-1.4 6.9 4.9-2.4 4.9 2.4-1.4-6.9"></path>
           </svg>
           <span>Membro Swiss Solar</span>
         </li>
-        <li class="trust__item">
-          <svg class="trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <li class="hero__strip-item">
+          <svg class="hero__strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
             <path d="m12 3.6 2.6 5.5 6 .8-4.3 4.2 1 6-5.3-2.9-5.3 2.9 1-6L3.4 9.9l6-.8Z"></path>
           </svg>
           <span>Recensioni Google</span>
