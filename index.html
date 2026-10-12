@@ -1254,6 +1254,16 @@ a { text-decoration: none; color: inherit; }
 .section--inverse .assist__icon { color: var(--color-on-dark); }
 .section--inverse .assist__title { color: var(--color-on-dark); }
 .section--inverse .assist__text { color: rgba(255, 255, 255, 0.9); }
+.section--inverse .section__intro { color: rgba(255, 255, 255, 0.9); }
+/* Progettazione su fondo scuro: elenco e icone in bianco come nella fascia
+   benefici. Il sage sul Deep Teal si ferma a 3.1:1 ed e' l'accostamento verde
+   chiaro / verde scuro che il brand evita. */
+.section--inverse .design__point { color: var(--color-on-dark); }
+.section--inverse .design__point svg { color: var(--color-on-dark); }
+/* Il primary e' Deep Teal: sul Deep Teal sparirebbe. Stessa inversione del
+   bottone della CTA finale. */
+.section--inverse .btn--primary { background: var(--color-surface); color: var(--color-text); }
+.section--inverse .btn--primary:hover { background: var(--color-surface-alt); }
 /* Il focus ring sage non si vede sul fondo scuro: contorno bianco */
 .section--inverse :focus-visible {
   outline: 2px solid var(--color-on-dark);
@@ -2196,7 +2206,7 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section section--accent section--lead" id="progettazione"
+  <section class="section section--inverse section--lead" id="progettazione"
            aria-labelledby="progettazione-title">
     <div class="container design__inner">
       <div class="design__content">
@@ -2478,7 +2488,7 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section" id="energia" aria-labelledby="energia-title">
+  <section class="section section--accent" id="energia" aria-labelledby="energia-title">
     <div class="container">
       <div class="section__head" data-reveal>
         <h2 class="section__title" id="energia-title">Più dell’energia che produci resta a tua disposizione</h2>
@@ -2584,7 +2594,7 @@ html { scroll-padding-top: var(--header-height); }
     </div>
   </section>
 
-  <section class="section section--accent section--lead" id="recensioni" aria-labelledby="recensioni-title">
+  <section class="section section--inverse section--lead" id="recensioni" aria-labelledby="recensioni-title">
     <div class="container">
       <div class="section__head" data-reveal>
         <h2 class="section__title" id="recensioni-title">Chi ha scelto YouPower</h2>
