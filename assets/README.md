@@ -172,10 +172,21 @@ Immagini in `assets/case-studies/` (nomi senza spazi, per URL statiche):
 | `edificio-residenziale-youpower.jpg` | Canobbio · 2026 | `/impianti/impianto-fotovoltaico-per-edificio-residenziale/` |
 | `rcp-lugano-campus-youpower.jpg` | Lugano Campus · 2025, RCP | `/impianti/impianto-fotovoltaico-residenziale-in-configurazione-rcp-lugano-campus/` |
 | `valeur-concept-sa-youpower.jpg` | Cinque ville Valeur Concept SA · 2025 | `/impianti/impianti-fotovoltaici-per-un-complesso-di-cinque-ville-valeur-concept-sa/` |
+| `palace-melide-vushleger-youpower.jpg` | Palace Melide Vushleger · 2023 | `/impianti/impianto-fotovoltaico-per-edificio-residenziale-palace-melide-vushleger/` |
+| `park-hotel-delta-youpower.jpg` | Park Hotel Delta · 2024 | `/impianti/impianto-fotovoltaico-per-struttura-ricettiva-park-hotel-delta/` |
+| `bicore-sa-youpower.jpg` | Bicore SA · 2025, industriale | `/impianti/impianto-fotovoltaico-per-il-settore-industriale-bicore-sa/` |
 
-- Originali 2560 x 1440 px, 0,9–1,4 MB ciascuna: la card le mostra a circa
-  370 px di larghezza (ritaglio 3:2). Sono `loading="lazy"`, ma conviene
-  generare versioni da ~1200 px (< 200 KB) con `srcset` prima del go-live.
+- Le tre immagini aggiunte per ultime sono già ridotte a 1280 x 720 px
+  (220–304 KB), ricavate dalla foto di copertina della rispettiva pagina.
+  Le prime tre sono ancora gli originali 2560 x 1440 px, 0,9–1,4 MB: la card
+  le mostra a circa 360 px (ritaglio 3:2), quindi conviene riportarle alla
+  stessa misura prima del go-live.
+- La sezione è un carosello orizzontale con scroll-snap e due frecce; le
+  frecce si nascondono da sole quando le card ci stanno tutte, e le card
+  restano raggiungibili con TAB anche senza usarle.
+- Il titolo di sezione dice "in Ticino": le pagine di Park Hotel Delta e
+  Bicore SA non indicano il luogo dell'impianto, quindi va confermato da
+  YouPower o il titolo va ammorbidito.
 - Dati verificati sulle pagine youpower.ch indicate (settembre 2026). Le
   produzioni di Lugano e Valeur sono "circa" / "prevista" sul sito.
 - "Scopri il progetto" apre una tendina nella card con il racconto del

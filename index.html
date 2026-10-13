@@ -774,13 +774,46 @@ a { text-decoration: none; color: inherit; }
   color: var(--color-secondary);
 }
 
+/* Carosello orizzontale: le card restano identiche, cambia solo il contenitore.
+   Il padding lascia respiro a ombra e focus ring, che altrimenti verrebbero
+   tagliati dall'overflow. */
 .refs {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: min(360px, 84vw);
   gap: var(--space-lg);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--space-xxs);
+  padding: var(--space-xxs) var(--space-xxs) var(--space-sm);
+  scrollbar-width: thin;
 }
+.refs__nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+.refs__arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--transition-base), opacity var(--transition-base);
+}
+.refs__arrow svg { width: var(--space-md); height: var(--space-md); }
+.refs__arrow:hover:not(:disabled) { background: var(--color-surface-alt); }
+.refs__arrow:disabled { opacity: 0.4; cursor: default; }
 /* La card non e' cliccabile: l'unico elemento interattivo e' il link finale */
 .ref-card {
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -951,41 +984,12 @@ a { text-decoration: none; color: inherit; }
   line-height: var(--line-height-body);
   color: var(--color-text);
 }
-.modal__link {
-  align-self: flex-start;
-  font-size: var(--font-size-body);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-body);
-  color: var(--color-primary);
-}
-.modal__link:hover {
-  color: var(--color-primary-dark);
-  text-decoration: underline;
-}
 @media (max-width: 767px) {
   .modal__body { padding: var(--space-md); }
 }
 
 /* Tablet: due colonne, la terza card sotto e centrata */
 @media (max-width: 1023px) {
-  .refs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .ref-card:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-    justify-self: center;
-    width: calc((100% - var(--space-lg)) / 2);
-  }
-}
-/* Mobile: una colonna */
-@media (max-width: 767px) {
-  .refs {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-  .ref-card:last-child:nth-child(odd) {
-    grid-column: auto;
-    justify-self: stretch;
-    width: auto;
-  }
 }
 
 
@@ -2304,8 +2308,9 @@ html { scroll-padding-top: var(--header-height); }
       <div class="refs__head" data-reveal>
         <h2 class="refs__title" id="referenze-title">Impianti realizzati in Ticino</h2>
         <p class="refs__intro">
-          Alcuni dei progetti chiavi in mano completati negli ultimi anni per abitazioni private
-          e complessi residenziali.
+          Alcuni dei progetti chiavi in mano completati negli ultimi anni, dalle abitazioni
+          private ai complessi residenziali, fino alle strutture ricettive e agli stabilimenti
+          industriali.
         </p>
       </div>
 
@@ -2373,7 +2378,78 @@ html { scroll-padding-top: var(--header-height); }
             <button class="ref-card__more" type="button" data-modal-open="modal-valeur" aria-haspopup="dialog">Scopri il progetto<span class="sr-only">: cinque ville Valeur Concept SA</span></button>
           </div>
         </li>
+        <li class="ref-card">
+          <img class="ref-card__img" src="assets/case-studies/palace-melide-vushleger-youpower.jpg"
+               width="1280" height="720" loading="lazy" decoding="async"
+               alt="Tetto piano del Palace Melide Vushleger con le file di moduli fotovoltaici affacciate sul Lago di Lugano">
+          <div class="ref-card__body">
+            <p class="ref-card__meta">Melide · 2023</p>
+            <h3 class="ref-card__title">Condominio Palace Melide Vushleger</h3>
+            <dl class="ref-card__metrics">
+              <div class="ref-card__metric">
+                <dt>Potenza installata</dt>
+                <dd>85,5 kWp</dd>
+              </div>
+              <div class="ref-card__metric">
+                <dt>Produzione annua</dt>
+                <dd>85.000 kWh</dd>
+              </div>
+            </dl>
+            <button class="ref-card__more" type="button" data-modal-open="modal-melide" aria-haspopup="dialog">Scopri il progetto<span class="sr-only">: Palace Melide Vushleger</span></button>
+          </div>
+        </li>
+
+        <li class="ref-card">
+          <img class="ref-card__img" src="assets/case-studies/park-hotel-delta-youpower.jpg"
+               width="1280" height="720" loading="lazy" decoding="async"
+               alt="Veduta aerea del Park Hotel Delta: moduli fotovoltaici sui tetti dei corpi dell’albergo, con piscina e parco">
+          <div class="ref-card__body">
+            <p class="ref-card__meta">Struttura ricettiva · 2024</p>
+            <h3 class="ref-card__title">Park Hotel Delta</h3>
+            <dl class="ref-card__metrics">
+              <div class="ref-card__metric">
+                <dt>Potenza installata</dt>
+                <dd>154,8 kWp</dd>
+              </div>
+              <div class="ref-card__metric">
+                <dt>Produzione annua</dt>
+                <dd>154,8 MWh</dd>
+              </div>
+            </dl>
+            <button class="ref-card__more" type="button" data-modal-open="modal-delta" aria-haspopup="dialog">Scopri il progetto<span class="sr-only">: Park Hotel Delta</span></button>
+          </div>
+        </li>
+
+        <li class="ref-card">
+          <img class="ref-card__img" src="assets/case-studies/bicore-sa-youpower.jpg"
+               width="1280" height="720" loading="lazy" decoding="async"
+               alt="Veduta aerea dello stabilimento Bicore SA con le file di moduli fotovoltaici sul tetto dei capannoni">
+          <div class="ref-card__body">
+            <p class="ref-card__meta">Settore industriale · 2025</p>
+            <h3 class="ref-card__title">Stabilimento Bicore SA</h3>
+            <dl class="ref-card__metrics">
+              <div class="ref-card__metric">
+                <dt>Potenza installata</dt>
+                <dd>91,65 kWp</dd>
+              </div>
+              <div class="ref-card__metric">
+                <dt>Produzione annua</dt>
+                <dd>91,6 MWh</dd>
+              </div>
+            </dl>
+            <button class="ref-card__more" type="button" data-modal-open="modal-bicore" aria-haspopup="dialog">Scopri il progetto<span class="sr-only">: Bicore SA</span></button>
+          </div>
+        </li>
       </ul>
+
+      <div class="refs__nav" data-reveal hidden>
+        <button class="refs__arrow" type="button" data-refs-prev aria-label="Mostra i progetti precedenti">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m14.5 5-7 7 7 7"></path></svg>
+        </button>
+        <button class="refs__arrow" type="button" data-refs-next aria-label="Mostra i progetti successivi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9.5 5 7 7-7 7"></path></svg>
+        </button>
+      </div>
 
       <!-- Mini modal delle case study: uno per progetto, aperti da "Scopri il progetto" -->
       <dialog class="modal" id="modal-canobbio" role="dialog" aria-modal="true" aria-labelledby="modal-canobbio-title">
@@ -2396,7 +2472,6 @@ html { scroll-padding-top: var(--header-height); }
                   </div>
                 </dl>
             <p class="modal__text">Completato nel 2026, il progetto di Canobbio va oltre i soli pannelli: sul tetto a falde dell’abitazione YouPower ha installato l’impianto fotovoltaico e, attorno a esso, un’infrastruttura energetica completa. La termopompa e la climatizzazione gestiscono il clima interno in modo intelligente in ogni stagione, mentre la colonnina di ricarica permette di fare il pieno all’auto elettrica direttamente con l’energia del sole. L’intero pacchetto è stato consegnato chiavi in mano, con YouPower a seguire ogni fase e a sollevare il proprietario dalla gestione burocratica e logistica.</p>
-            <a class="modal__link" href="https://www.youpower.ch/impianti/impianto-fotovoltaico-per-edificio-residenziale/" target="_blank" rel="noopener">Vai al progetto completo su youpower.ch<span class="sr-only"> (si apre in una nuova scheda)</span></a>
           </div>
         </div>
       </dialog>
@@ -2421,7 +2496,6 @@ html { scroll-padding-top: var(--header-height); }
                   </div>
                 </dl>
             <p class="modal__text">Per il complesso residenziale Lugano Campus, realizzato nel 2025, l’obiettivo era usare il più possibile l’energia prodotta direttamente all’interno dell’edificio. Per questo l’impianto è stato sviluppato in configurazione RCP: l’energia solare viene condivisa tra gli utenti dello stabile, che riducono il prelievo dalla rete e si ripartiscono i benefici economici dell’autoconsumo, migliorando al tempo stesso l’efficienza energetica dell’intero complesso. YouPower ha gestito il progetto chiavi in mano, dalla progettazione all’installazione fino alla messa in esercizio.</p>
-            <a class="modal__link" href="https://www.youpower.ch/impianti/impianto-fotovoltaico-residenziale-in-configurazione-rcp-lugano-campus/" target="_blank" rel="noopener">Vai al progetto completo su youpower.ch<span class="sr-only"> (si apre in una nuova scheda)</span></a>
           </div>
         </div>
       </dialog>
@@ -2446,7 +2520,78 @@ html { scroll-padding-top: var(--header-height); }
                   </div>
                 </dl>
             <p class="modal__text">Nel 2025 YouPower ha contribuito a un progetto promosso da Valeur Concept SA e realizzato insieme a Veragouth Xilema: un complesso di cinque ville residenziali, ognuna con il proprio impianto fotovoltaico su tetto piano. Invece di una soluzione uguale per tutte, ogni impianto è stato dimensionato sulle esigenze energetiche della singola villa, così da aumentare l’autoconsumo di ciascuna abitazione e ridurre l’impatto energetico dell’intero complesso. Anche qui la formula è stata chiavi in mano, con particolare attenzione all’integrazione dei moduli nell’architettura delle ville.</p>
-            <a class="modal__link" href="https://www.youpower.ch/impianti/impianti-fotovoltaici-per-un-complesso-di-cinque-ville-valeur-concept-sa/" target="_blank" rel="noopener">Vai al progetto completo su youpower.ch<span class="sr-only"> (si apre in una nuova scheda)</span></a>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog class="modal" id="modal-melide" role="dialog" aria-modal="true" aria-labelledby="modal-melide-title">
+        <button class="modal__close" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button>
+        <div class="modal__scroll">
+          <img class="modal__img" src="assets/case-studies/palace-melide-vushleger-youpower.jpg"
+               width="1280" height="720" loading="lazy" decoding="async"
+               alt="Tetto piano del Palace Melide Vushleger con le file di moduli fotovoltaici affacciate sul Lago di Lugano">
+          <div class="modal__body">
+            <p class="ref-card__meta">Melide · 2023</p>
+            <h3 class="modal__title" id="modal-melide-title">Condominio Palace Melide Vushleger</h3>
+            <dl class="ref-card__metrics">
+                  <div class="ref-card__metric">
+                    <dt>Potenza installata</dt>
+                    <dd>85,5 kWp</dd>
+                  </div>
+                  <div class="ref-card__metric">
+                    <dt>Produzione annua</dt>
+                    <dd>85.000 kWh</dd>
+                  </div>
+                </dl>
+            <p class="modal__text">Nel 2023 YouPower ha sfruttato l’ampio tetto piano del Palace Melide Vushleger, condominio affacciato sul Lago di Lugano, per installare un impianto da 85,5 kWp capace di produrre 85.000 kWh di energia pulita all’anno. L’intervento è stato realizzato con la formula chiavi in mano: progettazione iniziale, pratiche burocratiche e installazione finale sono state seguite interamente da YouPower, così i condomini hanno potuto iniziare subito a risparmiare sui consumi e a valorizzare l’immobile, riducendo le emissioni nel pieno rispetto del paesaggio circostante.</p>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog class="modal" id="modal-delta" role="dialog" aria-modal="true" aria-labelledby="modal-delta-title">
+        <button class="modal__close" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button>
+        <div class="modal__scroll">
+          <img class="modal__img" src="assets/case-studies/park-hotel-delta-youpower.jpg"
+               width="1280" height="720" loading="lazy" decoding="async"
+               alt="Veduta aerea del Park Hotel Delta: moduli fotovoltaici sui tetti dei corpi dell’albergo, con piscina e parco">
+          <div class="modal__body">
+            <p class="ref-card__meta">Struttura ricettiva · 2024</p>
+            <h3 class="modal__title" id="modal-delta-title">Park Hotel Delta</h3>
+            <dl class="ref-card__metrics">
+                  <div class="ref-card__metric">
+                    <dt>Potenza installata</dt>
+                    <dd>154,8 kWp</dd>
+                  </div>
+                  <div class="ref-card__metric">
+                    <dt>Produzione annua</dt>
+                    <dd>154,8 MWh</dd>
+                  </div>
+                </dl>
+            <p class="modal__text">Realizzato nel 2024 per il Park Hotel Delta, l’impianto serve una struttura ricettiva con l’obiettivo di ridurre i consumi energetici e migliorare la sostenibilità operativa dell’hotel. Con una potenza installata di 154,80 kWp garantisce una produzione annua media prevista di circa 154,8 MWh, un contributo significativo all’autoproduzione della struttura. Il progetto è stato sviluppato con una soluzione chiavi in mano che ha coperto tutte le fasi, dalla progettazione all’installazione fino alla messa in esercizio, senza impatti sulla normale attività dell’albergo.</p>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog class="modal" id="modal-bicore" role="dialog" aria-modal="true" aria-labelledby="modal-bicore-title">
+        <button class="modal__close" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12"></path><path d="M18 6 6 18"></path></svg></button>
+        <div class="modal__scroll">
+          <img class="modal__img" src="assets/case-studies/bicore-sa-youpower.jpg"
+               width="1280" height="720" loading="lazy" decoding="async"
+               alt="Veduta aerea dello stabilimento Bicore SA con le file di moduli fotovoltaici sul tetto dei capannoni">
+          <div class="modal__body">
+            <p class="ref-card__meta">Settore industriale · 2025</p>
+            <h3 class="modal__title" id="modal-bicore-title">Stabilimento Bicore SA</h3>
+            <dl class="ref-card__metrics">
+                  <div class="ref-card__metric">
+                    <dt>Potenza installata</dt>
+                    <dd>91,65 kWp</dd>
+                  </div>
+                  <div class="ref-card__metric">
+                    <dt>Produzione annua</dt>
+                    <dd>91,6 MWh</dd>
+                  </div>
+                </dl>
+            <p class="modal__text">Nel 2025 YouPower ha realizzato per Bicore SA un impianto fotovoltaico industriale su tetto piano da 91,65 kWp, in grado di generare circa 91,6 MWh di energia all’anno. L’intervento è stato sviluppato con un approccio chiavi in mano, che ha offerto al cliente un unico interlocutore per tutte le fasi del progetto. La soluzione valorizza le superfici disponibili e riduce il fabbisogno energetico proveniente dalla rete, migliorando l’efficienza complessiva dello stabilimento.</p>
           </div>
         </div>
       </dialog>
@@ -3115,6 +3260,39 @@ html { scroll-padding-top: var(--header-height); }
       });
   });
 })();
+/* Carosello delle referenze: frecce che scorrono di una card per volta.
+   Le card restano raggiungibili da tastiera con TAB, quindi il contenuto e'
+   accessibile anche senza toccare le frecce. */
+(function () {
+  var track = document.querySelector('.refs');
+  var nav = document.querySelector('.refs__nav');
+  if (!track || !nav) { return; }
+  var prev = nav.querySelector('[data-refs-prev]');
+  var next = nav.querySelector('[data-refs-next]');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function step() {
+    var card = track.querySelector('.ref-card');
+    var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    return card ? card.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+  }
+  function scorri(verso) {
+    track.scrollBy({ left: verso * step(), behavior: reduce.matches ? 'auto' : 'smooth' });
+  }
+  function sync() {
+    var max = track.scrollWidth - track.clientWidth;
+    /* Niente frecce se le card ci stanno tutte */
+    nav.hidden = max <= 1;
+    prev.disabled = track.scrollLeft <= 1;
+    next.disabled = track.scrollLeft >= max - 1;
+  }
+  prev.addEventListener('click', function () { scorri(-1); });
+  next.addEventListener('click', function () { scorri(1); });
+  track.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+  sync();
+})();
+
 /* Mini modal delle case study. */
 (function () {
   var triggers = document.querySelectorAll('[data-modal-open]');
