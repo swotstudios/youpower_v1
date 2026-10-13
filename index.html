@@ -778,6 +778,10 @@ a { text-decoration: none; color: inherit; }
    Il padding lascia respiro a ombra e focus ring, che altrimenti verrebbero
    tagliati dall'overflow. */
 .refs {
+  /* position: relative e' necessario, non decorativo: senza, il browser
+     propaga al documento lo scorrimento orizzontale del carosello e la
+     pagina intera scorre lateralmente. */
+  position: relative;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: min(360px, 84vw);
