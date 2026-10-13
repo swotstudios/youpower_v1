@@ -1332,6 +1332,62 @@ a { text-decoration: none; color: inherit; }
 
 
 /* =========================================================================
+   PREZZO DELL'ELETTRICITA' — grafico
+   ========================================================================= */
+/* SVG disegnato a mano: nessuna libreria, i colori sono i token del brand.
+   La linea usa il Deep Teal e non il sage perche' sul mint il sage resta
+   sotto il 3:1 richiesto per gli elementi grafici. */
+.chart {
+  max-width: 880px;
+  margin: 0 auto;
+}
+.chart__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.chart__grid { stroke: var(--color-border); stroke-width: 1; }
+.chart__area { fill: rgba(var(--color-primary-rgb), 0.18); }
+.chart__line {
+  fill: none;
+  stroke: var(--color-text);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.chart__dot { fill: var(--color-text); }
+.chart__dot--key { fill: var(--color-primary-dark); }
+.chart__tick {
+  font-family: var(--font-family-base);
+  font-size: 13px;
+  fill: var(--color-text);
+}
+.chart__value {
+  font-family: var(--font-family-base);
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+  fill: var(--color-text);
+}
+/* Sotto i 768px l'SVG si riduce a meno della meta': i testi vanno ingranditi
+   in unita' utente, altrimenti arrivano a schermo a 6 px. */
+@media (max-width: 767px) {
+  .chart__tick { font-size: 25px; }
+  .chart__value { font-size: 29px; }
+  .chart__line { stroke-width: 5; }
+  .chart__grid { stroke-width: 2; }
+  .chart__dot { r: 5; }
+  .chart__dot--key { r: 9; }
+}
+.chart__caption {
+  margin-top: var(--space-md);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+/* =========================================================================
    16. FORM CONTATTI
    ========================================================================= */
 [hidden] { display: none !important; }
@@ -2836,6 +2892,99 @@ html { scroll-padding-top: var(--header-height); }
           <p class="assist__text">Protezione dell’impianto da eventi imprevisti.</p>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <section class="section section--accent" id="prezzi" aria-labelledby="prezzi-title">
+    <div class="container">
+      <div class="section__head" data-reveal>
+        <h2 class="section__title" id="prezzi-title">Il prezzo dell’elettricità non è tornato quello di prima</h2>
+        <p class="section__intro">
+          Per dodici anni, in Ticino, l’elettricità è costata intorno ai 20 centesimi per kWh.
+          Nel 2024 ha toccato 31,8 centesimi e, pur essendo poi rientrata, nel 2027 resta a 25,9:
+          quasi il 29% sopra la media del periodo 2011–2022. Ogni kWh che produci sul tuo tetto
+          è un kWh che non compri a quel prezzo, qualunque cosa faccia la tariffa.
+        </p>
+      </div>
+
+      <figure class="chart" data-reveal style="--reveal-delay:80ms">
+    <svg class="chart__svg" viewBox="0 0 720 340" role="img" aria-labelledby="chart-titolo chart-desc" focusable="false">
+      <title id="chart-titolo">Prezzo mediano dell’elettricità in Ticino, dal 2011 al 2027</title>
+      <desc id="chart-desc">Il prezzo resta intorno ai 20 centesimi per kWh dal 2011 al 2022, sale fino a 31,8 centesimi nel 2024 e rientra a 25,9 centesimi nel 2027. I valori esatti sono nella tabella che segue.</desc>
+      <line class="chart__grid" x1="56" y1="288.0" x2="696" y2="288.0"></line>
+      <text class="chart__tick" x="44" y="292.0" text-anchor="end">0</text>
+      <line class="chart__grid" x1="56" y1="214.9" x2="696" y2="214.9"></line>
+      <text class="chart__tick" x="44" y="218.9" text-anchor="end">10</text>
+      <line class="chart__grid" x1="56" y1="141.7" x2="696" y2="141.7"></line>
+      <text class="chart__tick" x="44" y="145.7" text-anchor="end">20</text>
+      <line class="chart__grid" x1="56" y1="68.6" x2="696" y2="68.6"></line>
+      <text class="chart__tick" x="44" y="72.6" text-anchor="end">30</text>
+      <path class="chart__area" d="M56.0 144.2 L96.0 136.5 L136.0 138.2 L176.0 151.1 L216.0 146.1 L256.0 144.9 L296.0 150.6 L336.0 141.0 L376.0 137.0 L416.0 134.7 L456.0 133.4 L496.0 130.1 L536.0 79.4 L576.0 55.1 L616.0 84.8 L656.0 104.2 L696.0 98.5 L696.0 288 L56.0 288 Z"></path>
+      <path class="chart__line" d="M56.0 144.2 L96.0 136.5 L136.0 138.2 L176.0 151.1 L216.0 146.1 L256.0 144.9 L296.0 150.6 L336.0 141.0 L376.0 137.0 L416.0 134.7 L456.0 133.4 L496.0 130.1 L536.0 79.4 L576.0 55.1 L616.0 84.8 L656.0 104.2 L696.0 98.5"></path>
+      <circle class="chart__dot" cx="56.0" cy="144.2" r="2.5"></circle>
+      <circle class="chart__dot" cx="96.0" cy="136.5" r="2.5"></circle>
+      <circle class="chart__dot" cx="136.0" cy="138.2" r="2.5"></circle>
+      <circle class="chart__dot" cx="176.0" cy="151.1" r="2.5"></circle>
+      <circle class="chart__dot" cx="216.0" cy="146.1" r="2.5"></circle>
+      <circle class="chart__dot" cx="256.0" cy="144.9" r="2.5"></circle>
+      <circle class="chart__dot" cx="296.0" cy="150.6" r="2.5"></circle>
+      <circle class="chart__dot" cx="336.0" cy="141.0" r="2.5"></circle>
+      <circle class="chart__dot" cx="376.0" cy="137.0" r="2.5"></circle>
+      <circle class="chart__dot" cx="416.0" cy="134.7" r="2.5"></circle>
+      <circle class="chart__dot" cx="456.0" cy="133.4" r="2.5"></circle>
+      <circle class="chart__dot" cx="496.0" cy="130.1" r="2.5"></circle>
+      <circle class="chart__dot" cx="536.0" cy="79.4" r="2.5"></circle>
+      <circle class="chart__dot" cx="576.0" cy="55.1" r="2.5"></circle>
+      <circle class="chart__dot" cx="616.0" cy="84.8" r="2.5"></circle>
+      <circle class="chart__dot" cx="656.0" cy="104.2" r="2.5"></circle>
+      <circle class="chart__dot" cx="696.0" cy="98.5" r="2.5"></circle>
+      <circle class="chart__dot chart__dot--key" cx="496.0" cy="130.1" r="5"></circle>
+      <text class="chart__value" x="496.0" y="116.1" text-anchor="middle">21,6</text>
+      <circle class="chart__dot chart__dot--key" cx="576.0" cy="55.1" r="5"></circle>
+      <text class="chart__value" x="576.0" y="41.1" text-anchor="middle">31,8</text>
+      <circle class="chart__dot chart__dot--key" cx="696.0" cy="98.5" r="5"></circle>
+      <text class="chart__value" x="702.0" y="84.5" text-anchor="end">25,9</text>
+      <text class="chart__tick" x="56.0" y="312" text-anchor="start">2011</text>
+      <text class="chart__tick" x="216.0" y="312" text-anchor="middle">2015</text>
+      <text class="chart__tick" x="376.0" y="312" text-anchor="middle">2019</text>
+      <text class="chart__tick" x="536.0" y="312" text-anchor="middle">2023</text>
+      <text class="chart__tick" x="696.0" y="312" text-anchor="end">2027</text>
+    </svg>
+        <figcaption class="chart__caption">
+          Prezzo mediano dell’elettricità in Ticino per un’economia domestica di categoria H4
+          (4’500 kWh all’anno: appartamento di 5 locali con cucina elettrica e asciugatrice),
+          prodotto standard, in centesimi per kWh. Fonte: ElCom, tariffe 2011–2027.
+        </figcaption>
+        <!-- sr-only su <table> non funziona: il layout tabellare ignora width:1px
+             e la tabella allarga la pagina. Va avvolta in un contenitore. -->
+        <div class="sr-only">
+        <table>
+          <caption>Prezzo mediano dell’elettricità in Ticino, categoria H4, in centesimi per kWh</caption>
+          <thead>
+            <tr><th scope="col">Anno</th><th scope="col">Centesimi per kWh</th></tr>
+          </thead>
+          <tbody>
+          <tr><th scope="row">2011</th><td>19,67</td></tr>
+          <tr><th scope="row">2012</th><td>20,71</td></tr>
+          <tr><th scope="row">2013</th><td>20,48</td></tr>
+          <tr><th scope="row">2014</th><td>18,72</td></tr>
+          <tr><th scope="row">2015</th><td>19,41</td></tr>
+          <tr><th scope="row">2016</th><td>19,57</td></tr>
+          <tr><th scope="row">2017</th><td>18,79</td></tr>
+          <tr><th scope="row">2018</th><td>20,10</td></tr>
+          <tr><th scope="row">2019</th><td>20,64</td></tr>
+          <tr><th scope="row">2020</th><td>20,95</td></tr>
+          <tr><th scope="row">2021</th><td>21,14</td></tr>
+          <tr><th scope="row">2022</th><td>21,58</td></tr>
+          <tr><th scope="row">2023</th><td>28,52</td></tr>
+          <tr><th scope="row">2024</th><td>31,84</td></tr>
+          <tr><th scope="row">2025</th><td>27,78</td></tr>
+          <tr><th scope="row">2026</th><td>25,13</td></tr>
+          <tr><th scope="row">2027</th><td>25,91</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </figure>
     </div>
   </section>
 

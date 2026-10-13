@@ -193,3 +193,27 @@ Immagini in `assets/case-studies/` (nomi senza spazi, per URL statiche):
   progetto: nessun link esterno. I testi riprendono solo i fatti delle
   pagine indicate; esclusi i claim enfatici ("autonomia energetica totale",
   "a impatto zero", "drasticamente piu' efficiente").
+
+## Grafico "Il prezzo dell'elettricita' non e' tornato quello di prima"
+
+Serie: prezzo mediano dell'elettricita' nel **Canton Ticino**, categoria **H4**
+(4'500 kWh/anno, appartamento di 5 locali con cucina elettrica e asciugatrice,
+senza boiler elettrico), prodotto **standard**, in centesimi per kWh, tariffe
+**2011-2027**. Il valore e' il totale: energia, uso della rete, tributi e
+prestazioni agli enti pubblici.
+
+Fonte: ElCom, cubo `electricityprice-canton` su LINDAS. Interrogazione SPARQL
+su `https://lindas.admin.ch/query`, filtrando canton 21 (Ticino), categoria H4,
+prodotto standard. Dati scaricati il 13 ottobre 2026; ElCom pubblica le tariffe
+dell'anno successivo il 1º settembre, quindi il 2027 e' gia' definitivo.
+
+Numeri citati nel testo della sezione, ricalcolati dalla serie:
+
+- media 2011-2022: 20,15 ct./kWh
+- massimo: 31,84 ct./kWh nel 2024 (+47,5% sul 2022)
+- 2027: 25,91 ct./kWh, cioe' -18,6% dal picco ma +28,6% sulla media 2011-2022
+
+**Da rifare ogni anno**: a settembre esce la tariffa dell'anno nuovo. Vanno
+aggiornati i 17 punti dell'SVG, la tabella accessibile, le tre etichette sul
+grafico e le percentuali nel testo introduttivo, altrimenti la sezione invecchia
+e diventa un claim non piu' verificabile.
