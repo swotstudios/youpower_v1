@@ -8,6 +8,12 @@
  * /web/webclient/version_info), quindi si usa JSON-RPC: service "object",
  * metodo execute_kw, modello crm.lead, metodo create.
  *
+ * Oltre all'opportunita' viene inviata una notifica a info@youpower.ch. La
+ * mail parte dallo stesso Odoo (modello mail.mail, create + send), quindi usa
+ * il server di posta in uscita gia' configurato li': nessuna credenziale in
+ * piu' e nessun servizio esterno. Se l'invio fallisce, il lead resta comunque
+ * salvato e l'utente vede la conferma; l'errore finisce solo nei log.
+ *
  * Il record nasce con type = "opportunity" (entra subito nella pipeline, prima
  * fase "Nuova") e user_id = false, cioe' non assegnato: senza quel false Odoo
  * lo assegnerebbe all'utente dell'API key.
@@ -15,8 +21,13 @@
  * (POST /json/2/crm.lead/create con header Authorization: bearer <API_KEY>).
  */
 
-var TIMEOUT_MS = 10000;
+/* La function di Vercel ha un tetto di 10s: il budget sta sotto, e viene
+   diviso fra la creazione del lead e l'invio della mail. */
+var BUDGET_MS = 9000;
 var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+var MAIL_TO = process.env.LEAD_MAIL_TO || 'info@youpower.ch';
+var MAIL_FROM = process.env.LEAD_MAIL_FROM || 'YouPower <noreply@youpower.ch>';
+var MAIL_SUBJECT = 'YouPower "Richiesta dal form della landing fotovoltaico"';
 
 function str(value) {
   return typeof value === 'string' ? value.trim() : '';
@@ -39,7 +50,13 @@ function buildDescription(data) {
   var utm = [
     ['utm_source', data.utm_source],
     ['utm_medium', data.utm_medium],
-    ['utm_campaign', data.utm_campaign]
+    ['utm_campaign', data.utm_campaign],
+    ['utm_term', data.utm_term],
+    ['utm_content', data.utm_content],
+    ['gclid', data.gclid],
+    ['fbclid', data.fbclid],
+    ['msclkid', data.msclkid],
+    ['referrer', data.referrer]
   ].filter(function (row) { return row[1]; });
 
   var lines = rows
@@ -48,16 +65,66 @@ function buildDescription(data) {
 
   if (utm.length) {
     lines.push('');
-    lines.push('UTM');
+    lines.push('Provenienza');
     utm.forEach(function (row) { lines.push(escapeHtml(row[0]) + ': ' + escapeHtml(row[1])); });
   }
 
   return '<p>' + lines.join('<br>') + '</p>';
 }
 
-async function odooCreateLead(env, values) {
+/* Stesso impianto della mail che YouPower gia' riceve dal form del sito:
+   dati del contatto, poi provenienza del traffico, poi i click ID. I campi
+   vuoti restano "(not set)" invece di sparire, cosi' il formato e' sempre
+   lo stesso e si legge a colpo d'occhio cosa manca. */
+function buildMailHtml(data, leadId) {
+  function val(v) { return v ? escapeHtml(v) : '(not set)'; }
+
+  var contatto = [
+    ['Da', data.email],
+    ['Nome', data.nome],
+    ['Cognome', data.cognome],
+    ['Telefono', data.telefono],
+    ['Tipo di proprieta\u0300', data.proprieta],
+    ['Consumo energetico annuale', data.consumoNonSoDichiarato ? 'Non lo so (dichiarato dal contatto)' : data.consumo],
+    ['Accettazione privacy', 'Accettato: Ho letto e accetto l\u2019informativa sulla privacy']
+  ];
+  var traffico = [
+    ['Sorgente', data.utm_source],
+    ['Medium', data.utm_medium],
+    ['Campagna', data.utm_campaign],
+    ['Parola chiave', data.utm_term],
+    ['Contenuto', data.utm_content],
+    ['Referrer', data.referrer],
+    ['Landing Page', data.pageUrl]
+  ];
+  var click = [
+    ['Google Click ID', data.gclid],
+    ['Facebook Click ID', data.fbclid],
+    ['Microsoft Click ID', data.msclkid]
+  ];
+
+  function blocco(righe) {
+    return righe.map(function (r) {
+      return '<strong>' + escapeHtml(r[0]) + ':</strong> ' + val(r[1]);
+    }).join('<br>');
+  }
+
+  var crm = leadId
+    ? 'Opportunita\u0300 creata nel CRM con id ' + escapeHtml(String(leadId)) + '.'
+    : '<strong>Attenzione: la creazione nel CRM non e\u0300 riuscita.</strong> '
+      + 'Questo contatto va inserito a mano in Odoo.';
+
+  return '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5">'
+    + blocco(contatto)
+    + '<br><br>--- PROVENIENZA TRAFFICO ---<br>' + blocco(traffico)
+    + '<br><br>--- CLICK IDs (Google Ads / Facebook Ads) ---<br>' + blocco(click)
+    + '<br><br>' + crm
+    + '</div>';
+}
+
+async function odooRpc(env, model, method, args, timeoutMs) {
   var controller = new AbortController();
-  var timer = setTimeout(function () { controller.abort(); }, TIMEOUT_MS);
+  var timer = setTimeout(function () { controller.abort(); }, timeoutMs);
 
   try {
     var response = await fetch(env.url.replace(/\/+$/, '') + '/jsonrpc', {
@@ -71,7 +138,7 @@ async function odooCreateLead(env, values) {
         params: {
           service: 'object',
           method: 'execute_kw',
-          args: [env.db, env.uid, env.apiKey, 'crm.lead', 'create', [values]]
+          args: [env.db, env.uid, env.apiKey, model, method, args]
         }
       })
     });
@@ -124,7 +191,13 @@ module.exports = async function handler(req, res) {
     pageUrl: str(body.pageUrl),
     utm_source: str(body.utm_source).slice(0, 120),
     utm_medium: str(body.utm_medium).slice(0, 120),
-    utm_campaign: str(body.utm_campaign).slice(0, 120)
+    utm_campaign: str(body.utm_campaign).slice(0, 120),
+    utm_term: str(body.utm_term).slice(0, 120),
+    utm_content: str(body.utm_content).slice(0, 120),
+    gclid: str(body.gclid).slice(0, 200),
+    fbclid: str(body.fbclid).slice(0, 200),
+    msclkid: str(body.msclkid).slice(0, 200),
+    referrer: str(body.referrer).slice(0, 300)
   };
 
   var invalid = [];
@@ -160,13 +233,45 @@ module.exports = async function handler(req, res) {
     description: buildDescription(data)
   };
 
-  try {
-    var leadId = await odooCreateLead(env, values);
-    console.log('[lead] creata opportunita\' crm.lead id', leadId);
-    return res.status(201).json({ ok: true });
-  } catch (error) {
-    /* Il dettaglio resta nei log del server: all'utente non diciamo nulla di tecnico. */
-    console.error('[lead] creazione fallita:', error && error.message ? error.message : error);
-    return res.status(502).json({ ok: false, error: 'upstream_error' });
+  var scadenza = Date.now() + BUDGET_MS;
+  function restante(max) {
+    return Math.max(1000, Math.min(max, scadenza - Date.now()));
   }
+
+  /* Due canali indipendenti: il CRM e la notifica a YouPower. Basta che uno
+     dei due riesca perche' il contatto non vada perso, quindi il fallimento
+     di uno non annulla l'altro ne' l'esito mostrato all'utente. */
+  var leadId = null;
+  try {
+    leadId = await odooRpc(env, 'crm.lead', 'create', [values], restante(6000));
+    console.log('[lead] creata opportunita\' crm.lead id', leadId);
+  } catch (error) {
+    console.error('[lead] creazione in CRM fallita:', error && error.message ? error.message : error);
+  }
+
+  var mailOk = false;
+  try {
+    var mailId = await odooRpc(env, 'mail.mail', 'create', [{
+      subject: MAIL_SUBJECT,
+      email_from: MAIL_FROM,
+      email_to: MAIL_TO,
+      reply_to: data.email,
+      body_html: buildMailHtml(data, leadId),
+      auto_delete: false
+    }], restante(4000));
+    await odooRpc(env, 'mail.mail', 'send', [[mailId]], restante(4000));
+    mailOk = true;
+    console.log('[lead] notifica inviata a', MAIL_TO, '— mail.mail id', mailId);
+  } catch (error) {
+    console.error('[lead] invio della notifica fallito:', error && error.message ? error.message : error);
+  }
+
+  if (leadId || mailOk) {
+    if (!leadId) { console.warn('[lead] contatto salvato solo via mail: va inserito a mano in Odoo'); }
+    return res.status(201).json({ ok: true });
+  }
+
+  /* Il dettaglio resta nei log del server: all'utente non diciamo nulla di tecnico. */
+  console.error('[lead] nessun canale riuscito: contatto perso');
+  return res.status(502).json({ ok: false, error: 'upstream_error' });
 };

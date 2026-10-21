@@ -5,7 +5,7 @@ le lead al CRM di Odoo.
 
 ```
 index.html            landing completa (CSS e JS inline)
-api/lead.js           POST /api/lead -> crea crm.lead in Odoo
+api/lead.js           POST /api/lead -> crm.lead in Odoo + notifica a info@
 styles/brand-tokens.css   token del brand (copia di riferimento)
 assets/               immagini e note sui contenuti
 .env.example          nomi delle variabili d'ambiente (senza valori)
@@ -19,6 +19,11 @@ assets/               immagini e note sui contenuti
 | `ODOO_DB` | `youpower` | |
 | `ODOO_UID` | `21` | id dell'utente Odoo |
 | `ODOO_API_KEY` | *(segreta)* | API key dell'utente, mai nel repository |
+| `LEAD_MAIL_TO` | `info@youpower.ch` | facoltativa: destinatario della notifica |
+| `LEAD_MAIL_FROM` | `YouPower <noreply@youpower.ch>` | facoltativa: mittente della notifica |
+
+Le due variabili della mail hanno gia' questo default nel codice: vanno
+impostate solo per cambiare destinatario o mittente.
 
 `.env` e' in `.gitignore`: in locale copia `.env.example` in `.env` e inserisci la
 chiave. In produzione le variabili si impostano nel pannello dell'hosting.
@@ -38,6 +43,12 @@ vercel dev          # serve la landing e la function su http://localhost:3000
 1. Il form (due passi, dentro la hero) invia un JSON a `/api/lead`.
 2. La function valida i dati, scarta le richieste con honeypot compilato e
    chiama Odoo via JSON-RPC (`/jsonrpc`, `execute_kw`, `crm.lead`, `create`).
+   Subito dopo crea e invia un `mail.mail` verso `info@youpower.ch`, con i dati
+   del contatto, la provenienza del traffico e i click ID. La mail esce dal
+   server di posta configurato in Odoo: nessun servizio esterno.
+   I due canali sono indipendenti: se uno fallisce l'altro parte lo stesso, e
+   quando il CRM non risponde la mail lo dice in chiaro, cosi' il contatto si
+   recupera a mano. Il form conferma all'utente se almeno uno dei due riesce.
    Odoo e' alla 18.0: dalla 19 servirebbe invece la JSON-2 API.
 3. Campi creati: `name` ("Lead da landing – Nome Cognome"), `contact_name`,
    `email_from`, `phone`, `description` (tipo di proprieta', consumo, pagina di
