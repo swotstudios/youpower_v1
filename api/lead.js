@@ -288,7 +288,7 @@ module.exports = async function handler(req, res) {
   if (!mailOk && leadId) {
     try {
       var partner = await odooRpc(env, 'res.partner', 'search_read',
-        [[['email', '=', MAIL_TO]], ['id']], restante(2500), { limit: 1 });
+        [[['email', 'ilike', MAIL_TO]], ['id']], restante(2500), { limit: 1 });
       if (!partner || !partner.length) {
         console.error('[lead] ripiego impossibile: nessun contatto in Odoo con email', MAIL_TO);
       } else {
