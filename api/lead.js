@@ -251,6 +251,7 @@ module.exports = async function handler(req, res) {
   }
 
   var mailOk = false;
+  var viaChatter = false;
   try {
     var mailId = await odooRpc(env, 'mail.mail', 'create', [{
       subject: MAIL_SUBJECT,
@@ -276,11 +277,40 @@ module.exports = async function handler(req, res) {
         'stato:', stato, 'motivo:', (letto && letto[0] && letto[0].failure_reason) || 'non indicato');
     }
   } catch (error) {
-    console.error('[lead] invio della notifica fallito:', error && error.message ? error.message : error);
+    console.error('[lead] invio diretto della notifica fallito:', error && error.message ? error.message : error);
+  }
+
+  /* Ripiego: se l'utente dell'API non puo' creare messaggi in uscita (mail.mail
+     e' riservato al gruppo Impostazioni), si passa dal chatter del lead. E' la
+     via che un utente CRM ha sempre: Odoo notifica via mail i destinatari
+     indicati e il messaggio resta allegato all'opportunita'. Il testo e' lo
+     stesso, ma arriva dentro il modello di notifica di Odoo. */
+  if (!mailOk && leadId) {
+    try {
+      var partner = await odooRpc(env, 'res.partner', 'search_read',
+        [[['email', '=', MAIL_TO]], ['id']], restante(2500), { limit: 1 });
+      if (!partner || !partner.length) {
+        console.error('[lead] ripiego impossibile: nessun contatto in Odoo con email', MAIL_TO);
+      } else {
+        await odooRpc(env, 'crm.lead', 'message_post', [[leadId]], restante(3000), {
+          body: buildMailHtml(data, leadId),
+          subject: MAIL_SUBJECT,
+          message_type: 'comment',
+          subtype_xmlid: 'mail.mt_comment',
+          partner_ids: [partner[0].id]
+        });
+        mailOk = true;
+        viaChatter = true;
+        console.log('[lead] notifica inviata dal chatter del lead', leadId, 'a', MAIL_TO);
+      }
+    } catch (error2) {
+      console.error('[lead] anche il ripiego dal chatter e\' fallito:', error2 && error2.message ? error2.message : error2);
+    }
   }
 
   if (leadId || mailOk) {
     if (!leadId) { console.warn('[lead] contatto salvato solo via mail: va inserito a mano in Odoo'); }
+    if (viaChatter) { console.warn('[lead] notifica partita dal chatter: per il formato pulito servono i permessi su mail.mail'); }
     return res.status(201).json({ ok: true });
   }
 
