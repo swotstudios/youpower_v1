@@ -122,7 +122,7 @@ function buildMailHtml(data, leadId) {
     + '</div>';
 }
 
-async function odooRpc(env, model, method, args, timeoutMs) {
+async function odooRpc(env, model, method, args, timeoutMs, kwargs) {
   var controller = new AbortController();
   var timer = setTimeout(function () { controller.abort(); }, timeoutMs);
 
@@ -138,7 +138,8 @@ async function odooRpc(env, model, method, args, timeoutMs) {
         params: {
           service: 'object',
           method: 'execute_kw',
-          args: [env.db, env.uid, env.apiKey, model, method, args]
+          args: [env.db, env.uid, env.apiKey, model, method, args],
+          kwargs: kwargs || {}
         }
       })
     });
@@ -259,9 +260,21 @@ module.exports = async function handler(req, res) {
       body_html: buildMailHtml(data, leadId),
       auto_delete: false
     }], restante(4000));
-    await odooRpc(env, 'mail.mail', 'send', [[mailId]], restante(4000));
-    mailOk = true;
-    console.log('[lead] notifica inviata a', MAIL_TO, '— mail.mail id', mailId);
+    /* send() di default ingoia gli errori SMTP e si limita a marcare il
+       record come "exception": senza raise_exception un server di posta
+       rotto risulterebbe un invio riuscito. */
+    await odooRpc(env, 'mail.mail', 'send', [[mailId]], restante(3000), { raise_exception: true });
+
+    /* Conferma dal record, non dalla chiamata: state deve essere "sent". */
+    var letto = await odooRpc(env, 'mail.mail', 'read', [[mailId], ['state', 'failure_reason']], restante(2000));
+    var stato = letto && letto[0] ? letto[0].state : 'sconosciuto';
+    if (stato === 'sent') {
+      mailOk = true;
+      console.log('[lead] notifica inviata a', MAIL_TO, '— mail.mail id', mailId);
+    } else {
+      console.error('[lead] notifica non inviata — mail.mail id', mailId,
+        'stato:', stato, 'motivo:', (letto && letto[0] && letto[0].failure_reason) || 'non indicato');
+    }
   } catch (error) {
     console.error('[lead] invio della notifica fallito:', error && error.message ? error.message : error);
   }
