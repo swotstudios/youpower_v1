@@ -252,32 +252,40 @@ module.exports = async function handler(req, res) {
 
   var mailOk = false;
   var viaChatter = false;
-  try {
-    var mailId = await odooRpc(env, 'mail.mail', 'create', [{
-      subject: MAIL_SUBJECT,
-      email_from: MAIL_FROM,
-      email_to: MAIL_TO,
-      reply_to: data.email,
-      body_html: buildMailHtml(data, leadId),
-      auto_delete: false
-    }], restante(4000));
-    /* send() di default ingoia gli errori SMTP e si limita a marcare il
-       record come "exception": senza raise_exception un server di posta
-       rotto risulterebbe un invio riuscito. */
-    await odooRpc(env, 'mail.mail', 'send', [[mailId]], restante(3000), { raise_exception: true });
-
-    /* Conferma dal record, non dalla chiamata: state deve essere "sent". */
-    var letto = await odooRpc(env, 'mail.mail', 'read', [[mailId], ['state', 'failure_reason']], restante(2000));
-    var stato = letto && letto[0] ? letto[0].state : 'sconosciuto';
-    if (stato === 'sent') {
-      mailOk = true;
-      console.log('[lead] notifica inviata a', MAIL_TO, '— mail.mail id', mailId);
-    } else {
-      console.error('[lead] notifica non inviata — mail.mail id', mailId,
-        'stato:', stato, 'motivo:', (letto && letto[0] && letto[0].failure_reason) || 'non indicato');
+  if (process.env.RESEND_API_KEY) {
+    try {
+      var controller = new AbortController();
+      var timer = setTimeout(function () { controller.abort(); }, restante(4000));
+      try {
+        var r = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          signal: controller.signal,
+          headers: {
+            'Authorization': 'Bearer ' + process.env.RESEND_API_KEY,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: MAIL_FROM,
+            to: [MAIL_TO],
+            reply_to: data.email,
+            subject: MAIL_SUBJECT,
+            html: buildMailHtml(data, leadId)
+          })
+        });
+        var esito = await r.json();
+        if (!r.ok) {
+          throw new Error('Resend HTTP ' + r.status + ': ' + (esito && esito.message ? esito.message : ''));
+        }
+        mailOk = true;
+        console.log('[lead] notifica inviata via Resend, id', esito && esito.id);
+      } finally {
+        clearTimeout(timer);
+      }
+    } catch (error) {
+      console.error('[lead] invio via Resend fallito:', error && error.message ? error.message : error);
     }
-  } catch (error) {
-    console.error('[lead] invio diretto della notifica fallito:', error && error.message ? error.message : error);
+  } else {
+    console.warn('[lead] RESEND_API_KEY non impostata: si passa al chatter di Odoo');
   }
 
   /* Ripiego: se l'utente dell'API non puo' creare messaggi in uscita (mail.mail

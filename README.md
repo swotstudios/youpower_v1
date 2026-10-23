@@ -19,6 +19,7 @@ assets/               immagini e note sui contenuti
 | `ODOO_DB` | `youpower` | |
 | `ODOO_UID` | `21` | id dell'utente Odoo |
 | `ODOO_API_KEY` | *(segreta)* | API key dell'utente, mai nel repository |
+| `RESEND_API_KEY` | *(segreta)* | invio della notifica; senza, si ripiega sul chatter di Odoo |
 | `LEAD_MAIL_TO` | `info@youpower.ch` | facoltativa: destinatario della notifica |
 | `LEAD_MAIL_FROM` | `YouPower <noreply@youpower.ch>` | facoltativa: mittente della notifica |
 
